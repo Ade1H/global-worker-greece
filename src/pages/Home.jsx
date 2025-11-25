@@ -1,6 +1,7 @@
 import HeroSection from "../components/HeroSection";
 import RequestForm from "../components/RequestForm";
 import CompanyMap from "../components/CompanyMap";
+import VideoRecorder from "../components/VideoRecorder"; // ✅ ADD THIS
 
 // Sample workers (replace with real API data later)
 const SAMPLE_WORKERS = [
@@ -15,7 +16,11 @@ function Home() {
       <HeroSection />
       <RequestForm />
 
-      
+      {/* 🔴 VIDEO RECORDER SECTION */}
+      <div style={{ marginTop: "40px" }}>
+        <h2>Record Your Video</h2>
+        <VideoRecorder />
+      </div>
 
       {/* Worker Map */}
       <div style={{ marginTop: "40px" }}>
