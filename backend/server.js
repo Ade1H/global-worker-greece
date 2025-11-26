@@ -16,7 +16,7 @@ const upload = multer({
       "application/pdf",
       "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
     ];
-    const allowedVideoTypes = ["video/mp4"];
+    const allowedVideoTypes = ["video/mp4", "video/webm"];
 
     if (file.fieldname === "cv" && allowedCvTypes.includes(file.mimetype)) {
       cb(null, true);

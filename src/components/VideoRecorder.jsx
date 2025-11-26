@@ -19,20 +19,24 @@ function VideoRecorder({ formData }) {
       mediaRecorderRef.current.ondataavailable = (e) => chunks.push(e.data);
 
       mediaRecorderRef.current.onstop = () => {
-        const blob = new Blob(chunks, { type: "video/mp4" });
+        // Record as WebM (compatible with most browsers)
+        const blob = new Blob(chunks, { type: "video/webm" });
         setVideoBlob(blob);
+        console.log("Recording stopped. Blob:", blob);
       };
 
       mediaRecorderRef.current.start();
       setRecording(true);
+      console.log("Recording started...");
     } catch (err) {
       alert("Kameråtkomst blockerad!");
-      console.error(err);
+      console.error("Error accessing camera:", err);
     }
   };
 
   // Stop recording
   const stopRecording = () => {
+    if (!mediaRecorderRef.current) return;
     mediaRecorderRef.current.stop();
     videoStreamRef.current.getTracks().forEach((track) => track.stop());
     setRecording(false);
@@ -42,6 +46,8 @@ function VideoRecorder({ formData }) {
   const sendVideoAndCV = async () => {
     if (!videoBlob) return alert("Inget video inspelat!");
 
+    console.log("Sending video. Blob type:", videoBlob.type, "size:", videoBlob.size);
+
     const form = new FormData();
     form.append("name", formData.name);
     form.append("email", formData.email);
@@ -49,7 +55,7 @@ function VideoRecorder({ formData }) {
     form.append("message", formData.message);
 
     if (formData.cvFile) form.append("cv", formData.cvFile);
-    form.append("video", videoBlob, "cv-video.mp4");
+    form.append("video", videoBlob, "cv-video.webm");
 
     try {
       const response = await fetch("http://localhost:5000/api/request", {
@@ -58,10 +64,12 @@ function VideoRecorder({ formData }) {
       });
 
       const result = await response.json();
+      console.log("Backend response:", result);
+
       if (result.success) alert("Ansökan skickad!");
       else alert("Kunde inte skicka ansökan: " + result.message);
     } catch (err) {
-      console.error(err);
+      console.error("Error sending video:", err);
       alert("Fel vid skickande av video.");
     }
   };
@@ -69,7 +77,7 @@ function VideoRecorder({ formData }) {
   return (
     <div style={{ marginTop: "20px" }}>
       {!recording ? (
-        <button onClick={startRecording}>🎥 Start</button>
+        <button onClick={startRecording}>🎥 Starta inspelning</button>
       ) : (
         <button onClick={stopRecording}>⛔ Stoppa inspelning</button>
       )}

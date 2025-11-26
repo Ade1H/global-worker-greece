@@ -1,13 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import "bootstrap/dist/css/bootstrap.min.css";
-import "bootstrap/dist/js/bootstrap.bundle.min.js";
 
 function HeroSection() {
   const images = [
-    "/images/hero1.png",
-    "/images/hero2.png",
-    "/images/hero3.png"
+    import.meta.env.BASE_URL + "images/hero1.png",
+    import.meta.env.BASE_URL + "images/hero2.png",
+    import.meta.env.BASE_URL + "images/hero3.png"
   ];
 
   return (
@@ -30,7 +28,6 @@ function HeroSection() {
               style={{ height: "70vh", objectFit: "cover" }}
             />
 
-            {/* Overlay + Text */}
             <div
               className="carousel-caption d-flex flex-column justify-content-center h-100"
               style={{ backgroundColor: "rgba(0,0,0,0.4)" }}
@@ -52,7 +49,7 @@ function HeroSection() {
         ))}
       </div>
 
-      {/* Controls */}
+      {/* Prev */}
       <button
         className="carousel-control-prev"
         type="button"
@@ -62,6 +59,7 @@ function HeroSection() {
         <span className="carousel-control-prev-icon"></span>
       </button>
 
+      {/* Next */}
       <button
         className="carousel-control-next"
         type="button"
