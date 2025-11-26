@@ -1,14 +1,16 @@
 import { useState, useRef } from "react";
 
-function VideoRecorder() {
+function VideoRecorder({ formData }) {
+  // formData = { name, email, phone, message, cvFile }
   const [recording, setRecording] = useState(false);
-  const [videoURL, setVideoURL] = useState(null);
+  const [videoBlob, setVideoBlob] = useState(null);
   const mediaRecorderRef = useRef(null);
   const videoStreamRef = useRef(null);
 
+  // Start recording
   const startRecording = async () => {
     try {
-      const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+      const stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
       videoStreamRef.current = stream;
 
       mediaRecorderRef.current = new MediaRecorder(stream);
@@ -18,34 +20,68 @@ function VideoRecorder() {
 
       mediaRecorderRef.current.onstop = () => {
         const blob = new Blob(chunks, { type: "video/mp4" });
-        setVideoURL(URL.createObjectURL(blob));
+        setVideoBlob(blob);
       };
 
       mediaRecorderRef.current.start();
       setRecording(true);
     } catch (err) {
-      alert("Camera access blocked!");
+      alert("Kameråtkomst blockerad!");
+      console.error(err);
     }
   };
 
+  // Stop recording
   const stopRecording = () => {
     mediaRecorderRef.current.stop();
     videoStreamRef.current.getTracks().forEach((track) => track.stop());
     setRecording(false);
   };
 
+  // Send video + CV form to backend
+  const sendVideoAndCV = async () => {
+    if (!videoBlob) return alert("Inget video inspelat!");
+
+    const form = new FormData();
+    form.append("name", formData.name);
+    form.append("email", formData.email);
+    form.append("phone", formData.phone);
+    form.append("message", formData.message);
+
+    if (formData.cvFile) form.append("cv", formData.cvFile);
+    form.append("video", videoBlob, "cv-video.mp4");
+
+    try {
+      const response = await fetch("http://localhost:5000/api/request", {
+        method: "POST",
+        body: form,
+      });
+
+      const result = await response.json();
+      if (result.success) alert("Ansökan skickad!");
+      else alert("Kunde inte skicka ansökan: " + result.message);
+    } catch (err) {
+      console.error(err);
+      alert("Fel vid skickande av video.");
+    }
+  };
+
   return (
-    <div>
+    <div style={{ marginTop: "20px" }}>
       {!recording ? (
-        <button onClick={startRecording}>🎥 Start Recording</button>
+        <button onClick={startRecording}>🎥 Start</button>
       ) : (
-        <button onClick={stopRecording}>⛔ Stop Recording</button>
+        <button onClick={stopRecording}>⛔ Stoppa inspelning</button>
       )}
 
-      {videoURL && (
+      {videoBlob && (
         <div style={{ marginTop: "20px" }}>
-          <h4>Your Video:</h4>
-          <video src={videoURL} controls width="300" />
+          <h4>Förhandsgranska din video:</h4>
+          <video src={URL.createObjectURL(videoBlob)} controls width="400" />
+          <br />
+          <button onClick={sendVideoAndCV} style={{ marginTop: "10px" }}>
+            📧 Skicka CV + Video
+          </button>
         </div>
       )}
     </div>
