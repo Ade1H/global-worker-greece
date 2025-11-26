@@ -17,6 +17,7 @@ L.Icon.Default.mergeOptions({
   shadowUrl,
 });
 
+// Fly to selected location
 function FlyToLocation({ position, zoom = 6 }) {
   const map = useMap();
   useEffect(() => {
@@ -29,13 +30,28 @@ export default function WorkerMap({ workers = [], initialCenter = [20, 0], initi
   const [query, setQuery] = useState("");
   const [skillFilter, setSkillFilter] = useState("all");
   const [selectedPos, setSelectedPos] = useState(null);
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
 
+  // Adjust map height and mobile flag
+  const [mapHeight, setMapHeight] = useState(isMobile ? "50vh" : "75vh");
+  useEffect(() => {
+    const handleResize = () => {
+      const mobile = window.innerWidth < 768;
+      setIsMobile(mobile);
+      setMapHeight(mobile ? "50vh" : "75vh");
+    };
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  // Prepare skill filter options
   const skills = useMemo(() => {
     const s = new Set();
     workers.forEach((w) => (w.skills || []).forEach((sk) => s.add(sk)));
     return ["all", ...Array.from(s).sort()];
   }, [workers]);
 
+  // Fuse.js search
   const fuse = useMemo(
     () =>
       new Fuse(workers, {
@@ -48,13 +64,14 @@ export default function WorkerMap({ workers = [], initialCenter = [20, 0], initi
   const filtered = useMemo(() => {
     let result = workers;
     if (skillFilter !== "all") result = result.filter((w) => (w.skills || []).includes(skillFilter));
-    if (query && query.trim().length > 0) {
+    if (query && query.trim()) {
       const res = fuse.search(query.trim());
       result = res.map((r) => r.item).filter((w) => result.includes(w));
     }
     return result;
   }, [workers, skillFilter, query, fuse]);
 
+  // Fly to first worker if only one
   useEffect(() => {
     if (filtered.length === 1) setSelectedPos([filtered[0].lat, filtered[0].lng]);
   }, [filtered]);
@@ -93,11 +110,11 @@ export default function WorkerMap({ workers = [], initialCenter = [20, 0], initi
 
   return (
     <div className="container my-4">
-      <div className="card shadow-lg border-0 rounded-4">
-        <div className="card-body p-4">
+      <div className="card shadow-lg border-0 rounded-4 overflow-hidden">
+        <div className="card-body p-3 p-md-4">
           {/* Filters */}
-          <div className="row g-3 mb-3 align-items-center">
-            <div className="col-md-5">
+          <div className="row g-2 g-md-3 mb-3 align-items-center">
+            <div className="col-12 col-md-5">
               <div className="input-group">
                 <span className="input-group-text">🔍</span>
                 <input
@@ -106,16 +123,12 @@ export default function WorkerMap({ workers = [], initialCenter = [20, 0], initi
                   value={query}
                   onChange={(e) => setQuery(e.target.value)}
                 />
-                <button
-                  className="btn btn-outline-secondary"
-                  onClick={() => setQuery("")}
-                  type="button"
-                >
+                <button className="btn btn-outline-secondary" onClick={() => setQuery("")} type="button">
                   Rensa
                 </button>
               </div>
             </div>
-            <div className="col-md-4">
+            <div className="col-12 col-md-4">
               <select
                 className="form-select rounded-3"
                 value={skillFilter}
@@ -128,7 +141,7 @@ export default function WorkerMap({ workers = [], initialCenter = [20, 0], initi
                 ))}
               </select>
             </div>
-            <div className="col-md-3 text-end">
+            <div className="col-12 col-md-3 text-md-end">
               <div className="small text-muted">
                 Visar <strong>{filtered.length}</strong> av <strong>{workers.length}</strong> arbetare
               </div>
@@ -136,11 +149,11 @@ export default function WorkerMap({ workers = [], initialCenter = [20, 0], initi
           </div>
 
           {/* Map */}
-          <div style={{ height: "75vh", width: "100%", borderRadius: 12, overflow: "hidden" }}>
+          <div style={{ width: "100%", height: mapHeight, borderRadius: 12, overflow: "hidden" }}>
             <MapContainer
               center={initialCenter}
               zoom={initialZoom}
-              style={{ height: "100%" }}
+              style={{ width: "100%", height: "100%" }}
               scrollWheelZoom={true}
             >
               <TileLayer
@@ -150,7 +163,10 @@ export default function WorkerMap({ workers = [], initialCenter = [20, 0], initi
 
               {selectedPos && <FlyToLocation position={selectedPos} zoom={6} />}
 
-              <MarkerClusterGroup>
+              <MarkerClusterGroup
+                chunkedLoading
+                maxClusterRadius={isMobile ? 40 : 80} // smaller clusters on mobile
+              >
                 {filtered.map((w) => (
                   <Marker key={w.id} position={[w.lat, w.lng]}>
                     <Popup>
