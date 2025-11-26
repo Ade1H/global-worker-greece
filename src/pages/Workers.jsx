@@ -1,9 +1,9 @@
-import WorkerList from "../components/WorkerList";
+﻿import WorkerList from "../components/WorkerList";
 
 function Workers() {
   return (
     <div style={{ padding: "20px" }}>
-      <h1>Workers</h1>
+      <h1>Arbetare</h1>
       <WorkerList />
     </div>
   );

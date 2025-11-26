@@ -1,74 +1,24 @@
-import React from "react";
-import { Link } from "react-router-dom";
+﻿import React from 'react';
 
 function HeroSection() {
-  const images = [
-    import.meta.env.BASE_URL + "images/hero1.png",
-    import.meta.env.BASE_URL + "images/hero2.png",
-    import.meta.env.BASE_URL + "images/hero3.png"
-  ];
-
   return (
-    <div
-      id="heroCarousel"
-      className="carousel slide"
-      data-bs-ride="carousel"
-      data-bs-interval="3000"
-    >
-      <div className="carousel-inner">
-        {images.map((img, index) => (
-          <div
-            className={`carousel-item ${index === 0 ? "active" : ""}`}
-            key={index}
-          >
-            <img
-              src={img}
-              className="d-block w-100"
-              alt={`slide-${index}`}
-              style={{ height: "70vh", objectFit: "cover" }}
-            />
-
-            <div
-              className="carousel-caption d-flex flex-column justify-content-center h-100"
-              style={{ backgroundColor: "rgba(0,0,0,0.4)" }}
-            >
-              <h1 className="display-3 fw-bold">Välkommen till Global Worker Greece</h1>
-              <p className="lead">
-                Hitta arbetare, jobb, företag, dokument och mer – allt på ett ställe.
-              </p>
-              <div className="d-flex gap-3 justify-content-center mt-3">
-                <Link to="/workers" className="btn btn-primary btn-lg">
-                  Hitta arbetare
-                </Link>
-                <Link to="/jobs" className="btn btn-outline-light btn-lg">
-                  Bläddra jobb
-                </Link>
-              </div>
+    <section className='hero-section bg-primary text-white py-5'>
+      <div className='container'>
+        <div className='row align-items-center'>
+          <div className='col-lg-6'>
+            <h1 className='display-4 fw-bold'>Global Worker Grekland</h1>
+            <p className='lead'>Kopplar samman talangfulla arbetare med företag världen över</p>
+            <div className='mt-4'>
+              <button className='btn btn-light btn-lg me-3'>Hitta arbetare</button>
+              <button className='btn btn-outline-light btn-lg'>Hitta företag</button>
             </div>
           </div>
-        ))}
+          <div className='col-lg-6 text-center'>
+            <img src='/images/hero1.png' alt='Hjältebild' className='img-fluid' />
+          </div>
+        </div>
       </div>
-
-      {/* Prev */}
-      <button
-        className="carousel-control-prev"
-        type="button"
-        data-bs-target="#heroCarousel"
-        data-bs-slide="prev"
-      >
-        <span className="carousel-control-prev-icon"></span>
-      </button>
-
-      {/* Next */}
-      <button
-        className="carousel-control-next"
-        type="button"
-        data-bs-target="#heroCarousel"
-        data-bs-slide="next"
-      >
-        <span className="carousel-control-next-icon"></span>
-      </button>
-    </div>
+    </section>
   );
 }
 

@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+﻿import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
 function Sidebar() {
@@ -70,7 +70,7 @@ function Sidebar() {
         onMouseLeave={() => !isMobile && setOpen(false)}
         style={sidebarStyle}
       >
-        <h2 style={titleStyle}>Global Worker Greece</h2>
+        <h2 style={titleStyle}>Global Worker Grekland</h2>
         <ul style={{ listStyle: "none", padding: 0 }}>
           {/* Pages */}
           <li>
@@ -109,7 +109,7 @@ function Sidebar() {
               <div>
                 <Link to="/workers" style={dropdownLinkStyle}>Alla arbetare</Link>
                 <Link to="/workers/add" style={dropdownLinkStyle}>Lägg till arbetare</Link>
-                <Link to="/workers/categories" style={dropdownLinkStyle}>Arbetarkategorier</Link>
+                <Link to="/workers/categories" style={dropdownLinkStyle}>Arbetarkategorier</Link>    
               </div>
             )}
           </li>
@@ -122,7 +122,7 @@ function Sidebar() {
             {activeDropdown === "companies" && (
               <div>
                 <Link to="/companies" style={dropdownLinkStyle}>Alla företag</Link>
-                <Link to="/companies/add" style={dropdownLinkStyle}>Lägg till företag</Link>
+                <Link to="/companies/add" style={dropdownLinkStyle}>Lägg till företag</Link>       
               </div>
             )}
           </li>
@@ -161,7 +161,7 @@ function Sidebar() {
               <div>
                 <Link to="/settings/profile" style={dropdownLinkStyle}>Profil</Link>
                 <Link to="/settings/language" style={dropdownLinkStyle}>Språk</Link>
-                <Link to="/settings/notifications" style={dropdownLinkStyle}>Aviseringar</Link>
+                <Link to="/settings/notifications" style={dropdownLinkStyle}>Aviseringar</Link>      
               </div>
             )}
           </li>

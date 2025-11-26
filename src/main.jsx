@@ -1,14 +1,11 @@
-// main.js
-import 'leaflet/dist/leaflet.css';
-
-import 'bootstrap/dist/css/bootstrap.min.css';
-import "bootstrap/dist/js/bootstrap.bundle.min.js";
-
-import React from 'react';
+﻿import React from 'react';
 import ReactDOM from 'react-dom/client';
-import "./i18n";
-
 import App from './App.jsx';
+import './index.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'leaflet/dist/leaflet.css';
+import 'leaflet.markercluster/dist/MarkerCluster.css';
+import 'leaflet.markercluster/dist/MarkerCluster.Default.css';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>

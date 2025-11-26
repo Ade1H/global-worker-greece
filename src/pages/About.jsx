@@ -1,7 +1,10 @@
-import React from "react";
-
-const About = () => {
-  return <h2>About Page</h2>;
-};
+﻿function About() {
+  return (
+    <div style={{ padding: "20px" }}>
+      <h1>Om oss</h1>
+      <p>Information om Global Worker Grekland kommer att visas här.</p>
+    </div>
+  );
+}
 
 export default About;

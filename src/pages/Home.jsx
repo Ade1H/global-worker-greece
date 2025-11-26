@@ -1,27 +1,92 @@
-import HeroSection from "../components/HeroSection";
-import RequestForm from "../components/RequestForm";
-import CompanyMap from "../components/CompanyMap";
-import VideoRecorder from "../components/VideoRecorder";
+﻿import React from 'react';
+import HeroSection from '../components/HeroSection';
+import VideoRecorder from '../components/VideoRecorder';
+import RequestForm from '../components/RequestForm';
+import CompanyMap from '../components/CompanyMap';
+import WorkerMap from '../components/WorkerMap';
+
+// Exempeldata för kartor
+const SAMPLE_COMPANIES = [
+  { id: 'c1', name: 'Tech Corp', lat: 57.7089, lng: 11.9746, country: 'Sverige', city: 'Göteborg', industry: 'Teknik' },
+  { id: 'c2', name: 'Bygg AB', lat: 37.9838, lng: 23.7275, country: 'Grekland', city: 'Aten', industry: 'Bygg' },
+];
+
+const SAMPLE_WORKERS = [
+  { id: 'w1', name: 'Ava Johansson', lat: 57.7089, lng: 11.9746, country: 'Sverige', city: 'Göteborg', skills: ['Städning', 'Flytt'], availability: 'Heltid' },
+  { id: 'w2', name: 'Yannis Papadopoulos', lat: 37.9838, lng: 23.7275, country: 'Grekland', city: 'Aten', skills: ['El', 'Hantverkare'], availability: 'Deltid' },
+];
 
 function Home() {
   return (
-    <div className="container py-3 py-md-4">
+    <div>
+      {/* Hero Section */}
       <HeroSection />
-      <RequestForm />
-
-      {/* Video Recorder Section */}
-      <div className="mt-4">
-        <h2>Record Your Video</h2>
-        <VideoRecorder />
+      
+      {/* Video och CV Sektion */}
+      <div className='container py-4'>
+        <h2 className='text-center mb-4'>Kom igång</h2>
+        <div className='row'>
+          <div className='col-lg-6 mb-4'>
+            <VideoRecorder />
+          </div>
+          <div className='col-lg-6 mb-4'>
+            <RequestForm />
+          </div>
+        </div>
       </div>
 
-      {/* Company Map */}
-      <div className="mt-4">
-        <h2>Companies</h2>
-        <div className="card shadow-lg border-0 rounded-4 overflow-hidden">
-          <div className="card-body p-3 p-md-4">
-            <div style={{ width: "100%", height: "75vh", borderRadius: 12, overflow: "hidden" }}>
-              <CompanyMap />
+      {/* Kartsektion */}
+      <div className='container py-4'>
+        <h2 className='text-center mb-4'>Global täckning</h2>
+        <div className='row'>
+          <div className='col-lg-6 mb-4'>
+            <div className='card'>
+              <div className='card-body'>
+                <h5 className='card-title'>Företag världen över</h5>
+                <div style={{ height: '300px' }}>
+                  <CompanyMap 
+                    companies={SAMPLE_COMPANIES}
+                    initialCenter={[40, 15]}
+                    initialZoom={3}
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className='col-lg-6 mb-4'>
+            <div className='card'>
+              <div className='card-body'>
+                <h5 className='card-title'>Arbetare världen över</h5>
+                <div style={{ height: '300px' }}>
+                  <WorkerMap 
+                    workers={SAMPLE_WORKERS}
+                    initialCenter={[40, 15]}
+                    initialZoom={3}
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Ytterligare informationskort */}
+      <div className='container py-4'>
+        <div className='row'>
+          <div className='col-md-6'>
+            <div className='card'>
+              <div className='card-body'>
+                <h5 className='card-title'>Hitta arbetare</h5>
+                <p className='card-text'>Bläddra bland tillgängliga arbetare från hela världen.</p>
+              </div>
+            </div>
+          </div>
+          <div className='col-md-6'>
+            <div className='card'>
+              <div className='card-body'>
+                <h5 className='card-title'>Hitta företag</h5>
+                <p className='card-text'>Upptäck företag som söker talang.</p>
+              </div>
             </div>
           </div>
         </div>
