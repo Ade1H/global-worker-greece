@@ -22,7 +22,7 @@ function Home() {
       {/* Hero Section */}
       <HeroSection />
       
-      {/* Video och CV Sektion */}
+      {/* Video och CV Sektion - VIKTIGT: Denna sektion måste finnas */}
       <div className='container py-4'>
         <h2 className='text-center mb-4'>Kom igång</h2>
         <div className='row'>
@@ -64,28 +64,6 @@ function Home() {
                     initialZoom={3}
                   />
                 </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Ytterligare informationskort */}
-      <div className='container py-4'>
-        <div className='row'>
-          <div className='col-md-6'>
-            <div className='card'>
-              <div className='card-body'>
-                <h5 className='card-title'>Hitta arbetare</h5>
-                <p className='card-text'>Bläddra bland tillgängliga arbetare från hela världen.</p>
-              </div>
-            </div>
-          </div>
-          <div className='col-md-6'>
-            <div className='card'>
-              <div className='card-body'>
-                <h5 className='card-title'>Hitta företag</h5>
-                <p className='card-text'>Upptäck företag som söker talang.</p>
               </div>
             </div>
           </div>
