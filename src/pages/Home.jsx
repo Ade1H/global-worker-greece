@@ -5,24 +5,13 @@ import RequestForm from '../components/RequestForm';
 import CompanyMap from '../components/CompanyMap';
 import WorkerMap from '../components/WorkerMap';
 
-// Exempeldata för kartor
-const SAMPLE_COMPANIES = [
-  { id: 'c1', name: 'Tech Corp', lat: 57.7089, lng: 11.9746, country: 'Sverige', city: 'Göteborg', industry: 'Teknik' },
-  { id: 'c2', name: 'Bygg AB', lat: 37.9838, lng: 23.7275, country: 'Grekland', city: 'Aten', industry: 'Bygg' },
-];
-
-const SAMPLE_WORKERS = [
-  { id: 'w1', name: 'Ava Johansson', lat: 57.7089, lng: 11.9746, country: 'Sverige', city: 'Göteborg', skills: ['Städning', 'Flytt'], availability: 'Heltid' },
-  { id: 'w2', name: 'Yannis Papadopoulos', lat: 37.9838, lng: 23.7275, country: 'Grekland', city: 'Aten', skills: ['El', 'Hantverkare'], availability: 'Deltid' },
-];
-
 function Home() {
   return (
     <div>
       {/* Hero Section */}
       <HeroSection />
       
-      {/* Video och CV Sektion - VIKTIGT: Denna sektion måste finnas */}
+      {/* Video och CV Sektion */}
       <div className='container py-4'>
         <h2 className='text-center mb-4'>Kom igång</h2>
         <div className='row'>
@@ -35,35 +24,39 @@ function Home() {
         </div>
       </div>
 
-      {/* Kartsektion */}
+      {/* Kartsektion - BOTH MAPS WITH IDENTICAL STYLING */}
       <div className='container py-4'>
         <h2 className='text-center mb-4'>Global täckning</h2>
         <div className='row'>
           <div className='col-lg-6 mb-4'>
-            <div className='card'>
-              <div className='card-body'>
-                <h5 className='card-title'>Företag världen över</h5>
-                <div style={{ height: '300px' }}>
-                  <CompanyMap 
-                    companies={SAMPLE_COMPANIES}
-                    initialCenter={[40, 15]}
-                    initialZoom={3}
-                  />
-                </div>
+            <div className='card h-100'>
+              <div className='card-header bg-primary text-white'>
+                <h5 className='card-title mb-0'>
+                  <i className="bi bi-building me-2"></i>
+                  Företag i 8 länder
+                </h5>
+              </div>
+              <div className='card-body p-0'>
+                <CompanyMap />
+              </div>
+              <div className='card-footer text-muted'>
+                <small>Global Worker kontor världen över</small>
               </div>
             </div>
           </div>
           <div className='col-lg-6 mb-4'>
-            <div className='card'>
-              <div className='card-body'>
-                <h5 className='card-title'>Arbetare världen över</h5>
-                <div style={{ height: '300px' }}>
-                  <WorkerMap 
-                    workers={SAMPLE_WORKERS}
-                    initialCenter={[40, 15]}
-                    initialZoom={3}
-                  />
-                </div>
+            <div className='card h-100'>
+              <div className='card-header bg-success text-white'>
+                <h5 className='card-title mb-0'>
+                  <i className="bi bi-people me-2"></i>
+                  Arbetare världen över
+                </h5>
+              </div>
+              <div className='card-body p-0'>
+                <WorkerMap />
+              </div>
+              <div className='card-footer text-muted'>
+                <small>Talangfulla arbetare redo för nya uppdrag</small>
               </div>
             </div>
           </div>

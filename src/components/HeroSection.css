@@ -1,0 +1,645 @@
+﻿/* Hero Section Container */
+.hero-section-container {
+  position: relative;
+  width: 100%;
+}
+
+/* Ensure hero section stays below sidebar but above other content */
+#heroCarousel {
+  position: relative;
+  z-index: 1;
+}
+
+/* Hero Section Main Styles */
+.carousel-slide {
+  height: 100vh;
+  min-height: 600px;
+  max-height: 1200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Background Container for better control */
+.carousel-slide::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
+}
+
+/* Slide 1 */
+.slide-1::before {
+  background: 
+    linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.6)), 
+    url('/images/hero1.png');
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+
+/* Slide 2 - FIXED BLACK FRAME */
+.slide-2::before {
+  background: 
+    linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.3)), 
+    url('/images/hero2.png');
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+
+/* Slide 3 */
+.slide-3::before {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+/* Content Styling */
+.carousel-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  padding: 2rem;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Text Effects */
+.carousel-content h1,
+.carousel-content p {
+  text-shadow: 2px 2px 8px rgba(0,0,0,0.7);
+}
+
+/* Logo Styling */
+.logo-img {
+  width: 150px;
+  height: 150px;
+  object-fit: contain;
+  filter: drop-shadow(0 4px 12px rgba(0,0,0,0.4));
+}
+
+/* Button Group */
+.button-group {
+  display: flex;
+  gap: 1.5rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.btn-lg {
+  min-width: 200px;
+}
+
+/* Stats Container */
+.stats-container {
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin: 2rem 0;
+}
+
+.stat-card {
+  background: rgba(255,255,255,0.15);
+  backdrop-filter: blur(15px);
+  border-radius: 15px;
+  padding: 1.5rem 1rem;
+  border: 1px solid rgba(255,255,255,0.3);
+  min-width: 140px;
+  transition: all 0.3s ease;
+  flex: 1;
+  max-width: 160px;
+}
+
+.stat-card:hover {
+  transform: translateY(-5px);
+  background: rgba(255,255,255,0.2);
+}
+
+.stat-card h3 {
+  color: #ffd166;
+  margin-bottom: 0.5rem;
+  font-size: 2rem;
+}
+
+.stat-card p {
+  margin: 0;
+  opacity: 0.9;
+}
+
+/* Features Container */
+.features-container {
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin: 2rem 0;
+}
+
+.feature-icon {
+  transition: all 0.3s ease;
+  color: white;
+  text-align: center;
+  flex: 1;
+  min-width: 120px;
+  max-width: 150px;
+}
+
+.feature-icon:hover {
+  transform: translateY(-5px);
+}
+
+.feature-icon .bi {
+  display: block;
+  margin: 0 auto 0.5rem auto;
+  font-size: 2.5rem !important;
+}
+
+.feature-icon p {
+  font-size: 0.9rem;
+  margin: 0;
+  line-height: 1.3;
+}
+
+.feature-icon .bi-globe { color: #ffd166 !important; }
+.feature-icon .bi-shield-check { color: #06d6a0 !important; }
+.feature-icon .bi-lightning-charge { color: #118ab2 !important; }
+
+/* Custom Indicators */
+.custom-indicators {
+  margin-bottom: 2rem;
+}
+
+.custom-indicators button {
+  width: 12px !important;
+  height: 12px !important;
+  border-radius: 50% !important;
+  margin: 0 6px !important;
+  border: 2px solid white !important;
+  background-color: transparent !important;
+  opacity: 0.7;
+  transition: all 0.3s ease;
+}
+
+.custom-indicators button.active {
+  background-color: white !important;
+  opacity: 1;
+}
+
+.custom-indicators button:hover {
+  opacity: 1;
+}
+
+/* Carousel Controls */
+.carousel-control-prev,
+.carousel-control-next {
+  width: 80px;
+  opacity: 0.8;
+  transition: opacity 0.3s ease;
+}
+
+.carousel-control-prev:hover,
+.carousel-control-next:hover {
+  opacity: 1;
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  background-color: rgba(0,0,0,0.5);
+  border-radius: 50%;
+  padding: 1.5rem;
+  background-size: 1.5rem 1.5rem;
+}
+
+/* Animations */
+.animate-fade-in {
+  animation: fadeIn 1.5s ease-in;
+}
+
+.animate-slide-up {
+  animation: slideUp 1.5s ease-out;
+}
+
+.animate-bounce-in {
+  animation: bounceIn 1.5s ease-out;
+}
+
+@keyframes fadeIn {
+  from { 
+    opacity: 0; 
+    transform: translateY(30px);
+  }
+  to { 
+    opacity: 1; 
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideUp {
+  from { 
+    opacity: 0;
+    transform: translateY(50px);
+  }
+  to { 
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes bounceIn {
+  0% { 
+    opacity: 0;
+    transform: scale(0.3);
+  }
+  50% { 
+    opacity: 1;
+    transform: scale(1.05);
+  }
+  70% { 
+    transform: scale(0.95);
+  }
+  100% { 
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Button Hover Effects */
+.btn {
+  transition: all 0.3s ease !important;
+  border-width: 2px !important;
+}
+
+.btn:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.2) !important;
+}
+
+.btn-primary:hover {
+  box-shadow: 0 8px 20px rgba(13, 110, 253, 0.3) !important;
+}
+
+.btn-outline-light:hover {
+  background-color: rgba(255,255,255,0.1) !important;
+}
+
+/* Extra Large Screens (4K, Big PCs) */
+@media (min-width: 1920px) {
+  .carousel-slide {
+    height: 90vh;
+    max-height: 1000px;
+  }
+  
+  .carousel-content {
+    max-width: 1400px;
+  }
+  
+  .carousel-content h1.display-3 {
+    font-size: 4rem !important;
+  }
+  
+  .carousel-content h1.display-2 {
+    font-size: 4.5rem !important;
+  }
+  
+  .carousel-content .lead {
+    font-size: 1.5rem !important;
+  }
+  
+  .logo-img {
+    width: 200px;
+    height: 200px;
+  }
+  
+  .btn-lg {
+    padding: 1rem 2.5rem !important;
+    font-size: 1.25rem !important;
+    min-width: 250px;
+  }
+  
+  .stats-container {
+    gap: 4rem;
+  }
+  
+  .stat-card {
+    min-width: 200px;
+    padding: 2.5rem 2rem;
+  }
+  
+  .stat-card h3 {
+    font-size: 3rem;
+  }
+}
+
+/* Large Desktop Screens */
+@media (min-width: 1440px) and (max-width: 1919px) {
+  .carousel-slide {
+    height: 95vh;
+    max-height: 900px;
+  }
+  
+  .carousel-content h1.display-3 {
+    font-size: 3.5rem !important;
+  }
+  
+  .carousel-content h1.display-2 {
+    font-size: 4rem !important;
+  }
+}
+
+/* Standard Desktop */
+@media (min-width: 1200px) and (max-width: 1439px) {
+  .carousel-slide {
+    height: 100vh;
+    max-height: 800px;
+  }
+}
+
+/* Tablets and Small Laptops */
+@media (max-width: 1199px) and (min-width: 768px) {
+  .carousel-slide {
+    height: 80vh;
+    min-height: 500px;
+  }
+  
+  .carousel-content h1.display-3 {
+    font-size: 2.5rem !important;
+  }
+  
+  .carousel-content h1.display-2 {
+    font-size: 3rem !important;
+  }
+  
+  .stats-container {
+    gap: 2rem;
+  }
+  
+  .features-container {
+    gap: 2rem;
+  }
+}
+
+/* Mobile Devices */
+@media (max-width: 768px) {
+  .hero-section-container {
+    margin-top: 0;
+    padding-top: 0;
+  }
+  
+  #heroCarousel {
+    margin-top: 0;
+  }
+  
+  .carousel-slide {
+    height: 100vh !important;
+    min-height: 100vh !important;
+    max-height: 100vh !important;
+    padding: 1rem !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+
+  .carousel-content {
+    padding: 1rem !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    height: auto !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    align-items: center !important;
+  }
+
+  /* Slide 2 - Stats Mobile Fix */
+  .slide-2 .carousel-content {
+    padding-top: 2rem !important;
+    padding-bottom: 2rem !important;
+  }
+
+  .slide-2 h1 {
+    font-size: 1.8rem !important;
+    margin-bottom: 1rem !important;
+  }
+
+  .slide-2 .lead {
+    font-size: 1rem !important;
+    margin-bottom: 1.5rem !important;
+  }
+
+  .slide-2 .stats-container {
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 0.8rem !important;
+    margin: 1rem 0 2rem 0 !important;
+    width: 100% !important;
+    max-width: 300px !important;
+  }
+
+  .slide-2 .stat-card {
+    min-width: auto !important;
+    max-width: none !important;
+    padding: 1rem 0.5rem !important;
+    margin: 0 !important;
+  }
+
+  .slide-2 .stat-card h3 {
+    font-size: 1.3rem !important;
+    margin-bottom: 0.3rem !important;
+  }
+
+  .slide-2 .stat-card p {
+    font-size: 0.7rem !important;
+    line-height: 1.1 !important;
+  }
+
+  .slide-2 .btn {
+    margin-top: 0.5rem !important;
+    width: 90% !important;
+    max-width: 250px !important;
+  }
+
+  /* Slide 3 - Features Mobile Fix */
+  .slide-3 .carousel-content {
+    padding-top: 1rem !important;
+    padding-bottom: 1rem !important;
+  }
+
+  .slide-3 h1 {
+    font-size: 1.8rem !important;
+    margin-bottom: 1rem !important;
+  }
+
+  .slide-3 .lead {
+    font-size: 1rem !important;
+    margin-bottom: 1rem !important;
+  }
+
+  .slide-3 .logo-img {
+    width: 80px !important;
+    height: 80px !important;
+    margin-bottom: 1rem !important;
+  }
+
+  .slide-3 .features-container {
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 0.8rem !important;
+    margin: 1rem 0 1.5rem 0 !important;
+    width: 100% !important;
+    max-width: 320px !important;
+  }
+
+  .slide-3 .feature-icon {
+    min-width: auto !important;
+    max-width: none !important;
+    padding: 0.5rem !important;
+  }
+
+  .slide-3 .feature-icon .bi {
+    font-size: 1.8rem !important;
+    margin-bottom: 0.3rem !important;
+  }
+
+  .slide-3 .feature-icon p {
+    font-size: 0.65rem !important;
+    line-height: 1.1 !important;
+  }
+
+  .slide-3 .button-group {
+    margin-top: 0.5rem !important;
+  }
+
+  .slide-3 .btn {
+    width: 90% !important;
+    max-width: 250px !important;
+    padding: 0.7rem 1rem !important;
+    font-size: 0.9rem !important;
+  }
+
+  /* Common mobile styles for all slides */
+  .carousel-content h1.display-3,
+  .carousel-content h1.display-2 {
+    font-size: 1.8rem !important;
+    margin-bottom: 1rem !important;
+    line-height: 1.2 !important;
+  }
+
+  .carousel-content .lead {
+    font-size: 1rem !important;
+    margin-bottom: 1.5rem !important;
+    line-height: 1.4 !important;
+  }
+
+  .button-group {
+    flex-direction: column !important;
+    gap: 0.8rem !important;
+    width: 100% !important;
+    align-items: center !important;
+  }
+
+  .btn-lg {
+    width: 90% !important;
+    max-width: 280px !important;
+    padding: 0.8rem 1.5rem !important;
+    font-size: 0.95rem !important;
+    margin: 0 !important;
+  }
+}
+
+/* Very Small Mobile Devices */
+@media (max-width: 480px) {
+  .carousel-slide {
+    height: 100vh !important;
+    min-height: 100vh !important;
+  }
+
+  .carousel-content {
+    padding: 0.5rem !important;
+  }
+
+  /* Slide 2 - Extra Small Screens */
+  .slide-2 .stats-container {
+    gap: 0.5rem !important;
+    max-width: 280px !important;
+  }
+
+  .slide-2 .stat-card {
+    padding: 0.8rem 0.3rem !important;
+  }
+
+  .slide-2 .stat-card h3 {
+    font-size: 1.1rem !important;
+  }
+
+  .slide-2 .stat-card p {
+    font-size: 0.6rem !important;
+  }
+
+  /* Slide 3 - Extra Small Screens */
+  .slide-3 .features-container {
+    gap: 0.5rem !important;
+    max-width: 280px !important;
+  }
+
+  .slide-3 .feature-icon .bi {
+    font-size: 1.5rem !important;
+  }
+
+  .slide-3 .feature-icon p {
+    font-size: 0.6rem !important;
+  }
+
+  .slide-3 .logo-img {
+    width: 70px !important;
+    height: 70px !important;
+  }
+
+  /* Text sizing for very small screens */
+  .carousel-content h1.display-3,
+  .carousel-content h1.display-2 {
+    font-size: 1.6rem !important;
+  }
+
+  .carousel-content .lead {
+    font-size: 0.9rem !important;
+  }
+
+  .btn-lg {
+    font-size: 0.9rem !important;
+    padding: 0.7rem 1.2rem !important;
+  }
+}
+
+/* Landscape Mobile */
+@media (max-width: 768px) and (orientation: landscape) {
+  .carousel-slide {
+    height: 100vh !important;
+    min-height: 100vh !important;
+  }
+
+  .carousel-content {
+    padding: 0.5rem !important;
+    transform: scale(0.9);
+  }
+
+  .slide-2 .stats-container,
+  .slide-3 .features-container {
+    max-width: 90% !important;
+  }
+}
+
+/* Ensure content is always visible */
+.carousel-content {
+  overflow: visible !important;
+}
+
+.carousel-slide {
+  overflow: visible !important;
+}

@@ -1,10 +1,104 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+/* GLOBAL FIXES TO PREVENT ZOOMING */
+* {
+  touch-action: manipulation;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  box-sizing: border-box;
 }
 
+html, body {
+  touch-action: pan-x pan-y;
+  height: 100%;
+  width: 100%;
+  overflow-x: hidden;
+  position: relative;
+  margin: 0;
+  padding: 0;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  /* REMOVED all flex properties that cause zoom issues */
+}
+
+#root {
+  width: 100%;
+  min-height: 100vh;
+  /* REMOVED: max-width, margin, padding, text-align that were causing issues */
+}
+
+/* Prevent zoom on form elements in iOS */
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  input[type="text"],
+  input[type="email"],
+  input[type="tel"],
+  input[type="password"],
+  input[type="search"],
+  input[type="url"],
+  input[type="number"],
+  textarea,
+  select {
+    font-size: 16px !important;
+    transform: translateZ(0);
+  }
+}
+
+/* Fix for Bootstrap Carousel */
+.carousel {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+.carousel-item {
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+}
+
+/* Fix for video elements */
+video {
+  object-fit: cover;
+  transform: translateZ(0);
+  max-width: 100%;
+  height: auto;
+}
+
+/* Main content area should account for sidebar */
+.main-content {
+  margin-left: 60px; /* Default sidebar width */
+  width: calc(100% - 60px);
+  min-height: 100vh;
+  transition: margin-left 0.3s ease;
+}
+
+.main-content.expanded {
+  margin-left: 220px; /* Expanded sidebar width */
+  width: calc(100% - 220px);
+}
+
+/* Mobile styles */
+@media (max-width: 768px) {
+  .main-content {
+    margin-left: 0 !important;
+    width: 100% !important;
+  }
+  
+  body {
+    position: relative;
+    overflow-x: hidden;
+  }
+  
+  #root {
+    position: relative;
+    overflow-x: hidden;
+  }
+}
+
+/* Your existing styles (optional - keep if you need them) */
 .logo {
   height: 6em;
   padding: 1.5em;

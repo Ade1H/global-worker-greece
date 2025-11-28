@@ -1,3 +1,4 @@
+/* GLOBAL FIXES TO PREVENT ZOOMING */
 :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -13,6 +14,83 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* CRITICAL: Prevent zooming and layout issues */
+* {
+  touch-action: manipulation;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  box-sizing: border-box;
+}
+
+html, body {
+  touch-action: pan-x pan-y;
+  height: 100%;
+  width: 100%;
+  overflow-x: hidden;
+  position: relative;
+  margin: 0;
+  padding: 0;
+  /* REMOVED: display: flex, place-items: center, min-height: 100vh */
+}
+
+/* FIXED: Body should not be flex centered */
+body {
+  margin: 0;
+  min-width: 320px;
+  /* REMOVED the flex properties that were causing zoom issues */
+}
+
+/* Prevent zoom on form elements in iOS */
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  input[type="text"],
+  input[type="email"],
+  input[type="tel"],
+  input[type="password"],
+  input[type="search"],
+  input[type="url"],
+  input[type="number"],
+  textarea,
+  select {
+    font-size: 16px !important;
+    transform: translateZ(0);
+  }
+}
+
+/* Fix for Bootstrap Carousel zoom */
+.carousel {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+.carousel-item {
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+}
+
+/* Fix for video elements */
+video {
+  object-fit: cover;
+  transform: translateZ(0);
+  max-width: 100%;
+  height: auto;
+}
+
+/* Fix for form containers */
+.form-container {
+  transform: translateZ(0);
+  max-width: 100%;
+  overflow: hidden;
+}
+
+/* Prevent text size adjustment */
+body {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+/* Your existing styles */
 a {
   font-weight: 500;
   color: #646cff;
@@ -20,14 +98,6 @@ a {
 }
 a:hover {
   color: #535bf2;
-}
-
-body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
 }
 
 h1 {
@@ -64,5 +134,36 @@ button:focus-visible {
   }
   button {
     background-color: #f9f9f9;
+  }
+}
+
+/* Additional fixes for sidebar and layout */
+#root {
+  width: 100%;
+  min-height: 100vh;
+}
+
+/* Ensure proper layout for app */
+.app-container {
+  width: 100%;
+  min-height: 100vh;
+  position: relative;
+}
+
+/* Fix for mobile viewport */
+@media (max-width: 768px) {
+  body {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+  }
+  
+  #root {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
   }
 }
