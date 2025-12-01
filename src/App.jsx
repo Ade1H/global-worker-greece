@@ -20,7 +20,6 @@ import Event from './components/Event';
 import Res from './components/Res';
 
 function App() {
-  const [sidebarExpanded, setSidebarExpanded] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
@@ -36,43 +35,60 @@ function App() {
     };
   }, []);
 
-  const handleSidebarToggle = (expanded) => {
-    setSidebarExpanded(expanded);
-  };
+  const sidebarWidth = isMobile ? '0' : '280px';
 
   return (
     <Router>
-      <div style={{ minHeight: '100vh', display: 'flex', position: 'relative' }}>
-        <Sidebar onToggle={handleSidebarToggle} />
-        <div style={{ 
-          flex: 1, 
-          marginLeft: isMobile ? '0' : (sidebarExpanded ? '220px' : '60px'),
-          transition: 'margin-left 0.3s ease',
-          minHeight: '100vh',
-          width: isMobile ? '100%' : (sidebarExpanded ? 'calc(100% - 220px)' : 'calc(100% - 60px)'),
-          position: 'relative',
-          zIndex: 1
-        }}>
-          <Routes>
-            <Route path='/' element={<Home />} />
-            <Route path="/tjanster" element={<Tjanster />} />
-            <Route path="/karriar" element={<Karriar />} />
-            <Route path="/blogg" element={<Blogg />} />
-            <Route path="/rekommendationer" element={<Rcomend />} />
-            <Route path="/evenemang" element={<Event />} />
-            <Route path="/Team" element={<Team />} />
-            <Route path="/About" element={<About />} />
-            <Route path="/resurser" element={<Res />} />
-            <Route path='/workers' element={<Workers />} />
-            <Route path='/companies' element={<Companies />} />
-            <Route path='/search' element={<Search />} />
-            <Route path='/contact' element={<Contact />} />
-          </Routes>
-          <Footer />
-          
-          {/* Add ChatBot component */}
-          <ChatBot />
+      <div style={{ 
+        minHeight: '100vh', 
+        display: 'flex', 
+        flexDirection: 'column',
+        position: 'relative',
+        background: '#ffffff',
+      }}>
+        {/* Header/Sidebar section */}
+        <div style={{ display: 'flex', minHeight: 'calc(100vh - 300px)' }}> {/* Adjust 300px based on your footer height */}
+          <Sidebar />
+          <div style={{ 
+            flex: 1, 
+            marginLeft: sidebarWidth,
+            transition: 'margin-left 0.3s ease',
+            width: isMobile ? '100%' : `calc(100% - ${sidebarWidth})`,
+            position: 'relative',
+            zIndex: 1,
+            padding: isMobile ? '15px' : '25px',
+            boxSizing: 'border-box',
+            background: '#ffffff',
+            color: '#1a1a2e',
+            overflowX: 'hidden'
+          }}>
+            <Routes>
+              <Route path='/' element={<Home />} />
+              <Route path="/tjanster" element={<Tjanster />} />
+              <Route path="/karriar" element={<Karriar />} />
+              <Route path="/blogg" element={<Blogg />} />
+              <Route path="/rekommendationer" element={<Rcomend />} />
+              <Route path="/evenemang" element={<Event />} />
+              <Route path="/Team" element={<Team />} />
+              <Route path="/About" element={<About />} />
+              <Route path="/resurser" element={<Res />} />
+              <Route path='/workers' element={<Workers />} />
+              <Route path='/companies' element={<Companies />} />
+              <Route path="/search" element={<Search />} />
+              <Route path='/contact' element={<Contact />} />
+            </Routes>
+          </div>
         </div>
+        
+        {/* Footer - will be below everything */}
+        <div style={{
+          marginLeft: sidebarWidth,
+          width: isMobile ? '100%' : `calc(100% - ${sidebarWidth})`,
+          transition: 'margin-left 0.3s ease, width 0.3s ease',
+        }}>
+          <Footer />
+        </div>
+        <ChatBot />
       </div>
     </Router>
   );

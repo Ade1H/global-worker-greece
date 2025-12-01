@@ -1,4 +1,5 @@
 ﻿import React from "react";
+import { Link } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./HeroSection.css";
 
@@ -12,7 +13,6 @@ function HeroSection() {
         data-bs-interval="4000"
         data-bs-pause="false"
       >
-        {/* Your existing carousel code remains exactly the same */}
         {/* Carousel Indicators */}
         <div className="carousel-indicators custom-indicators">
           {[0, 1, 2].map((index) => (
@@ -28,7 +28,7 @@ function HeroSection() {
 
         {/* Carousel Slides */}
         <div className="carousel-inner">
-          {/* Slide 1 */}
+          {/* Slide 1: Huvudbudskap */}
           <div className="carousel-item active">
             <div className="carousel-slide slide-1">
               <div className="carousel-content">
@@ -37,61 +37,66 @@ function HeroSection() {
                     Global Worker Grekland
                   </h1>
                   <p className="lead mb-4 fs-5">
-                    Kopplar samman talangfulla arbetare med företag världen över
+                    Rekryterar svenska arbetare till jobb i länder med fantastiskt väder
                   </p>
                   <div className="button-group">
-                    <button className="btn btn-primary btn-lg px-5 py-3 fw-bold">
-                      <i className="bi bi-search me-2"></i>
-                      Hitta arbetare
-                    </button>
-                    <button className="btn btn-outline-light btn-lg px-5 py-3 fw-bold">
-                      <i className="bi bi-building me-2"></i>
-                      Hitta företag
-                    </button>
+                    <Link to="/Tjanster" className="btn btn-primary btn-lg px-5 py-3 fw-bold">
+                      <i className="bi bi-sun me-2"></i>
+                      Hitta jobb i varma länder
+                    </Link>
+          
                   </div>
                 </div>
               </div>
             </div>
           </div>
 
-          {/* Slide 2 */}
+          {/* Slide 2: För arbetare */}
           <div className="carousel-item">
             <div className="carousel-slide slide-2">
               <div className="carousel-content">
                 <div className="animate-slide-up">
                   <h1 className="display-3 fw-bold mb-3">
-                    Hitta Arbetare
+                    Jobb i Paradiset
                   </h1>
                   <p className="lead mb-4 fs-5">
-                    Upptäck talangfulla arbetare från hela världen
+                    Upptäck jobbmöjligheter i Spanien, Grekland, Italien, Portugal & mer
                   </p>
                   
-                  {/* Stats Row */}
+                  {/* Varma länder */}
                   <div className="stats-container mb-5">
                     <div className="stat-card">
-                      <h3 className="fw-bold">10K+</h3>
-                      <p className="mb-0">Aktiva arbetare</p>
+                      <i className="bi bi-sun-fill text-warning fs-2 mb-2"></i>
+                      <h4 className="fw-bold">Spanien</h4>
+                      <p className="mb-0">30+ jobb</p>
                     </div>
                     <div className="stat-card">
-                      <h3 className="fw-bold">50+</h3>
-                      <p className="mb-0">Länder</p>
+                      <i className="bi bi-umbrella-fill text-primary fs-2 mb-2"></i>
+                      <h4 className="fw-bold">Grekland</h4>
+                      <p className="mb-0">25+ jobb</p>
                     </div>
                     <div className="stat-card">
-                      <h3 className="fw-bold">95%</h3>
-                      <p className="mb-0">Framgångsrate</p>
+                      <i className="bi bi-tree-fill text-success fs-2 mb-2"></i>
+                      <h4 className="fw-bold">Italien</h4>
+                      <p className="mb-0">20+ jobb</p>
+                    </div>
+                    <div className="stat-card">
+                      <i className="bi bi-water text-info fs-2 mb-2"></i>
+                      <h4 className="fw-bold">Portugal</h4>
+                      <p className="mb-0">15+ jobb</p>
                     </div>
                   </div>
 
-                  <button className="btn btn-primary btn-lg px-5 py-3 fw-bold">
-                    <i className="bi bi-people-fill me-2"></i>
-                    Bläddra arbetare
-                  </button>
+                  <Link to="/jobs" className="btn btn-primary btn-lg px-5 py-3 fw-bold">
+                    <i className="bi bi-briefcase me-2"></i>
+                    Se alla jobb
+                  </Link>
                 </div>
               </div>
             </div>
           </div>
 
-          {/* Slide 3 */}
+          {/* Slide 3: Fördelar */}
           <div className="carousel-item">
             <div className="carousel-slide slide-3">
               <div className="carousel-content">
@@ -102,37 +107,42 @@ function HeroSection() {
                     className="logo-img mb-4"
                   />
                   <h1 className="display-2 fw-bold mb-3">
-                    Global Worker Grekland
+                    Fördelar för dig
                   </h1>
-                  <p className="lead mb-4 fs-4">
-                    Din partner för global rekrytering
-                  </p>
                   
-                  {/* Feature Icons */}
+                  {/* Fördelar */}
                   <div className="features-container mb-5">
                     <div className="feature-icon">
-                      <i className="bi bi-globe fs-1"></i>
-                      <p className="mt-2 mb-0">Global räckvidd</p>
+                      <i className="bi bi-house-door-fill text-success fs-1"></i>
+                      <h5 className="mt-2 mb-1">Boende ingår</h5>
+                      <p className="small mb-0">Bostad ordnas åt dig</p>
                     </div>
                     <div className="feature-icon">
-                      <i className="bi bi-shield-check fs-1"></i>
-                      <p className="mt-2 mb-0">Verifierade profiler</p>
+                      <i className="bi bi-airplane-fill text-primary fs-1"></i>
+                      <h5 className="mt-2 mb-1">Flyg betalas</h5>
+                      <p className="small mb-0">Resekostnader ingår</p>
                     </div>
                     <div className="feature-icon">
-                      <i className="bi bi-lightning-charge fs-1"></i>
-                      <p className="mt-2 mb-0">Snabba matchningar</p>
+                      <i className="bi bi-shield-fill text-info fs-1"></i>
+                      <h5 className="mt-2 mb-1">Sjukförsäkring</h5>
+                      <p className="small mb-0">Fullt försäkrad</p>
+                    </div>
+                    <div className="feature-icon">
+                      <i className="bi bi-cash-stack text-warning fs-1"></i>
+                      <h5 className="mt-2 mb-1">Bra lön</h5>
+                      <p className="small mb-0">Konkurrenskraftiga löner</p>
                     </div>
                   </div>
 
                   <div className="button-group">
-                    <button className="btn btn-light btn-lg px-5 py-3 fw-bold">
-                      <i className="bi bi-rocket-takeoff me-2"></i>
-                      Kom igång
-                    </button>
-                    <button className="btn btn-outline-light btn-lg px-5 py-3 fw-bold">
+                    <Link to="/contact" className="btn btn-light btn-lg px-5 py-3 fw-bold">
+                      <i className="bi bi-chat-dots me-2"></i>
+                      Kontakta oss
+                    </Link>
+                    <Link to="/about" className="btn btn-outline-light btn-lg px-5 py-3 fw-bold">
                       <i className="bi bi-info-circle me-2"></i>
-                      Läs mer
-                    </button>
+                      Om oss
+                    </Link>
                   </div>
                 </div>
               </div>

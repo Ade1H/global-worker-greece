@@ -6,7 +6,7 @@ const ChatBot = () => {
   const [messages, setMessages] = useState([
     {
       id: 1,
-      text: "Hello! I'm your friendly chat bot. How can I help you today?",
+      text: "Hej! Jag är din hjälpsamma chatbot. Hur kan jag hjälpa dig idag?",
       sender: 'bot',
       timestamp: new Date(),
     }
@@ -24,32 +24,38 @@ const ChatBot = () => {
     scrollToBottom();
   }, [messages]);
 
-  // Keep your existing fallback responses as a backup
+  // Svenska fallback-svar
   const getFallbackResponse = (userMessage) => {
     const lowerMessage = userMessage.toLowerCase();
     
-    if (lowerMessage.includes('hello') || lowerMessage.includes('hi')) {
-      return "Hello there! Welcome to our platform. How can I assist you today?";
-    } else if (lowerMessage.includes('help')) {
-      return "I can help you navigate the app! You can explore Workers, Companies, Search features, or contact support.";
-    } else if (lowerMessage.includes('worker') || lowerMessage.includes('employees')) {
-      return "The Workers section shows all employees in the system. You can view their details, roles, and contact information.";
-    } else if (lowerMessage.includes('compan') || lowerMessage.includes('business')) {
-      return "The Companies section displays all registered companies. You can see company details and their associated workers.";
-    } else if (lowerMessage.includes('search')) {
-      return "Use the Search page to find specific workers, companies, or information across the platform.";
-    } else if (lowerMessage.includes('contact')) {
-      return "The Contact page provides ways to get in touch with our support team or send us feedback.";
-    } else if (lowerMessage.includes('thanks') || lowerMessage.includes('thank you')) {
-      return "You're welcome! Is there anything else I can help with?";
-    } else if (lowerMessage.includes('bye') || lowerMessage.includes('goodbye')) {
-      return "Goodbye! Feel free to chat again if you need anything!";
+    if (lowerMessage.includes('hej') || lowerMessage.includes('hallå') || lowerMessage.includes('tjena')) {
+      return "Hej där! Välkommen till vår plattform. Hur kan jag hjälpa dig idag?";
+    } else if (lowerMessage.includes('hjälp')) {
+      return "Jag kan hjälpa dig att navigera i appen! Du kan utforska Arbetare, Företag, Sök-funktioner eller kontakta support.";
+    } else if (lowerMessage.includes('arbetar') || lowerMessage.includes('anställd')) {
+      return "Avdelningen Arbetare visar alla anställda i systemet. Du kan se deras detaljer, roller och kontaktinformation.";
+    } else if (lowerMessage.includes('företag') || lowerMessage.includes('företag')) {
+      return "Avdelningen Företag visar alla registrerade företag. Du kan se företagsdetaljer och deras associerade arbetare.";
+    } else if (lowerMessage.includes('sök')) {
+      return "Använd Sök-sidan för att hitta specifika arbetare, företag eller information på plattformen.";
+    } else if (lowerMessage.includes('kontakt')) {
+      return "Kontakt-sidan ger dig möjlighet att komma i kontakt med vårt supportteam eller skicka feedback.";
+    } else if (lowerMessage.includes('tjänst') || lowerMessage.includes('service')) {
+      return "Vi erbjuder tjänster inom rekrytering, bemanning och HR-konsultation. Kolla gärna vår Tjänster-sida!";
+    } else if (lowerMessage.includes('grekland') || lowerMessage.includes('spanien')) {
+      return "Vi har många jobbmöjligheter i Grekland, Spanien, Italien och Portugal med boende och flyg inkluderat!";
+    } else if (lowerMessage.includes('jobb') || lowerMessage.includes('anställning')) {
+      return "Vi rekryterar svenska arbetare till jobb i varma länder. Kolla våra tjänster för att se aktuella jobbmöjligheter!";
+    } else if (lowerMessage.includes('tack') || lowerMessage.includes('tackar')) {
+      return "Varsågod! Är det något annat jag kan hjälpa dig med?";
+    } else if (lowerMessage.includes('hejdå') || lowerMessage.includes('adjö')) {
+      return "Hejdå! Kom gärna tillbaka om du behöver hjälp med något!";
     } else {
       const responses = [
-        "I'm here to help! What would you like to know about our app?",
-        "That's interesting! How can I assist you with our platform?",
-        "I see. Would you like help with Workers, Companies, Search, or Contact sections?",
-        "Thanks for sharing! I'm here to help you navigate this application."
+        "Jag är här för att hjälpa! Vad vill du veta om vår applikation?",
+        "Intressant! Hur kan jag hjälpa dig med vår plattform?",
+        "Jag förstår. Vill du ha hjälp med Arbetare, Företag, Sök eller Kontakt-avdelningarna?",
+        "Tack för att du delar med dig! Jag är här för att hjälpa dig navigera i denna applikation."
       ];
       return responses[Math.floor(Math.random() * responses.length)];
     }
@@ -57,10 +63,10 @@ const ChatBot = () => {
 
   const getBotResponse = async (userMessage) => {
     try {
-      // Check if API key exists
+      // Kolla om API-nyckel finns
       const apiKey = import.meta.env.VITE_OPENAI_API_KEY;
       if (!apiKey) {
-        throw new Error('API key not found');
+        throw new Error('API-nyckel hittades inte');
       }
 
       const response = await fetch('https://api.openai.com/v1/chat/completions', {
@@ -74,7 +80,7 @@ const ChatBot = () => {
           messages: [
             {
               role: "system",
-              content: "You are a helpful assistant for a business application that manages workers and companies. Keep responses concise and helpful (under 100 words). Be friendly and professional."
+              content: "Du är en hjälpsam assistent för Global Worker Grekland, en applikation som rekryterar svenska arbetare till jobb i varma länder som Grekland, Spanien, Italien och Portugal. Håll svaren koncisa och hjälpsamma (under 100 ord). Var vänlig och professionell. Tala alltid på svenska. Fokusera på att hjälpa med jobbmöjligheter, tjänster, rekrytering och bemanning."
             },
             {
               role: "user",
@@ -88,15 +94,15 @@ const ChatBot = () => {
 
       if (!response.ok) {
         const errorData = await response.json();
-        throw new Error(errorData.error?.message || 'API request failed');
+        throw new Error(errorData.error?.message || 'API-förfrågan misslyckades');
       }
 
       const data = await response.json();
       return data.choices[0].message.content;
       
     } catch (error) {
-      console.error('Error calling AI API:', error);
-      // Fallback to local responses if API fails
+      console.error('Fel vid anrop till AI API:', error);
+      // Fallback till lokala svar om API misslyckas
       return getFallbackResponse(userMessage);
     }
   };
@@ -106,7 +112,7 @@ const ChatBot = () => {
     
     if (!inputMessage.trim() || isLoading) return;
 
-    // Add user message
+    // Lägg till användarens meddelande
     const userMessage = {
       id: Date.now(),
       text: inputMessage,
@@ -118,7 +124,7 @@ const ChatBot = () => {
     setInputMessage('');
     setIsLoading(true);
 
-    // Add typing indicator
+    // Lägg till skriv-indikator
     const typingMessage = {
       id: Date.now() + 0.5,
       text: "...",
@@ -131,7 +137,7 @@ const ChatBot = () => {
     try {
       const botResponseText = await getBotResponse(inputMessage);
       
-      // Remove typing indicator and add actual response
+      // Ta bort skriv-indikator och lägg till faktiskt svar
       setMessages(prev => {
         const filtered = prev.filter(msg => !msg.isTyping);
         const botResponse = {
@@ -143,12 +149,12 @@ const ChatBot = () => {
         return [...filtered, botResponse];
       });
     } catch (error) {
-      // Remove typing indicator and show error
+      // Ta bort skriv-indikator och visa felmeddelande
       setMessages(prev => {
         const filtered = prev.filter(msg => !msg.isTyping);
         const errorResponse = {
           id: Date.now() + 1,
-          text: "Sorry, I'm having trouble connecting right now. Please try again later.",
+          text: "Ursäkta, jag har problem med anslutningen just nu. Var god försök igen senare.",
           sender: 'bot',
           timestamp: new Date(),
         };
@@ -171,28 +177,28 @@ const ChatBot = () => {
 
   return (
     <div className="chatbot-container">
-      {/* Chat Button */}
+      {/* Chat-knapp */}
       {!isOpen && (
         <button className="chatbot-toggle-btn" onClick={toggleChat}>
           <Bot size={24} />
         </button>
       )}
 
-      {/* Chat Window */}
+      {/* Chat-fönster */}
       {isOpen && (
         <div className="chatbot-window">
           {/* Header */}
           <div className="chatbot-header">
             <div className="chatbot-title">
               <Bot size={20} />
-              <span>App Assistant</span>
+              <span>Global Worker Assistans</span>
             </div>
             <button className="close-btn" onClick={toggleChat}>
               <X size={18} />
             </button>
           </div>
 
-          {/* Messages */}
+          {/* Meddelanden */}
           <div className="chatbot-messages">
             {messages.map((message) => (
               <div
@@ -216,7 +222,7 @@ const ChatBot = () => {
                   </div>
                   {!message.isTyping && (
                     <div className="message-time">
-                      {message.timestamp.toLocaleTimeString([], { 
+                      {message.timestamp.toLocaleTimeString('sv-SE', { 
                         hour: '2-digit', 
                         minute: '2-digit' 
                       })}
@@ -228,14 +234,14 @@ const ChatBot = () => {
             <div ref={messagesEndRef} />
           </div>
 
-          {/* Input */}
+          {/* Inmatning */}
           <form className="chatbot-input-form" onSubmit={handleSendMessage}>
             <input
               type="text"
               value={inputMessage}
               onChange={(e) => setInputMessage(e.target.value)}
               onKeyPress={handleKeyPress}
-              placeholder="Type your message..."
+              placeholder="Skriv ditt meddelande..."
               className="chatbot-input"
               disabled={isLoading}
             />

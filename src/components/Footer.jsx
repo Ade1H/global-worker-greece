@@ -1,230 +1,424 @@
-﻿import React from "react";
-import { Link } from "react-router-dom";
+﻿import React from 'react';
+import { Link } from 'react-router-dom';
 
 function Footer() {
+  const currentYear = new Date().getFullYear();
+
   return (
-    <>
-      <footer style={footerStyle}>
-        <div className="container">
-          <div className="row">
-            {/* Company Info */}
-            <div className="col-md-4 mb-4">
-              <div style={logoSectionStyle}>
-                <img 
-                  src="/images/logo.png" 
-                  alt="Global Worker Grekland" 
-                  style={logoStyle}
-                  onError={(e) => {
-                    e.target.style.display = 'none';
-                  }}
-                />
-                <h5 style={companyNameStyle}>Global Worker Grekland</h5>
+    <footer style={{
+      background: '#1a1a2e',
+      color: '#e2e8f0',
+      padding: '40px 0 20px',
+      borderTop: '2px solid #16213e',
+      fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, sans-serif",
+      width: '100%',
+      position: 'relative',
+      overflow: 'hidden',
+    }}>
+      {/* Container fix - Remove Bootstrap container class and use inline style */}
+      <div style={{
+        maxWidth: '100%', // Changed from Bootstrap container
+        paddingLeft: '15px',
+        paddingRight: '15px',
+        marginLeft: 'auto',
+        marginRight: 'auto',
+      }}>
+        {/* Grid layout fix */}
+        <div style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
+          gap: '30px',
+          marginBottom: '40px',
+        }}>
+          {/* Logo Section */}
+          <div>
+            <div style={{ 
+              display: 'flex', 
+              alignItems: 'center', 
+              gap: '12px', 
+              marginBottom: '20px',
+              paddingBottom: '15px',
+              borderBottom: '1px solid rgba(255, 255, 255, 0.1)'
+            }}>
+              <img 
+                src="/images/logo.png" 
+                alt="Global Worker Logo" 
+                style={{
+                  height: '100px',
+                  width: '100px',
+                  borderRadius: '10px',
+                  backgroundColor: 'white',
+                  padding: '5px',
+                  border: '2px solid #0ea5e9',
+                }}
+              />
+              <div>
+                <h3 style={{
+                  color: '#ffffff',
+                  fontWeight: '700',
+                  fontSize: '1.2rem',
+                  margin: '0 0 3px 0',
+                }}>
+                  Global Worker
+                </h3>
+                <p style={{
+                  color: '#94a3b8',
+                  fontSize: '0.75rem',
+                  margin: 0,
+                }}>
+                  Grekland • Sverige
+                </p>
               </div>
-              <p style={descriptionStyle}>
-                Kopplar samman talangfulla arbetare med företag världen över. 
-                Din partner för global rekrytering.
-              </p>
-              <div style={socialIconsStyle}>
-                <a href="#" style={socialLinkStyle} className="social-icon">
-                  <i className="bi bi-facebook"></i>
-                </a>
-                <a href="#" style={socialLinkStyle} className="social-icon">
-                  <i className="bi bi-linkedin"></i>
-                </a>
-                <a href="#" style={socialLinkStyle} className="social-icon">
-                  <i className="bi bi-twitter"></i>
-                </a>
-                <a href="#" style={socialLinkStyle} className="social-icon">
-                  <i className="bi bi-instagram"></i>
-                </a>
+            </div>
+            
+            {/* Stats */}
+            <div style={{ 
+              background: 'rgba(0, 0, 0, 0.2)', 
+              padding: '15px',
+              borderRadius: '10px',
+              borderLeft: '3px solid #0ea5e9',
+            }}>
+              <div style={{ color: '#0ea5e9', fontSize: '0.9rem', fontWeight: '600', marginBottom: '10px' }}>
+                <i className="bi bi-graph-up me-2"></i>
+                Snabbstatistik
               </div>
-            </div>
-
-            {/* Quick Links */}
-            <div className="col-md-2 mb-4">
-              <h6 style={headingStyle}>Snabblänkar</h6>
-              <ul style={listStyle}>
-                <li><Link to="/" style={linkStyle}>Hem</Link></li>
-                <li><Link to="/workers" style={linkStyle}>Arbetare</Link></li>
-                <li><Link to="/companies" style={linkStyle}>Företag</Link></li>
-                <li><Link to="/search" style={linkStyle}>Sök</Link></li>
-              </ul>
-            </div>
-
-            {/* Services */}
-            <div className="col-md-3 mb-4">
-              <h6 style={headingStyle}>Tjänster</h6>
-              <ul style={listStyle}>
-                <li><a href="#" style={linkStyle}>Rekrytering</a></li>
-                <li><a href="#" style={linkStyle}>Arbetsförmedling</a></li>
-                <li><a href="#" style={linkStyle}>CV-hantering</a></li>
-                <li><a href="#" style={linkStyle}>Kompetensutveckling</a></li>
-              </ul>
-            </div>
-
-            {/* Contact Info */}
-            <div className="col-md-3 mb-4">
-              <h6 style={headingStyle}>Kontakt</h6>
-              <ul style={listStyle}>
-                <li style={contactItemStyle}>
-                  <i className="bi bi-geo-alt me-2"></i>
-                  Greklandsgatan 123, Stockholm
-                </li>
-                <li style={contactItemStyle}>
-                  <i className="bi bi-telephone me-2"></i>
-                  +46 70 123 45 67
-                </li>
-                <li style={contactItemStyle}>
-                  <i className="bi bi-envelope me-2"></i>
-                  info@globalworker.se
-                </li>
-                <li style={contactItemStyle}>
-                  <i className="bi bi-clock me-2"></i>
-                  Mån-Fre: 9:00 - 17:00
-                </li>
-              </ul>
+              <div style={{ fontSize: '0.85rem' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '5px' }}>
+                  <span style={{ color: '#cbd5e1' }}>Placerade arbetare:</span>
+                  <span style={{ color: '#0ea5e9', fontWeight: '600' }}>156</span>
+                </div>
+                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                  <span style={{ color: '#cbd5e1' }}>Jobb just nu:</span>
+                  <span style={{ color: '#0ea5e9', fontWeight: '600' }}>28</span>
+                </div>
+              </div>
             </div>
           </div>
 
-          {/* Bottom Bar */}
-          <div style={bottomBarStyle}>
-            <div className="row align-items-center">
-              <div className="col-md-6">
-                <p style={copyrightStyle}>
-                  &copy; {new Date().getFullYear()} Global Worker Grekland. Alla rättigheter förbehållna.
-                </p>
+          {/* Quick Links */}
+          <div>
+            <h5 style={{ 
+              color: '#0ea5e9',
+              marginBottom: '15px', 
+              fontSize: '0.9rem',
+              fontWeight: '600',
+              textTransform: 'uppercase',
+              letterSpacing: '1px',
+            }}>
+              <i className="bi bi-compass me-2"></i>
+              Navigation
+            </h5>
+            <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
+              {[
+                { icon: 'house', label: 'Hem', path: '/' },
+                { icon: 'briefcase', label: 'Karriär', path: '/karriar' },
+                { icon: 'gear', label: 'Tjänster', path: '/tjanster' },
+                { icon: 'info-circle', label: 'Om oss', path: '/about' },
+                { icon: 'envelope', label: 'Kontakt', path: '/contact' },
+              ].map((item) => (
+                <li key={item.path} style={{ marginBottom: '8px' }}>
+                  <Link 
+                    to={item.path}
+                    style={{
+                      color: '#94a3b8',
+                      textDecoration: 'none',
+                      fontSize: '0.85rem',
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '10px',
+                      padding: '6px 0',
+                      transition: 'all 0.2s ease',
+                      borderLeft: '2px solid transparent',
+                      paddingLeft: '10px',
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.color = '#0ea5e9';
+                      e.currentTarget.style.borderLeft = '2px solid #0ea5e9';
+                      e.currentTarget.style.paddingLeft = '15px';
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.color = '#94a3b8';
+                      e.currentTarget.style.borderLeft = '2px solid transparent';
+                      e.currentTarget.style.paddingLeft = '10px';
+                    }}
+                  >
+                    <i className={`bi bi-${item.icon}`} style={{ width: '16px', textAlign: 'center' }}></i>
+                    {item.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Länder */}
+          <div>
+            <h5 style={{ 
+              color: '#0ea5e9',
+              marginBottom: '15px', 
+              fontSize: '0.9rem',
+              fontWeight: '600',
+              textTransform: 'uppercase',
+              letterSpacing: '1px',
+            }}>
+              <i className="bi bi-globe me-2"></i>
+              Våra länder
+            </h5>
+            <div style={{ 
+              display: 'grid', 
+              gridTemplateColumns: 'repeat(2, 1fr)',
+              gap: '8px',
+            }}>
+              {[
+                { flag: '🇬🇷', name: 'Grekland', jobs: '25+' },
+                { flag: '🇪🇸', name: 'Spanien', jobs: '30+' },
+                { flag: '🇮🇹', name: 'Italien', jobs: '20+' },
+                { flag: '🇵🇹', name: 'Portugal', jobs: '15+' },
+              ].map((country) => (
+                <div 
+                  key={country.name}
+                  style={{
+                    background: 'rgba(255, 255, 255, 0.05)',
+                    padding: '10px',
+                    borderRadius: '8px',
+                    border: '1px solid rgba(255, 255, 255, 0.1)',
+                    transition: 'all 0.2s ease',
+                    cursor: 'pointer',
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.background = 'rgba(14, 165, 233, 0.1)';
+                    e.currentTarget.style.border = '1px solid rgba(14, 165, 233, 0.3)';
+                    e.currentTarget.style.transform = 'translateY(-2px)';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.background = 'rgba(255, 255, 255, 0.05)';
+                    e.currentTarget.style.border = '1px solid rgba(255, 255, 255, 0.1)';
+                    e.currentTarget.style.transform = 'translateY(0)';
+                  }}
+                >
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                    <div>
+                      <span style={{ fontSize: '1.2rem' }}>{country.flag}</span>
+                      <span style={{ color: '#cbd5e1', marginLeft: '8px', fontSize: '0.85rem' }}>
+                        {country.name}
+                      </span>
+                    </div>
+                    <span style={{ 
+                      color: '#0ea5e9', 
+                      fontSize: '0.75rem',
+                      fontWeight: '600',
+                      background: 'rgba(14, 165, 233, 0.1)',
+                      padding: '2px 8px',
+                      borderRadius: '10px',
+                    }}>
+                      {country.jobs}
+                    </span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Contact */}
+          <div>
+            <h5 style={{ 
+              color: '#0ea5e9',
+              marginBottom: '15px', 
+              fontSize: '0.9rem',
+              fontWeight: '600',
+              textTransform: 'uppercase',
+              letterSpacing: '1px',
+            }}>
+              <i className="bi bi-headset me-2"></i>
+              Kontakta oss
+            </h5>
+            
+            <div style={{ 
+              background: 'rgba(0, 0, 0, 0.2)', 
+              padding: '20px',
+              borderRadius: '10px',
+              marginBottom: '20px',
+            }}>
+              <div style={{ display: 'flex', alignItems: 'flex-start', gap: '12px', marginBottom: '15px' }}>
+                <div style={{
+                  width: '32px',
+                  height: '32px',
+                  borderRadius: '8px',
+                  background: 'rgba(14, 165, 233, 0.1)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  color: '#0ea5e9',
+                }}>
+                  <i className="bi bi-geo-alt"></i>
+                </div>
+                <div>
+                  <div style={{ color: '#ffffff', fontSize: '0.85rem', fontWeight: '600', marginBottom: '3px' }}>
+                    Huvudkontor
+                  </div>
+                  <div style={{ color: '#94a3b8', fontSize: '0.8rem', lineHeight: '1.4' }}>
+                    Leoforos Thisseos 330<br />
+                    Kallithea 17675<br />
+                    Aten, Grekland
+                  </div>
+                </div>
               </div>
-              <div className="col-md-6 text-md-end">
-                <div style={legalLinksStyle}>
-                  <a href="#" style={legalLinkStyle}>Integritetspolicy</a>
-                  <a href="#" style={legalLinkStyle}>Användarvillkor</a>
-                  <a href="#" style={legalLinkStyle}>Cookies</a>
+              
+              <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '15px' }}>
+                <div style={{
+                  width: '32px',
+                  height: '32px',
+                  borderRadius: '8px',
+                  background: 'rgba(14, 165, 233, 0.1)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  color: '#0ea5e9',
+                }}>
+                  <i className="bi bi-telephone"></i>
+                </div>
+                <div>
+                  <div style={{ color: '#ffffff', fontSize: '0.85rem', fontWeight: '600', marginBottom: '3px' }}>
+                    Telefon
+                  </div>
+                  <div style={{ color: '#94a3b8', fontSize: '0.8rem' }}>
+                    +30 210 123 4567
+                  </div>
+                </div>
+              </div>
+              
+              <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+                <div style={{
+                  width: '32px',
+                  height: '32px',
+                  borderRadius: '8px',
+                  background: 'rgba(14, 165, 233, 0.1)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  color: '#0ea5e9',
+                }}>
+                  <i className="bi bi-envelope"></i>
+                </div>
+                <div>
+                  <div style={{ color: '#ffffff', fontSize: '0.85rem', fontWeight: '600', marginBottom: '3px' }}>
+                    Email
+                  </div>
+                  <div style={{ color: '#94a3b8', fontSize: '0.8rem' }}>
+                    Johan.karlsson@globalworker.nu
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </footer>
 
-      {/* Inline style tag for hover effects */}
-      <style jsx>{`
-        .social-icon:hover {
-          color: #ffd166 !important;
-          transform: translateY(-2px);
-          transition: all 0.3s ease;
+        {/* Bottom Bar - Fixed to remove extra space */}
+        <div style={{
+          borderTop: '1px solid rgba(255, 255, 255, 0.1)',
+          paddingTop: '20px',
+          marginTop: '20px',
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          flexWrap: 'wrap',
+          gap: '15px',
+        }}>
+          <div style={{ 
+            color: '#94a3b8', 
+            fontSize: '0.8rem',
+          }}>
+            © {currentYear} Global Worker. Alla rättigheter förbehållna.
+          </div>
+          
+          <div style={{ display: 'flex', alignItems: 'center', gap: '20px', flexWrap: 'wrap' }}>
+            <div style={{ display: 'flex', gap: '12px' }}>
+              {['facebook', 'linkedin', 'instagram'].map((social) => (
+                <a 
+                  key={social}
+                  href={`https://${social}.com`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{
+                    color: '#94a3b8',
+                    fontSize: '0.9rem',
+                    transition: 'all 0.2s ease',
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.color = '#0ea5e9';
+                    e.currentTarget.style.transform = 'translateY(-2px)';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.color = '#94a3b8';
+                    e.currentTarget.style.transform = 'translateY(0)';
+                  }}
+                >
+                  <i className={`bi bi-${social}`}></i>
+                </a>
+              ))}
+            </div>
+            
+            <div style={{ 
+              display: 'flex', 
+              gap: '15px',
+              borderLeft: '1px solid rgba(255, 255, 255, 0.1)',
+              paddingLeft: '15px',
+            }}>
+              {['Integritet', 'Villkor', 'Cookies'].map((item) => (
+                <a 
+                  key={item}
+                  href={`/${item.toLowerCase()}`} 
+                  style={{ 
+                    color: '#94a3b8', 
+                    textDecoration: 'none', 
+                    fontSize: '0.75rem',
+                    transition: 'color 0.2s ease',
+                    whiteSpace: 'nowrap',
+                  }}
+                  onMouseEnter={(e) => e.currentTarget.style.color = '#0ea5e9'}
+                  onMouseLeave={(e) => e.currentTarget.style.color = '#94a3b8'}
+                >
+                  {item}
+                </a>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Add this to fix any remaining black space */}
+      <style>{`
+        footer::after {
+          content: '';
+          display: block;
+          height: 0;
+          clear: both;
         }
         
-        a:hover {
-          color: white !important;
+        /* Ensure no extra margins on body */
+        body {
+          margin: 0;
+          padding: 0;
+          overflow-x: hidden;
+        }
+        
+        /* Responsive fixes */
+        @media (max-width: 768px) {
+          footer > div {
+            padding-left: 10px;
+            padding-right: 10px;
+          }
+          
+          .grid-layout {
+            grid-template-columns: 1fr;
+            gap: 20px;
+          }
         }
       `}</style>
-    </>
+    </footer>
   );
 }
-
-// Styles
-const footerStyle = {
-  background: "linear-gradient(135deg, #0077b6 0%, #03045e 100%)",
-  color: "white",
-  padding: "50px 0 0 0",
-  marginTop: "50px",
-  width: "100%",
-};
-
-const logoSectionStyle = {
-  display: "flex",
-  alignItems: "center",
-  marginBottom: "15px",
-};
-
-const logoStyle = {
-  width: "40px",
-  height: "40px",
-  borderRadius: "5px",
-  marginRight: "10px",
-};
-
-const companyNameStyle = {
-  margin: 0,
-  fontWeight: "bold",
-  fontSize: "1.2rem",
-};
-
-const descriptionStyle = {
-  fontSize: "0.9rem",
-  lineHeight: "1.5",
-  opacity: 0.9,
-  marginBottom: "20px",
-};
-
-const socialIconsStyle = {
-  display: "flex",
-  gap: "15px",
-};
-
-const socialLinkStyle = {
-  color: "white",
-  fontSize: "1.2rem",
-  textDecoration: "none",
-  transition: "color 0.3s ease",
-};
-
-const headingStyle = {
-  fontWeight: "bold",
-  marginBottom: "15px",
-  fontSize: "1rem",
-  textTransform: "uppercase",
-  letterSpacing: "1px",
-};
-
-const listStyle = {
-  listStyle: "none",
-  padding: 0,
-  margin: 0,
-};
-
-const linkStyle = {
-  color: "rgba(255,255,255,0.8)",
-  textDecoration: "none",
-  fontSize: "0.9rem",
-  lineHeight: "2",
-  transition: "color 0.3s ease",
-  display: "block",
-};
-
-const contactItemStyle = {
-  color: "rgba(255,255,255,0.8)",
-  fontSize: "0.9rem",
-  lineHeight: "1.8",
-  marginBottom: "8px",
-  display: "flex",
-  alignItems: "flex-start",
-};
-
-const bottomBarStyle = {
-  borderTop: "1px solid rgba(255,255,255,0.2)",
-  padding: "20px 0",
-  marginTop: "30px",
-};
-
-const copyrightStyle = {
-  margin: 0,
-  fontSize: "0.85rem",
-  opacity: 0.8,
-};
-
-const legalLinksStyle = {
-  display: "flex",
-  gap: "20px",
-  justifyContent: "flex-end",
-  flexWrap: "wrap",
-};
-
-const legalLinkStyle = {
-  color: "rgba(255,255,255,0.7)",
-  textDecoration: "none",
-  fontSize: "0.85rem",
-  transition: "color 0.3s ease",
-};
 
 export default Footer;
