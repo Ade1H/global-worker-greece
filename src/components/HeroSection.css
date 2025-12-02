@@ -88,83 +88,6 @@
   padding: 0 0.5rem;
 }
 
-/* Modern stats grid - RESPONSIVE */
-.stats-container {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 0.75rem;
-  margin: 1.5rem auto;
-  max-width: 500px;
-}
-
-.stat-card {
-  background: rgba(255, 255, 255, 0.08);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 12px;
-  padding: 1rem;
-  text-align: center;
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  position: relative;
-  overflow: hidden;
-}
-
-.stat-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
-  transition: left 0.6s;
-}
-
-.stat-card:hover {
-  transform: translateY(-8px) scale(1.02);
-  background: rgba(255, 255, 255, 0.12);
-  border-color: rgba(255, 255, 255, 0.2);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-  backdrop-filter: blur(25px);
-  -webkit-backdrop-filter: blur(25px);
-}
-
-.stat-card:hover::before {
-  left: 100%;
-}
-
-/* Fix for stat number with icons */
-.stat-number {
-  font-size: 1.75rem;
-  font-weight: 700;
-  display: block;
-  margin-bottom: 0.25rem;
-  line-height: 1;
-}
-
-.stat-number i {
-  font-size: 1.25rem;
-  vertical-align: middle;
-  margin-right: 0.25rem;
-}
-
-.stat-label {
-  font-size: 0.85rem;
-  opacity: 0.9;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  font-weight: 600;
-  margin-bottom: 0.25rem;
-}
-
-.stat-card p.small {
-  font-size: 0.75rem;
-  opacity: 0.7;
-  margin: 0;
-  line-height: 1.2;
-}
-
 /* Modern button group - RESPONSIVE */
 .button-group {
   display: flex;
@@ -226,7 +149,7 @@
   -webkit-backdrop-filter: blur(15px);
 }
 
-/* Floating feature icons - RESPONSIVE */
+/* Floating feature icons - RESPONSIVE - UPDATED FOR 8 COUNTRIES */
 .features-container {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -235,6 +158,7 @@
   margin-top: 1.5rem;
   margin-bottom: 0.5rem;
   padding: 0 0.5rem;
+  width: 100%;
 }
 
 .feature-icon {
@@ -251,10 +175,15 @@
   animation-delay: calc(var(--i) * 0.2s);
 }
 
+/* Animation delays for 8 items */
 .feature-icon:nth-child(1) { --i: 1; }
 .feature-icon:nth-child(2) { --i: 2; }
 .feature-icon:nth-child(3) { --i: 3; }
 .feature-icon:nth-child(4) { --i: 4; }
+.feature-icon:nth-child(5) { --i: 5; }
+.feature-icon:nth-child(6) { --i: 6; }
+.feature-icon:nth-child(7) { --i: 7; }
+.feature-icon:nth-child(8) { --i: 8; }
 
 .feature-icon:hover {
   transform: translateY(-5px) scale(1.05);
@@ -265,14 +194,19 @@
   -webkit-backdrop-filter: blur(20px);
 }
 
+/* Allow custom colors for country icons */
 .feature-icon i {
   font-size: 1.75rem;
   margin-bottom: 0.5rem;
-  background: linear-gradient(to right, #4dc9ff, #0066ff);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
   display: block;
+}
+
+/* Override gradient text for country icons - they'll use inline styles */
+.feature-icon i[style*="color"] {
+  -webkit-background-clip: initial;
+  -webkit-text-fill-color: initial;
+  background-clip: initial;
+  background: none;
 }
 
 .feature-text {
@@ -284,12 +218,14 @@
   font-size: 0.95rem;
   margin-bottom: 0.125rem;
   display: block;
+  color: white;
 }
 
 .feature-text .small {
   font-size: 0.75rem;
   opacity: 0.75;
   line-height: 1.2;
+  color: rgba(255, 255, 255, 0.8);
 }
 
 /* Modern carousel indicators */
@@ -439,12 +375,8 @@
   animation: fadeIn 1s ease-out 0.7s both;
 }
 
-.stats-container > * {
-  animation: fadeIn 1s ease-out calc(0.8s + (var(--i, 0) * 0.1s)) both;
-}
-
 .features-container > * {
-  animation: fadeIn 1s ease-out calc(1s + (var(--i, 0) * 0.1s)) both;
+  animation: fadeIn 1s ease-out calc(0.8s + (var(--i, 0) * 0.1s)) both;
 }
 
 /* ========== TABLET AND DESKTOP STYLES ========== */
@@ -478,33 +410,6 @@
     margin-bottom: 2rem;
   }
   
-  .stats-container {
-    grid-template-columns: repeat(4, 1fr);
-    gap: 1.5rem;
-    max-width: 800px;
-  }
-  
-  .stat-card {
-    padding: 1.5rem;
-    border-radius: 16px;
-  }
-  
-  .stat-number {
-    font-size: 2.5rem;
-  }
-  
-  .stat-number i {
-    font-size: 1.5rem;
-  }
-  
-  .stat-label {
-    font-size: 1rem;
-  }
-  
-  .stat-card p.small {
-    font-size: 0.85rem;
-  }
-  
   .button-group {
     flex-direction: row;
     gap: 1.5rem;
@@ -517,31 +422,33 @@
     font-size: 1.1rem;
   }
   
+  /* For desktop: Show 4 countries per row */
   .features-container {
     grid-template-columns: repeat(4, 1fr);
-    gap: 2rem;
-    margin-top: 3rem;
+    gap: 1.5rem;
+    margin-top: 2.5rem;
+    margin-bottom: 2rem;
   }
   
   .feature-icon {
-    padding: 2rem;
-    border-radius: 20px;
+    padding: 1.5rem;
+    border-radius: 16px;
   }
   
   .feature-icon i {
-    font-size: 2.5rem;
+    font-size: 2.25rem;
   }
   
   .feature-text {
-    font-size: 0.95rem;
+    font-size: 0.9rem;
   }
   
   .feature-text .fw-bold {
-    font-size: 1.1rem;
+    font-size: 1rem;
   }
   
   .feature-text .small {
-    font-size: 0.85rem;
+    font-size: 0.8rem;
   }
   
   .carousel-indicators.custom-indicators {
@@ -592,6 +499,18 @@
   .hero-subtitle {
     font-size: 1.5rem;
   }
+  
+  .features-container {
+    gap: 2rem;
+  }
+  
+  .feature-icon {
+    padding: 2rem;
+  }
+  
+  .feature-icon i {
+    font-size: 2.5rem;
+  }
 }
 
 /* ========== CRITICAL FIXES ========== */
@@ -620,6 +539,12 @@
   .carousel-content {
     padding: 1rem 0.5rem;
   }
+  
+  /* Remove the stats container styles since you don't use them */
+  .stats-container,
+  .stat-card {
+    display: none;
+  }
 }
 
 /* Extra small devices */
@@ -632,20 +557,8 @@
     font-size: 1rem;
   }
   
-  .stats-container {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 0.5rem;
-  }
-  
-  .stat-card {
-    padding: 0.75rem;
-  }
-  
-  .stat-number {
-    font-size: 1.5rem;
-  }
-  
   .features-container {
+    grid-template-columns: repeat(2, 1fr);
     gap: 0.5rem;
   }
   
@@ -653,7 +566,69 @@
     padding: 0.75rem;
   }
   
+  .feature-icon i {
+    font-size: 1.5rem;
+  }
+  
+  .feature-text {
+    font-size: 0.8rem;
+  }
+  
+  .feature-text .fw-bold {
+    font-size: 0.9rem;
+  }
+  
+  .feature-text .small {
+    font-size: 0.7rem;
+  }
+  
   .carousel-indicators.custom-indicators {
     bottom: 15px;
   }
 }
+
+/* Medium devices (tablets) */
+@media (min-width: 481px) and (max-width: 767px) {
+  .features-container {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+  
+  .feature-icon {
+    padding: 1rem;
+  }
+}
+
+/* FIX for multiple features-container in one slide */
+.carousel-content .features-container + .features-container {
+  margin-top: 0.5rem;
+}
+
+/* Mobile-specific adjustments */
+.mobile-indicators {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .mobile-indicators {
+    display: block;
+    position: absolute;
+    bottom: 20px;
+    left: 0;
+    right: 0;
+    z-index: 10;
+  }
+}
+
+/* Fix for countries layout on very small screens */
+@media (max-width: 360px) {
+  .features-container {
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+  }
+  
+  .feature-icon {
+    padding: 0.75rem;
+  }
+}
+

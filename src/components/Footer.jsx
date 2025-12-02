@@ -150,7 +150,7 @@ function Footer() {
             </ul>
           </div>
 
-          {/* Länder */}
+          {/* Länder - UPDATED WITH YOUR COUNTRIES */}
           <div>
             <h5 style={{ 
               color: '#0ea5e9',
@@ -169,10 +169,14 @@ function Footer() {
               gap: '8px',
             }}>
               {[
-                { flag: '🇬🇷', name: 'Grekland', jobs: '25+' },
-                { flag: '🇪🇸', name: 'Spanien', jobs: '30+' },
-                { flag: '🇮🇹', name: 'Italien', jobs: '20+' },
-                { flag: '🇵🇹', name: 'Portugal', jobs: '15+' },
+                { flag: '🇬🇷', name: 'Grekland', jobs: '35+' },
+                { flag: '🇪🇸', name: 'Spanien', jobs: '28+' },
+                { flag: '🇸🇪', name: 'Sverige', jobs: '42+' },
+                { flag: '🇹🇭', name: 'Thailand', jobs: '22+' },
+                { flag: '🇧🇷', name: 'Brasilien', jobs: '18+' },
+                { flag: '🇦🇪', name: 'Dubai', jobs: '31+' },
+                { flag: '🇸🇨', name: 'Seychellerna', jobs: '12+' },
+                { flag: '🇨🇴', name: 'Colombia', jobs: '15+' },
               ].map((country) => (
                 <div 
                   key={country.name}
@@ -388,33 +392,83 @@ function Footer() {
         </div>
       </div>
 
-      {/* Add this to fix any remaining black space */}
+      {/* Add responsive styles for mobile */}
       <style>{`
+        @media (max-width: 768px) {
+          footer {
+            padding: 20px 0 15px !important;
+          }
+          
+          /* Make grid stack on mobile */
+          footer > div > div:first-child {
+            grid-template-columns: 1fr !important;
+            gap: 20px !important;
+          }
+          
+          /* Adjust logo size for mobile */
+          .logo-section img {
+            height: 70px !important;
+            width: 70px !important;
+          }
+          
+          /* Make countries grid responsive */
+          .countries-grid {
+            grid-template-columns: repeat(2, 1fr) !important;
+            gap: 6px !important;
+          }
+          
+          /* Adjust bottom bar for mobile */
+          .bottom-bar {
+            flex-direction: column !important;
+            text-align: center !important;
+            gap: 10px !important;
+          }
+          
+          .bottom-bar > div:last-child {
+            flex-direction: column !important;
+            gap: 10px !important;
+            border-left: none !important;
+            padding-left: 0 !important;
+          }
+          
+          /* Reduce padding on mobile */
+          footer > div {
+            padding-left: 10px !important;
+            padding-right: 10px !important;
+          }
+        }
+        
+        @media (max-width: 480px) {
+          .countries-grid {
+            grid-template-columns: 1fr !important;
+          }
+          
+          .logo-section img {
+            height: 60px !important;
+            width: 60px !important;
+          }
+          
+          .stats-box {
+            padding: 12px !important;
+          }
+          
+          .contact-box {
+            padding: 15px !important;
+          }
+        }
+        
+        /* Ensure no extra space below footer */
+        html, body {
+          margin: 0;
+          padding: 0;
+        }
+        
+        /* Fix for any remaining spacing issues */
         footer::after {
           content: '';
           display: block;
           height: 0;
           clear: both;
-        }
-        
-        /* Ensure no extra margins on body */
-        body {
-          margin: 0;
-          padding: 0;
-          overflow-x: hidden;
-        }
-        
-        /* Responsive fixes */
-        @media (max-width: 768px) {
-          footer > div {
-            padding-left: 10px;
-            padding-right: 10px;
-          }
-          
-          .grid-layout {
-            grid-template-columns: 1fr;
-            gap: 20px;
-          }
         }
       `}</style>
     </footer>
