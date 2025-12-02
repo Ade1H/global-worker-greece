@@ -16,7 +16,6 @@ function VideoRecorder() {
   const recordedChunksRef = useRef([]);
   const timerRef = useRef(null);
 
-  // Get available video devices
   const getVideoDevices = async () => {
     try {
       const devices = await navigator.mediaDevices.enumerateDevices();
@@ -57,7 +56,7 @@ function VideoRecorder() {
       
       const mediaRecorder = new MediaRecorder(stream, {
         mimeType: 'video/webm;codecs=vp9,opus',
-        videoBitsPerSecond: 2500000 // 2.5 Mbps
+        videoBitsPerSecond: 2500000
       });
       
       mediaRecorder.ondataavailable = (event) => {
@@ -85,7 +84,6 @@ function VideoRecorder() {
       mediaRecorder.start(1000);
       setRecording(true);
       
-      // Start recording timer
       timerRef.current = setInterval(() => {
         setRecordingTime(prev => prev + 1);
       }, 1000);
@@ -158,7 +156,6 @@ function VideoRecorder() {
     clearInterval(timerRef.current);
   };
 
-  // Format seconds to MM:SS
   const formatTime = (seconds) => {
     const mins = Math.floor(seconds / 60);
     const secs = seconds % 60;
@@ -179,62 +176,68 @@ function VideoRecorder() {
   return (
     <div style={{
       background: 'white',
-      borderRadius: '20px',
-      boxShadow: '0 10px 40px rgba(0, 0, 0, 0.08)',
+      borderRadius: '8px',
       border: '1px solid #e5e7eb',
+      boxShadow: '0 1px 3px rgba(0, 0, 0, 0.1)',
       overflow: 'hidden',
       height: '100%'
     }}>
-      <div style={{ padding: '2rem' }}>
+      <div style={{ 
+        padding: '1.5rem',
+        borderLeft: '4px solid #ef4444'
+      }}>
         {uploaded ? (
           <div style={{
             textAlign: 'center',
-            padding: '2rem 1rem'
+            padding: '1rem'
           }}>
             <div style={{
-              width: '4rem',
-              height: '4rem',
-              borderRadius: '50%',
-              background: 'linear-gradient(135deg, #10b981, #059669)',
+              width: '3rem',
+              height: '3rem',
+              borderRadius: '6px',
+              background: '#10b981',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              margin: '0 auto 1.5rem',
+              margin: '0 auto 1rem',
               color: 'white',
-              fontSize: '1.5rem'
+              fontSize: '1.25rem'
             }}>
               ✓
             </div>
             <h3 style={{
-              fontSize: '1.5rem',
-              fontWeight: '700',
-              color: '#111827',
+              fontSize: '1.125rem',
+              fontWeight: '600',
+              color: '#1f2937',
               marginBottom: '0.5rem'
             }}>
               Video CV skickat!
             </h3>
-            <p style={{ color: '#6b7280', marginBottom: '1.5rem' }}>
-              Din video har skickats till Johan Karlsson.
+            <p style={{ 
+              color: '#6b7280', 
+              marginBottom: '1rem',
+              fontSize: '0.875rem'
+            }}>
+              Din video har skickats.
             </p>
             <button 
               onClick={resetRecorder}
               style={{
-                padding: '0.75rem 1.5rem',
-                background: 'linear-gradient(135deg, #3b82f6, #2563eb)',
+                padding: '0.625rem 1.25rem',
+                background: '#ef4444',
                 color: 'white',
                 border: 'none',
-                borderRadius: '10px',
+                borderRadius: '6px',
                 fontWeight: '600',
                 cursor: 'pointer',
+                fontSize: '0.875rem',
                 transition: 'all 0.2s ease'
               }}
               onMouseEnter={(e) => {
-                e.target.style.transform = 'translateY(-2px)';
-                e.target.style.boxShadow = '0 8px 20px rgba(59, 130, 246, 0.4)';
+                e.target.style.opacity = '0.9';
               }}
               onMouseLeave={(e) => {
-                e.target.style.transform = 'translateY(0)';
-                e.target.style.boxShadow = 'none';
+                e.target.style.opacity = '1';
               }}
             >
               Spela in ny video
@@ -244,33 +247,37 @@ function VideoRecorder() {
           <>
             <div style={{
               display: 'flex',
-              alignItems: 'center',
+              alignItems: 'flex-start',
               gap: '1rem',
               marginBottom: '1.5rem'
             }}>
               <div style={{
-                width: '3rem',
-                height: '3rem',
-                borderRadius: '12px',
-                background: 'linear-gradient(135deg, #ef4444, #dc2626)',
+                width: '2.5rem',
+                height: '2.5rem',
+                borderRadius: '6px',
+                background: '#fee2e2',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                color: 'white',
-                fontSize: '1.25rem'
+                color: '#ef4444',
+                fontSize: '1rem',
+                flexShrink: 0
               }}>
                 🎬
               </div>
-              <div>
+              <div style={{ flex: 1 }}>
                 <h3 style={{
-                  fontSize: '1.5rem',
-                  fontWeight: '700',
-                  color: '#111827',
-                  margin: 0
+                  fontSize: '1.125rem',
+                  fontWeight: '600',
+                  color: '#1f2937',
+                  marginBottom: '0.25rem'
                 }}>
                   Video CV
                 </h3>
-                <p style={{ color: '#6b7280', margin: '0.25rem 0 0 0', fontSize: '0.9rem' }}>
+                <p style={{ 
+                  color: '#6b7280', 
+                  fontSize: '0.875rem'
+                }}>
                   Spela in ett personligt video CV
                 </p>
               </div>
@@ -279,10 +286,11 @@ function VideoRecorder() {
             {/* Video Preview */}
             <div style={{
               position: 'relative',
-              borderRadius: '12px',
+              borderRadius: '6px',
               overflow: 'hidden',
-              marginBottom: '1.5rem',
-              backgroundColor: '#000'
+              marginBottom: '1rem',
+              backgroundColor: '#000',
+              border: '1px solid #e5e7eb'
             }}>
               <video 
                 ref={videoRef} 
@@ -290,7 +298,7 @@ function VideoRecorder() {
                 muted 
                 style={{
                   width: '100%',
-                  height: '250px',
+                  height: '200px',
                   objectFit: 'cover',
                   display: 'block'
                 }}
@@ -299,25 +307,25 @@ function VideoRecorder() {
               {recording && (
                 <div style={{
                   position: 'absolute',
-                  top: '1rem',
-                  left: '1rem',
+                  top: '0.75rem',
+                  left: '0.75rem',
                   display: 'flex',
                   alignItems: 'center',
                   gap: '0.5rem',
-                  background: 'rgba(239, 68, 68, 0.9)',
+                  background: '#ef4444',
                   color: 'white',
-                  padding: '0.5rem 1rem',
-                  borderRadius: '20px',
-                  backdropFilter: 'blur(4px)'
+                  padding: '0.375rem 0.75rem',
+                  borderRadius: '4px',
+                  fontSize: '0.75rem',
+                  fontWeight: '500'
                 }}>
                   <div style={{
-                    width: '10px',
-                    height: '10px',
+                    width: '8px',
+                    height: '8px',
                     borderRadius: '50%',
-                    background: 'white',
-                    animation: 'pulse 1.5s infinite'
+                    background: 'white'
                   }}></div>
-                  <span style={{ fontWeight: '600' }}>Inspelar {formatTime(recordingTime)}</span>
+                  <span>{formatTime(recordingTime)}</span>
                 </div>
               )}
 
@@ -333,24 +341,28 @@ function VideoRecorder() {
                   justifyContent: 'center',
                   flexDirection: 'column',
                   color: 'white',
-                  background: 'rgba(0, 0, 0, 0.3)',
-                  backdropFilter: 'blur(2px)'
+                  background: 'rgba(0, 0, 0, 0.2)'
                 }}>
                   <div style={{
-                    width: '4rem',
-                    height: '4rem',
-                    borderRadius: '50%',
-                    background: 'rgba(255, 255, 255, 0.2)',
+                    width: '3rem',
+                    height: '3rem',
+                    borderRadius: '6px',
+                    background: 'rgba(255, 255, 255, 0.1)',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
-                    marginBottom: '1rem',
-                    fontSize: '1.5rem'
+                    marginBottom: '0.75rem',
+                    fontSize: '1.25rem'
                   }}>
                     📹
                   </div>
-                  <p style={{ margin: 0, fontSize: '0.9rem', opacity: 0.9 }}>
-                    Kameran är redo för inspelning
+                  <p style={{ 
+                    margin: 0, 
+                    fontSize: '0.75rem', 
+                    opacity: 0.9,
+                    fontWeight: '500'
+                  }}>
+                    Kameran är redo
                   </p>
                 </div>
               )}
@@ -361,10 +373,10 @@ function VideoRecorder() {
               <div style={{ marginBottom: '1rem' }}>
                 <label style={{
                   display: 'block',
-                  fontSize: '0.85rem',
+                  fontSize: '0.75rem',
                   fontWeight: '500',
-                  color: '#374151',
-                  marginBottom: '0.5rem'
+                  color: '#4b5563',
+                  marginBottom: '0.375rem'
                 }}>
                   Välj kamera:
                 </label>
@@ -373,11 +385,19 @@ function VideoRecorder() {
                   onChange={(e) => setSelectedDevice(e.target.value)}
                   style={{
                     width: '100%',
-                    padding: '0.5rem 1rem',
-                    borderRadius: '8px',
+                    padding: '0.5rem',
+                    borderRadius: '6px',
                     border: '1px solid #d1d5db',
                     background: 'white',
-                    fontSize: '0.9rem'
+                    fontSize: '0.875rem',
+                    outline: 'none',
+                    transition: 'all 0.2s ease'
+                  }}
+                  onFocus={(e) => {
+                    e.target.style.borderColor = '#3b82f6';
+                  }}
+                  onBlur={(e) => {
+                    e.target.style.borderColor = '#d1d5db';
                   }}
                 >
                   {videoDevices.map(device => (
@@ -395,16 +415,16 @@ function VideoRecorder() {
                 background: '#fee2e2',
                 border: '1px solid #fecaca',
                 color: '#991b1b',
-                padding: '1rem',
-                borderRadius: '8px',
+                padding: '0.75rem',
+                borderRadius: '6px',
                 marginBottom: '1rem',
-                fontSize: '0.9rem'
+                fontSize: '0.75rem'
               }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.5rem' }}>
-                  <i className="bi bi-exclamation-triangle"></i>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.25rem' }}>
+                  <span style={{ fontSize: '0.875rem' }}>⚠️</span>
                   <strong>Kameraåtkomst krävs</strong>
                 </div>
-                <p style={{ margin: 0 }}>{streamError}</p>
+                <p style={{ margin: 0, fontSize: '0.75rem' }}>{streamError}</p>
               </div>
             )}
 
@@ -417,14 +437,14 @@ function VideoRecorder() {
                       onClick={startRecording}
                       style={{
                         width: '100%',
-                        padding: '0.875rem',
-                        background: 'linear-gradient(135deg, #ef4444, #dc2626)',
+                        padding: '0.75rem',
+                        background: '#ef4444',
                         color: 'white',
                         border: 'none',
-                        borderRadius: '10px',
+                        borderRadius: '6px',
                         fontWeight: '600',
                         cursor: 'pointer',
-                        fontSize: '1rem',
+                        fontSize: '0.875rem',
                         transition: 'all 0.2s ease',
                         display: 'flex',
                         alignItems: 'center',
@@ -432,15 +452,13 @@ function VideoRecorder() {
                         gap: '0.5rem'
                       }}
                       onMouseEnter={(e) => {
-                        e.target.style.transform = 'translateY(-2px)';
-                        e.target.style.boxShadow = '0 8px 20px rgba(239, 68, 68, 0.4)';
+                        e.target.style.opacity = '0.9';
                       }}
                       onMouseLeave={(e) => {
-                        e.target.style.transform = 'translateY(0)';
-                        e.target.style.boxShadow = 'none';
+                        e.target.style.opacity = '1';
                       }}
                     >
-                      <i className="bi bi-record-circle"></i>
+                      <span style={{ fontSize: '0.875rem' }}>●</span>
                       Börja spela in video CV
                     </button>
                   ) : (
@@ -448,14 +466,14 @@ function VideoRecorder() {
                       onClick={stopRecording}
                       style={{
                         width: '100%',
-                        padding: '0.875rem',
+                        padding: '0.75rem',
                         background: 'white',
-                        color: '#dc2626',
-                        border: '2px solid #dc2626',
-                        borderRadius: '10px',
+                        color: '#ef4444',
+                        border: '1px solid #ef4444',
+                        borderRadius: '6px',
                         fontWeight: '600',
                         cursor: 'pointer',
-                        fontSize: '1rem',
+                        fontSize: '0.875rem',
                         transition: 'all 0.2s ease',
                         display: 'flex',
                         alignItems: 'center',
@@ -464,35 +482,31 @@ function VideoRecorder() {
                       }}
                       onMouseEnter={(e) => {
                         e.target.style.background = '#fee2e2';
-                        e.target.style.transform = 'translateY(-2px)';
                       }}
                       onMouseLeave={(e) => {
                         e.target.style.background = 'white';
-                        e.target.style.transform = 'translateY(0)';
                       }}
                     >
-                      <i className="bi bi-stop-circle"></i>
+                      <span style={{ fontSize: '0.875rem' }}>■</span>
                       Stoppa inspelning
                     </button>
                   )}
                 </div>
               ) : (
-                <div style={{ display: 'flex', gap: '0.75rem' }}>
+                <div style={{ display: 'flex', gap: '0.5rem' }}>
                   <button 
                     onClick={uploadVideo}
                     disabled={uploading}
                     style={{
                       flex: 1,
-                      padding: '0.875rem',
-                      background: uploading 
-                        ? '#9ca3af' 
-                        : 'linear-gradient(135deg, #10b981, #059669)',
+                      padding: '0.75rem',
+                      background: uploading ? '#9ca3af' : '#10b981',
                       color: 'white',
                       border: 'none',
-                      borderRadius: '10px',
+                      borderRadius: '6px',
                       fontWeight: '600',
                       cursor: uploading ? 'not-allowed' : 'pointer',
-                      fontSize: '1rem',
+                      fontSize: '0.875rem',
                       transition: 'all 0.2s ease',
                       display: 'flex',
                       alignItems: 'center',
@@ -501,22 +515,20 @@ function VideoRecorder() {
                     }}
                     onMouseEnter={(e) => {
                       if (!uploading) {
-                        e.target.style.transform = 'translateY(-2px)';
-                        e.target.style.boxShadow = '0 8px 20px rgba(16, 185, 129, 0.4)';
+                        e.target.style.opacity = '0.9';
                       }
                     }}
                     onMouseLeave={(e) => {
                       if (!uploading) {
-                        e.target.style.transform = 'translateY(0)';
-                        e.target.style.boxShadow = 'none';
+                        e.target.style.opacity = '1';
                       }
                     }}
                   >
                     {uploading ? (
                       <>
                         <div style={{
-                          width: '16px',
-                          height: '16px',
+                          width: '12px',
+                          height: '12px',
                           border: '2px solid white',
                           borderTop: '2px solid transparent',
                           borderRadius: '50%',
@@ -526,7 +538,7 @@ function VideoRecorder() {
                       </>
                     ) : (
                       <>
-                        <i className="bi bi-cloud-upload"></i>
+                        <span style={{ fontSize: '0.875rem' }}>📤</span>
                         Skicka video CV
                       </>
                     )}
@@ -534,29 +546,27 @@ function VideoRecorder() {
                   <button 
                     onClick={resetRecorder}
                     style={{
-                      padding: '0.875rem 1.5rem',
+                      padding: '0.75rem 1rem',
                       background: '#f3f4f6',
-                      color: '#374151',
+                      color: '#4b5563',
                       border: 'none',
-                      borderRadius: '10px',
+                      borderRadius: '6px',
                       fontWeight: '600',
                       cursor: 'pointer',
-                      fontSize: '0.9rem',
+                      fontSize: '0.75rem',
                       transition: 'all 0.2s ease',
                       display: 'flex',
                       alignItems: 'center',
-                      gap: '0.5rem'
+                      gap: '0.375rem'
                     }}
                     onMouseEnter={(e) => {
                       e.target.style.background = '#e5e7eb';
-                      e.target.style.transform = 'translateY(-2px)';
                     }}
                     onMouseLeave={(e) => {
                       e.target.style.background = '#f3f4f6';
-                      e.target.style.transform = 'translateY(0)';
                     }}
                   >
-                    <i className="bi bi-arrow-clockwise"></i>
+                    <span style={{ fontSize: '0.75rem' }}>🔄</span>
                     Spela om
                   </button>
                 </div>
@@ -564,55 +574,50 @@ function VideoRecorder() {
             </div>
 
             {/* Instructions */}
-            <div style={{ marginTop: '1rem', paddingTop: '1rem', borderTop: '1px solid #e5e7eb' }}>
+            <div style={{ 
+              marginTop: '1rem', 
+              paddingTop: '0.75rem', 
+              borderTop: '1px solid #e5e7eb' 
+            }}>
               <p style={{
                 color: '#6b7280',
-                fontSize: '0.85rem',
+                fontSize: '0.75rem',
                 margin: 0,
-                lineHeight: '1.5'
+                lineHeight: '1.5',
+                display: 'flex',
+                alignItems: 'flex-start',
+                gap: '0.5rem'
               }}>
-                <i className="bi bi-lightbulb" style={{ marginRight: '0.5rem', color: '#f59e0b' }}></i>
+                <span style={{ fontSize: '0.875rem', color: '#f59e0b' }}>💡</span>
                 {!recordedVideo 
                   ? 'Tips: Ha god belysning, titta in i kameran och var dig själv.' 
                   : 'Tips: Lyssna på din inspelning innan du skickar.'}
               </p>
             </div>
-
-            {/* Recording Timer */}
-            {recording && (
-              <div style={{
-                position: 'absolute',
-                top: '1rem',
-                right: '1rem',
-                background: 'rgba(0, 0, 0, 0.7)',
-                color: 'white',
-                padding: '0.5rem 1rem',
-                borderRadius: '20px',
-                fontSize: '0.85rem',
-                fontWeight: '600',
-                backdropFilter: 'blur(4px)'
-              }}>
-                {formatTime(recordingTime)}
-              </div>
-            )}
           </>
         )}
       </div>
 
       {/* CSS Animations */}
-      <style>{`
-        @keyframes pulse {
-          0%, 100% { opacity: 1; }
-          50% { opacity: 0.5; }
-        }
-        
+      <style jsx>{`
         @keyframes spin {
           0% { transform: rotate(0deg); }
           100% { transform: rotate(360deg); }
         }
         
         video {
-          border-radius: 12px;
+          border-radius: 6px;
+        }
+        
+        select:focus {
+          border-color: #3b82f6;
+          outline: none;
+          box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+        
+        button:disabled {
+          opacity: 0.6;
+          cursor: not-allowed;
         }
       `}</style>
     </div>

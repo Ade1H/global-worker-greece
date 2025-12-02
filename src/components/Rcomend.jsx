@@ -1,7 +1,16 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import './Rcomend.css';
 
 function Rekommendationer() {
+  const navigate = useNavigate();
   const [activeFilter, setActiveFilter] = useState('Alla');
+  const [hoveredCard, setHoveredCard] = useState(null);
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    setIsVisible(true);
+  }, []);
 
   const testimonials = [
     {
@@ -12,9 +21,10 @@ function Rekommendationer() {
       type: "Företag",
       rating: 5,
       text: "Global Worker har varit en ovärderlig partner för vår tillväxt. De har levererat exceptionella IT-talanger som direkt bidragit till vår framgång. Deras förståelse för vår verksamhet och kultur är imponerande.",
-      image: "/images/testimonials/anders.jpg",
       date: "2024-01-10",
-      category: "IT-rekrytering"
+      category: "IT-rekrytering",
+      country: "🇸🇪 Sverige",
+      color: "#3b82f6"
     },
     {
       id: 2,
@@ -24,9 +34,10 @@ function Rekommendationer() {
       type: "Företag",
       rating: 5,
       text: "Som grekiskt företag som vill expandera till Sverige var Global Worker den perfekta partnern. Deras kunskap om både den svenska och grekiska arbetsmarknaden gav oss en unik fördel.",
-      image: "/images/testimonials/elena.jpg",
       date: "2024-01-08",
-      category: "Internationell rekrytering"
+      category: "Internationell rekrytering",
+      country: "🇬🇷 Grekland",
+      color: "#10b981"
     },
     {
       id: 3,
@@ -36,9 +47,10 @@ function Rekommendationer() {
       type: "Arbetare",
       rating: 5,
       text: "Genom Global Worker fick jag mitt drömjobb i Grekland. De guidade mig genom hela processen - från ansökan till relocation. Professionellt och personligt bemötande hela vägen!",
-      image: "/images/testimonials/marcus.jpg",
       date: "2024-01-05",
-      category: "Tech"
+      category: "Tech",
+      country: "🇸🇪 → 🇬🇷",
+      color: "#8b5cf6"
     },
     {
       id: 4,
@@ -48,9 +60,10 @@ function Rekommendationer() {
       type: "Företag",
       rating: 5,
       text: "Vi har anlitat Global Worker för flera seniora säljrekryteringar och resultaten har överträffat våra förväntningar. Deras nätverk och screeningprocess är exceptionell.",
-      image: "/images/testimonials/lisa.jpg",
       date: "2024-01-03",
-      category: "Sales-rekrytering"
+      category: "Sales-rekrytering",
+      country: "🇸🇪 Sverige",
+      color: "#f59e0b"
     },
     {
       id: 5,
@@ -60,9 +73,10 @@ function Rekommendationer() {
       type: "Arbetare",
       rating: 5,
       text: "Global Worker hjälpte mig att hitta ett fantastiskt jobb i Stockholm. De förberedde mig utmärkt för intervjuer och förhandlade en konkurrenskraftig paket. Tack!",
-      image: "/images/testimonials/nikolas.jpg",
       date: "2023-12-28",
-      category: "Tech"
+      category: "Tech",
+      country: "🇬🇷 → 🇸🇪",
+      color: "#ef4444"
     },
     {
       id: 6,
@@ -71,10 +85,11 @@ function Rekommendationer() {
       company: "Nordic Bank",
       type: "Företag",
       rating: 5,
-      text: "Snabb, professionell och effektiv. Global Worker förstod våra behav perfekt och levererade kvalificerade kandidater inom rekordtid. Vår go-to partner för rekrytering.",
-      image: "/images/testimonials/sara.jpg",
+      text: "Snabb, professionell och effektiv. Global Worker förstod våra behov perfekt och levererade kvalificerade kandidater inom rekordtid. Vår go-to partner för rekrytering.",
       date: "2023-12-25",
-      category: "Finance-rekrytering"
+      category: "Finance-rekrytering",
+      country: "🇸🇪 Sverige",
+      color: "#ec4899"
     },
     {
       id: 7,
@@ -84,9 +99,10 @@ function Rekommendationer() {
       type: "Arbetare",
       rating: 5,
       text: "Efter att ha flyttat från Grekland hjälpte Global Worker mig att etablera mig på den svenska arbetsmarknaden. Deras kontakter och rådgivning var ovärderliga.",
-      image: "/images/testimonials/david.jpg",
       date: "2023-12-20",
-      category: "Marketing"
+      category: "Marketing",
+      country: "🇬🇷 → 🇸🇪",
+      color: "#06b6d4"
     },
     {
       id: 8,
@@ -96,337 +112,298 @@ function Rekommendationer() {
       type: "Företag",
       rating: 5,
       text: "Global Worker har varit instrumental i vår expansion till Grekland. Deras lokala kunskap kombinerat med internationell expertis gav oss en smidig start.",
-      image: "/images/testimonials/maria.jpg",
       date: "2023-12-18",
-      category: "Internationell rekrytering"
+      category: "Internationell rekrytering",
+      country: "🇪🇸 Spanien",
+      color: "#84cc16"
     }
   ];
 
   const stats = [
-    { number: "98%", label: "Nöjda kunder" },
-    { number: "4.9/5", label: "Genomsnittligt betyg" },
-    { number: "500+", label: "Recensioner" },
-    { number: "95%", label: "Återkommande kunder" }
+    { number: "98%", label: "Nöjda kunder", emoji: "😊", color: "#ef4444" },
+    { number: "4.9", label: "Genomsnittligt betyg", emoji: "⭐", color: "#f59e0b", sublabel: "/5" },
+    { number: "500+", label: "Recensioner", emoji: "💬", color: "#10b981" },
+    { number: "95%", label: "Återkommande kunder", emoji: "🔄", color: "#3b82f6" },
+    { number: "24h", label: "Snitt svarstid", emoji: "⚡", color: "#8b5cf6" },
+    { number: "50+", label: "Länder", emoji: "🌍", color: "#7c2d12" }
   ];
 
-  const filters = ['Alla', 'Företag', 'Arbetare', 'Tech', 'Sales', 'Marketing', 'Internationell'];
+  const filters = [
+    { label: 'Alla', emoji: '📋', count: testimonials.length },
+    { label: 'Företag', emoji: '🏢', count: testimonials.filter(t => t.type === 'Företag').length },
+    { label: 'Arbetare', emoji: '👤', count: testimonials.filter(t => t.type === 'Arbetare').length },
+    { label: 'Tech', emoji: '💻', count: testimonials.filter(t => t.category.includes('Tech')).length },
+    { label: 'Sales', emoji: '📈', count: testimonials.filter(t => t.category.includes('Sales')).length },
+    { label: 'Marketing', emoji: '📢', count: testimonials.filter(t => t.category.includes('Marketing')).length },
+    { label: 'Internationell', emoji: '✈️', count: testimonials.filter(t => t.category.includes('Internationell')).length }
+  ];
+
+  const trustIndicators = [
+    { 
+      emoji: '🏆', 
+      title: 'Certifierade Proffs', 
+      desc: 'Alla våra rekryterare är certifierade med gedigen branscherfarenhet',
+      color: '#ef4444'
+    },
+    { 
+      emoji: '🛡️', 
+      title: 'DataSkydd', 
+      desc: 'Strikt GDPR-compliance för maximal integritet och säkerhet',
+      color: '#10b981'
+    },
+    { 
+      emoji: '🔒', 
+      title: 'Bekräftat Förtroende', 
+      desc: 'Verifierade recensioner från riktiga kunder och kandidater',
+      color: '#3b82f6'
+    }
+  ];
 
   const filteredTestimonials = activeFilter === 'Alla' 
     ? testimonials 
     : testimonials.filter(testimonial => 
-        testimonial.type === activeFilter || testimonial.category === activeFilter
+        testimonial.type === activeFilter || testimonial.category.includes(activeFilter)
       );
 
-  const renderStars = (rating) => {
-    return Array.from({ length: 5 }, (_, index) => (
-      <i 
-        key={index}
-        className={`bi ${index < rating ? 'bi-star-fill' : 'bi-star'}`}
-        style={{ color: '#ffcd00', marginRight: '2px' }}
-      ></i>
-    ));
-  };
-
   const formatDate = (dateString) => {
-    const options = { year: 'numeric', month: 'long', day: 'numeric' };
+    const options = { year: 'numeric', month: 'short', day: 'numeric' };
     return new Date(dateString).toLocaleDateString('sv-SE', options);
   };
 
   return (
-    <div style={{ padding: '20px', maxWidth: '1200px', margin: '0 auto' }}>
-      {/* Hero Section */}
-      <div style={{ 
-        background: 'linear-gradient(135deg, #005293 0%, #00457e 100%)',
-        color: 'white',
-        padding: '80px 20px',
-        borderRadius: '15px',
-        textAlign: 'center',
-        marginBottom: '60px'
-      }}>
-        <h1 style={{ marginBottom: '20px', fontSize: '3rem' }}>Rekommendationer</h1>
-        <p style={{ fontSize: '1.3rem', maxWidth: '700px', margin: '0 auto', lineHeight: '1.6' }}>
-          Läs vad våra kunder och kandidater säger om sitt samarbete med Global Worker
-        </p>
-      </div>
+    <div className="rekommendationer-container">
+      <div className="container">
+        {/* Hero Section */}
+        <div className={`rekommendationer-hero ${isVisible ? 'visible' : ''}`}>
+          <h1 className="hero-title gradient-text">
+            Rekommendationer
+          </h1>
+          
+          <p className="hero-subtitle">
+            Läs vad våra kunder och kandidater säger om sitt samarbete med Global Worker
+          </p>
+        </div>
 
-      {/* Stats Section */}
-      <div style={{ marginBottom: '60px' }}>
-        <h2 style={{ textAlign: 'center', color: '#005293', marginBottom: '40px' }}>
-          Vårt Rykte i Siffror
-        </h2>
-        <div className="row">
-          {stats.map((stat, index) => (
-            <div key={index} className="col-6 col-md-3 mb-4">
-              <div style={{ textAlign: 'center' }}>
-                <div style={{ 
-                  fontSize: '2.5rem', 
-                  fontWeight: 'bold', 
-                  color: '#005293',
-                  marginBottom: '10px'
-                }}>
-                  {stat.number}
+        {/* Stats Section */}
+        <section className="stats-section">
+          <h2 className="section-title">Vårt Rykte i Siffror</h2>
+          <div className="stats-grid">
+            {stats.map((stat, index) => (
+              <div 
+                key={index}
+                className={`stat-card ${isVisible ? 'visible' : ''}`}
+                style={{ animationDelay: `${index * 0.1}s` }}
+              >
+                <div 
+                  className="stat-emoji"
+                  style={{ color: stat.color }}
+                >
+                  {stat.emoji}
                 </div>
-                <div style={{ color: '#666', fontSize: '1.1rem' }}>
-                  {stat.label}
+                <div className="stat-content">
+                  <div className="stat-number">
+                    {stat.number}
+                    {stat.sublabel && (
+                      <span className="stat-sublabel">{stat.sublabel}</span>
+                    )}
+                  </div>
+                  <div className="stat-label">{stat.label}</div>
                 </div>
               </div>
-            </div>
-          ))}
-        </div>
-      </div>
+            ))}
+          </div>
+        </section>
 
-      {/* Filters */}
-      <div style={{ marginBottom: '40px' }}>
-        <h3 style={{ color: '#005293', marginBottom: '20px', textAlign: 'center' }}>
-          Filtrera Rekommendationer
-        </h3>
-        <div style={{ 
-          display: 'flex', 
-          flexWrap: 'wrap', 
-          gap: '10px', 
-          justifyContent: 'center',
-          marginBottom: '30px'
-        }}>
-          {filters.map((filter) => (
-            <button
-              key={filter}
-              onClick={() => setActiveFilter(filter)}
-              style={{
-                backgroundColor: activeFilter === filter ? '#005293' : 'white',
-                color: activeFilter === filter ? 'white' : '#005293',
-                border: '2px solid #005293',
-                padding: '10px 20px',
-                borderRadius: '25px',
-                cursor: 'pointer',
-                fontWeight: '600',
-                transition: 'all 0.2s ease',
-                fontSize: '0.9rem'
-              }}
-              onMouseEnter={(e) => {
-                if (activeFilter !== filter) {
-                  e.target.style.backgroundColor = '#005293';
-                  e.target.style.color = 'white';
-                }
-              }}
-              onMouseLeave={(e) => {
-                if (activeFilter !== filter) {
-                  e.target.style.backgroundColor = 'white';
-                  e.target.style.color = '#005293';
-                }
-              }}
-            >
-              {filter}
-            </button>
-          ))}
-        </div>
-      </div>
+        {/* Filter Tabs */}
+        <section className="filter-section">
+          <h3 className="section-subtitle">Filtrera Rekommendationer</h3>
+          <div className="filter-tabs">
+            {filters.map((filter) => (
+              <button
+                key={filter.label}
+                className={`filter-tab ${activeFilter === filter.label ? 'active' : ''}`}
+                onClick={() => setActiveFilter(filter.label)}
+              >
+                <span className="filter-emoji">{filter.emoji}</span>
+                <span className="filter-label">{filter.label}</span>
+                <span className="filter-count">{filter.count}</span>
+              </button>
+            ))}
+          </div>
+        </section>
 
-      {/* Testimonials Grid */}
-      <div style={{ marginBottom: '60px' }}>
-        <h2 style={{ color: '#005293', marginBottom: '40px', textAlign: 'center' }}>
-          {activeFilter === 'Alla' ? 'Alla Rekommendationer' : `${activeFilter} Rekommendationer`}
-        </h2>
-        <div className="row">
-          {filteredTestimonials.map((testimonial) => (
-            <div key={testimonial.id} className="col-md-6 mb-4">
-              <div style={{
-                border: '2px solid #e0e0e0',
-                borderRadius: '12px',
-                padding: '30px',
-                backgroundColor: 'white',
-                boxShadow: '0 4px 15px rgba(0,0,0,0.1)',
-                transition: 'all 0.3s ease',
-                height: '100%',
-                position: 'relative'
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.transform = 'translateY(-5px)';
-                e.currentTarget.style.boxShadow = '0 8px 25px rgba(0,0,0,0.15)';
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.transform = 'translateY(0)';
-                e.currentTarget.style.boxShadow = '0 4px 15px rgba(0,0,0,0.1)';
-              }}>
-                {/* Type Badge */}
-                <div style={{
-                  position: 'absolute',
-                  top: '15px',
-                  right: '15px',
-                  backgroundColor: testimonial.type === 'Företag' ? '#005293' : '#ffcd00',
-                  color: testimonial.type === 'Företag' ? 'white' : '#005293',
-                  padding: '4px 12px',
-                  borderRadius: '15px',
-                  fontSize: '0.7rem',
-                  fontWeight: '600'
-                }}>
-                  {testimonial.type}
-                </div>
-
-                {/* Stars */}
-                <div style={{ marginBottom: '20px' }}>
-                  {renderStars(testimonial.rating)}
-                </div>
-
-                {/* Testimonial Text */}
-                <p style={{ 
-                  color: '#555', 
-                  lineHeight: '1.7',
-                  fontSize: '1rem',
-                  fontStyle: 'italic',
-                  marginBottom: '25px',
-                  position: 'relative'
-                }}>
-                  <i className="bi bi-quote" style={{ 
-                    color: '#ffcd00', 
-                    fontSize: '2rem',
-                    position: 'absolute',
-                    top: '-10px',
-                    left: '-5px',
-                    opacity: 0.3
-                  }}></i>
-                  {testimonial.text}
-                </p>
-
-                {/* Author Info */}
-                <div style={{ 
-                  display: 'flex', 
-                  alignItems: 'center',
-                  borderTop: '1px solid #e0e0e0',
-                  paddingTop: '20px'
-                }}>
-                  <div style={{
-                    width: '60px',
-                    height: '60px',
-                    backgroundColor: '#ffcd00',
-                    borderRadius: '50%',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    color: '#005293',
-                    fontSize: '1.2rem',
-                    fontWeight: 'bold',
-                    marginRight: '15px',
-                    flexShrink: 0
-                  }}>
-                    {testimonial.name.split(' ').map(n => n[0]).join('')}
+        {/* Testimonials Grid */}
+        <section className="testimonials-section">
+          <h2 className="section-title">
+            <span className="section-icon">💬</span>
+            {activeFilter === 'Alla' ? 'Alla Rekommendationer' : `${activeFilter} Rekommendationer`}
+            <span className="section-counter">{filteredTestimonials.length} st</span>
+          </h2>
+          
+          <div className="testimonials-grid">
+            {filteredTestimonials.map((testimonial, index) => (
+              <div 
+                key={testimonial.id}
+                className={`testimonial-card ${isVisible ? 'visible' : ''}`}
+                style={{ animationDelay: `${index * 0.1}s` }}
+                onMouseEnter={() => setHoveredCard(testimonial.id)}
+                onMouseLeave={() => setHoveredCard(null)}
+              >
+                {/* Top Color Bar */}
+                <div 
+                  className="testimonial-card-bar"
+                  style={{ background: `linear-gradient(90deg, ${testimonial.color}, ${testimonial.color}dd)` }}
+                ></div>
+                
+                <div className="testimonial-card-content">
+                  {/* Type Badge */}
+                  <div 
+                    className="type-badge"
+                    style={{ 
+                      background: `linear-gradient(135deg, ${testimonial.color}, ${testimonial.color}dd)`
+                    }}
+                  >
+                    <span className="type-emoji">
+                      {testimonial.type === 'Företag' ? '🏢' : '👤'}
+                    </span>
+                    {testimonial.type}
                   </div>
-                  <div>
-                    <div style={{ 
-                      fontSize: '1.1rem', 
-                      fontWeight: '600', 
-                      color: '#005293',
-                      marginBottom: '5px'
-                    }}>
-                      {testimonial.name}
+
+                  {/* Stars Rating */}
+                  <div className="rating-section">
+                    <div className="stars">
+                      {[...Array(5)].map((_, i) => (
+                        <span 
+                          key={i}
+                          className={`star ${i < testimonial.rating ? 'filled' : ''}`}
+                          style={{ 
+                            color: i < testimonial.rating ? testimonial.color : '#e5e7eb'
+                          }}
+                        >
+                          ★
+                        </span>
+                      ))}
                     </div>
-                    <div style={{ 
-                      fontSize: '0.9rem', 
-                      color: '#666',
-                      marginBottom: '3px'
-                    }}>
-                      {testimonial.position}
+                    <span className="rating-text">
+                      {testimonial.rating}.0 betyg
+                    </span>
+                  </div>
+
+                  {/* Testimonial Quote */}
+                  <div className="testimonial-quote">
+                    <span className="quote-mark">"</span>
+                    {testimonial.text}
+                  </div>
+
+                  {/* Location & Date */}
+                  <div className="testimonial-meta">
+                    <div className="meta-item">
+                      <span className="meta-icon">📍</span>
+                      <span className="meta-text">{testimonial.country}</span>
                     </div>
-                    <div style={{ 
-                      fontSize: '0.8rem', 
-                      color: '#888'
-                    }}>
-                      {testimonial.company} • {formatDate(testimonial.date)}
+                    <div className="meta-item">
+                      <span className="meta-icon">📅</span>
+                      <span className="meta-text">{formatDate(testimonial.date)}</span>
                     </div>
                   </div>
-                </div>
 
-                {/* Category Tag */}
-                <div style={{
-                  position: 'absolute',
-                  bottom: '15px',
-                  left: '15px'
-                }}>
-                  <span style={{
-                    backgroundColor: '#f8f9fa',
-                    color: '#005293',
-                    padding: '3px 10px',
-                    borderRadius: '12px',
-                    fontSize: '0.7rem',
-                    fontWeight: '500',
-                    border: '1px solid #005293'
-                  }}>
+                  {/* Author Info */}
+                  <div className="author-section">
+                    <div 
+                      className="author-avatar"
+                      style={{ backgroundColor: testimonial.color }}
+                    >
+                      {testimonial.name.split(' ').map(n => n[0]).join('')}
+                    </div>
+                    <div className="author-info">
+                      <div className="author-name">{testimonial.name}</div>
+                      <div className="author-position">{testimonial.position}</div>
+                      <div className="author-company">
+                        <span className="company-icon">🏢</span>
+                        {testimonial.company}
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Category Tag */}
+                  <div 
+                    className="category-tag"
+                    style={{ 
+                      backgroundColor: `${testimonial.color}15`,
+                      color: testimonial.color,
+                      border: `1px solid ${testimonial.color}30`
+                    }}
+                  >
+                    <span className="category-icon">🏷️</span>
                     {testimonial.category}
-                  </span>
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
-        </div>
-      </div>
+            ))}
+          </div>
+        </section>
 
-      {/* CTA Section */}
-      <div style={{ 
-        backgroundColor: '#f8f9fa',
-        padding: '50px 30px',
-        borderRadius: '15px',
-        textAlign: 'center'
-      }}>
-        <h2 style={{ color: '#005293', marginBottom: '20px' }}>
-          Redo att bli vår nästa framgångsberättelse?
-        </h2>
-        <p style={{ color: '#666', marginBottom: '30px', fontSize: '1.1rem' }}>
-          Oavsett om du är ett företag som behöver talanger eller en arbetssökande som vill hitta ditt drömjobb - vi hjälper dig att nå dina mål.
-        </p>
-        <div style={{ display: 'flex', gap: '15px', justifyContent: 'center', flexWrap: 'wrap' }}>
-          <button 
-            onClick={() => window.location.href = '/tjanster'}
-            style={{
-              backgroundColor: '#005293',
-              color: 'white',
-              border: 'none',
-              padding: '15px 30px',
-              borderRadius: '8px',
-              fontWeight: '600',
-              cursor: 'pointer',
-              fontSize: '1rem'
-            }}
-          >
-            Se Lediga Tjänster
-          </button>
-          <button 
-            onClick={() => window.location.href = '/contact'}
-            style={{
-              backgroundColor: '#ffcd00',
-              color: '#005293',
-              border: 'none',
-              padding: '15px 30px',
-              borderRadius: '8px',
-              fontWeight: '600',
-              cursor: 'pointer',
-              fontSize: '1rem'
-            }}
-          >
-            Kontakta Oss
-          </button>
-        </div>
-      </div>
+        {/* Trust Indicators */}
+        <section className="trust-section">
+          <h2 className="section-title">Varför Välja Oss?</h2>
+          <div className="trust-grid">
+            {trustIndicators.map((indicator, index) => (
+              <div 
+                key={index}
+                className={`trust-card ${isVisible ? 'visible' : ''}`}
+                style={{ animationDelay: `${0.5 + index * 0.1}s` }}
+              >
+                <div 
+                  className="trust-emoji"
+                  style={{ 
+                    backgroundColor: `${indicator.color}15`,
+                    border: `2px solid ${indicator.color}30`,
+                    color: indicator.color
+                  }}
+                >
+                  {indicator.emoji}
+                </div>
+                <h3 className="trust-title">{indicator.title}</h3>
+                <p className="trust-description">{indicator.desc}</p>
+              </div>
+            ))}
+          </div>
+        </section>
 
-      {/* Trust Indicators */}
-      <div style={{ marginTop: '60px', textAlign: 'center' }}>
-        <h3 style={{ color: '#005293', marginBottom: '30px' }}>
-          Förtroendeindikatorer
-        </h3>
-        <div className="row">
-          <div className="col-md-4 mb-4">
-            <i className="bi bi-award" style={{ fontSize: '2.5rem', color: '#005293', marginBottom: '15px' }}></i>
-            <h5 style={{ color: '#005293', marginBottom: '10px' }}>Certifierade Proffs</h5>
-            <p style={{ color: '#666' }}>Alla våra rekryterare är certifierade och har branscherfarenhet</p>
+        {/* CTA Section */}
+        <div className={`rekommendationer-cta ${isVisible ? 'visible' : ''}`}>
+          <div className="cta-icon">
+            <i className="bi bi-chat-heart"></i>
           </div>
-          <div className="col-md-4 mb-4">
-            <i className="bi bi-shield-check" style={{ fontSize: '2.5rem', color: '#005293', marginBottom: '15px' }}></i>
-            <h5 style={{ color: '#005293', marginBottom: '10px' }}>DataSkydd</h5>
-            <p style={{ color: '#666' }}>Vi följer GDPR och säkerställer att din information är skyddad</p>
+          
+          <h3 className="cta-title">Redo att bli vår nästa framgångsberättelse?</h3>
+          
+          <p className="cta-description">
+            Oavsett om du är ett företag som behöver talanger eller en arbetssökande som vill hitta ditt drömjobb - vi hjälper dig att nå dina mål.
+          </p>
+          
+          <div className="cta-buttons">
+            <button 
+              className="cta-button primary"
+              onClick={() => navigate('/tjanster')}
+            >
+              <i className="bi bi-search me-2"></i>
+              Se Lediga Tjänster
+            </button>
+            
+            <button 
+              className="cta-button secondary"
+              onClick={() => navigate('/contact')}
+            >
+              <i className="bi bi-envelope me-2"></i>
+              Kontakta Oss
+            </button>
           </div>
-          <div className="col-md-4 mb-4">
-            <i className="bi bi-hand-thumbs-up" style={{ fontSize: '2.5rem', color: '#005293', marginBottom: '15px' }}></i>
-            <h5 style={{ color: '#005293', marginBottom: '10px' }}>Bekräftat Förtroende</h5>
-            <p style={{ color: '#666' }}>Verifierade recensioner från riktiga kunder och kandidater</p>
-          </div>
+          
+          <p className="cta-note">
+            <i className="bi bi-clock me-2"></i>
+            Vi återkommer inom 48 timmar
+          </p>
         </div>
       </div>
     </div>

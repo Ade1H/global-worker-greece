@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import './Tjanster.css';
 
 function Tjanster() {
   const navigate = useNavigate();
   const [isVisible, setIsVisible] = useState(false);
-  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  const [windowWidth, setWindowWidth] = useState(typeof window !== 'undefined' ? window.innerWidth : 1024);
   const [hoveredCard, setHoveredCard] = useState(null);
 
   useEffect(() => {
@@ -24,7 +25,7 @@ function Tjanster() {
       description: "Bygg karriär inom försäljning direkt till konsumenter. Utveckla kommunikationsförmåga och förstå kundbehov för en framgångsrik säljkarriär.",
       location: "Aten, Grekland",
       employmentTypes: ["Deltid", "Heltid", "Projekt"],
-      icon: "bi bi-person-badge",
+      icon: "bi-person-badge",
       color: "#2563eb"
     },
     {
@@ -32,7 +33,7 @@ function Tjanster() {
       description: "Arbeta med försäljning till företag. Utveckla affärsförmåga, bygg långsiktiga kundrelationer och skapa värde genom strategisk marknadsföring.",
       location: "Aten, Grekland",
       employmentTypes: ["Deltid", "Heltid", "Projekt"],
-      icon: "bi bi-building",
+      icon: "bi-building",
       color: "#10b981"
     },
     {
@@ -40,7 +41,7 @@ function Tjanster() {
       description: "Inkörsport till säljkarriär. Utveckla stark kommunikationsförmåga och lär dig förstå kundbehov för att bli attraktiv på arbetsmarknaden.",
       location: "Aten, Grekland",
       employmentTypes: ["Deltid", "Heltid", "Projekt"],
-      icon: "bi bi-calendar-check",
+      icon: "bi-calendar-check",
       color: "#8b5cf6"
     },
     {
@@ -48,7 +49,7 @@ function Tjanster() {
       description: "Ansvar för installation, underhåll och support av IT-system. Felsökning, teknisk support och säkerhet för hårdvara och mjukvara.",
       location: "Aten, Grekland",
       employmentTypes: ["Deltid", "Heltid", "Projekt"],
-      icon: "bi bi-laptop",
+      icon: "bi-laptop",
       color: "#f59e0b"
     },
     {
@@ -56,7 +57,7 @@ function Tjanster() {
       description: "Planera, genomför och optimera marknadsföringskampanjer. Utveckla kundrelationer och stärk företagets varumärke.",
       location: "Aten, Grekland",
       employmentTypes: ["Deltid", "Heltid", "Projekt"],
-      icon: "bi bi-megaphone",
+      icon: "bi-megaphone",
       color: "#ef4444"
     },
     {
@@ -64,7 +65,7 @@ function Tjanster() {
       description: "Granska och säkerställ korrekthet i bokföring och ekonomiska rapporter. Analysera finansiella processer för regelefterlevnad.",
       location: "Aten, Grekland",
       employmentTypes: ["Deltid", "Heltid", "Projekt"],
-      icon: "bi bi-calculator",
+      icon: "bi-calculator",
       color: "#ec4899"
     },
     {
@@ -72,162 +73,81 @@ function Tjanster() {
       description: "Ge utmärkt kundservice genom tydlig kommunikation och support. Säkerställ snabb hjälp och positiv kundupplevelse.",
       location: "Aten, Grekland",
       employmentTypes: ["Deltid", "Heltid", "Projekt"],
-      icon: "bi bi-headset",
+      icon: "bi-headset",
       color: "#06b6d4"
     }
+  ];
+
+  const stats = [
+    { number: '7', label: 'Lediga tjänster', icon: 'bi-briefcase', color: '#2563eb' },
+    { number: '1', label: 'Stad', icon: 'bi-geo-alt', color: '#10b981' },
+    { number: '3', label: 'Anställningsformer', icon: 'bi-clock', color: '#8b5cf6' },
+    { number: '48h', label: 'Snabb respons', icon: 'bi-lightning', color: '#f59e0b' }
   ];
 
   const handleSpontaneousApplication = () => {
     navigate('/contact');
   };
 
-  const getGridColumns = () => {
-    if (windowWidth >= 1024) return 'repeat(3, 1fr)';
-    if (windowWidth >= 768) return 'repeat(2, 1fr)';
-    return '1fr';
-  };
-
   return (
-    <div style={{
-      minHeight: '100vh',
-      background: 'linear-gradient(to bottom, #f8fafc, #ffffff)',
-      padding: '2rem 1rem'
-    }}>
-      <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
+    <div className="tjanster-container">
+      <div className="container">
         {/* Hero Header */}
-        <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
-          <h1 style={{
-            fontSize: windowWidth >= 768 ? '2.5rem' : '2rem',
-            fontWeight: '800',
-            color: '#111827',
-            marginBottom: '1rem',
-            opacity: isVisible ? 1 : 0,
-            transform: isVisible ? 'translateY(0)' : 'translateY(20px)',
-            transition: 'all 0.6s ease-out',
-            background: 'linear-gradient(to right, #005293, #0077c8)',
-            WebkitBackgroundClip: 'text',
-            WebkitTextFillColor: 'transparent',
-            backgroundClip: 'text'
-          }}>
+        <div className="section-header">
+          <h1 className={`section-title gradient-text ${isVisible ? 'visible' : ''}`}>
             Lediga Tjänster
           </h1>
-          <p style={{
-            fontSize: windowWidth >= 768 ? '1.25rem' : '1.1rem',
-            color: '#6b7280',
-            maxWidth: '600px',
-            margin: '0 auto',
-            lineHeight: '1.6',
-            opacity: isVisible ? 1 : 0,
-            transform: isVisible ? 'translateY(0)' : 'translateY(20px)',
-            transition: 'all 0.6s ease-out 0.2s'
-          }}>
+          <p className={`section-subtitle ${isVisible ? 'visible' : ''}`}>
             Upptäck spännande karriärmöjligheter inom olika branscher
           </p>
         </div>
 
         {/* Job Cards Grid */}
-        <div style={{
-          display: 'grid',
-          gridTemplateColumns: getGridColumns(),
-          gap: '1.5rem',
-          marginBottom: '3rem'
-        }}>
+        <div className="job-grid">
           {jobPositions.map((job, index) => (
             <div 
               key={index}
-              style={{
-                background: 'white',
-                borderRadius: '20px',
-                boxShadow: '0 10px 40px rgba(0, 0, 0, 0.08)',
-                border: '1px solid #e5e7eb',
-                overflow: 'hidden',
-                transition: 'all 0.4s ease',
-                opacity: isVisible ? 1 : 0,
-                transform: isVisible ? 'translateY(0)' : 'translateY(20px)',
-                animationDelay: `${index * 0.1}s`,
-                animation: isVisible ? 'fadeInUp 0.6s ease forwards' : 'none',
-                position: 'relative'
-              }}
+              className={`job-card ${isVisible ? 'visible' : ''}`}
+              style={{ animationDelay: `${index * 0.1}s` }}
               onMouseEnter={() => setHoveredCard(index)}
               onMouseLeave={() => setHoveredCard(null)}
             >
               {/* Top Color Bar */}
-              <div style={{
-                height: '6px',
-                background: `linear-gradient(90deg, ${job.color}, ${job.color}dd)`,
-                width: '100%'
-              }}></div>
+              <div 
+                className="job-card-bar"
+                style={{ background: `linear-gradient(90deg, ${job.color}, ${job.color}dd)` }}
+              ></div>
               
-              <div style={{ padding: '1.5rem' }}>
+              <div className="job-card-content">
                 {/* Job Header */}
-                <div style={{ 
-                  display: 'flex', 
-                  alignItems: 'flex-start', 
-                  gap: '1rem',
-                  marginBottom: '1rem'
-                }}>
-                  <div style={{
-                    width: '3rem',
-                    height: '3rem',
-                    borderRadius: '12px',
-                    background: `${job.color}15`,
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    flexShrink: 0,
-                    color: job.color,
-                    fontSize: '1.25rem'
-                  }}>
-                    <i className={job.icon}></i>
+                <div className="job-card-header">
+                  <div 
+                    className="job-icon"
+                    style={{ backgroundColor: `${job.color}15`, color: job.color }}
+                  >
+                    <i className={`bi ${job.icon}`}></i>
                   </div>
                   <div>
-                    <h3 style={{
-                      fontSize: '1.25rem',
-                      fontWeight: '700',
-                      color: '#111827',
-                      margin: '0 0 0.25rem 0',
-                      lineHeight: '1.3'
-                    }}>
-                      {job.title}
-                    </h3>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                      <i className="bi bi-geo-alt" style={{ fontSize: '0.875rem', color: '#6b7280' }}></i>
-                      <span style={{ color: '#6b7280', fontSize: '0.875rem' }}>
-                        {job.location}
-                      </span>
+                    <h3 className="job-title">{job.title}</h3>
+                    <div className="job-location">
+                      <i className="bi bi-geo-alt"></i>
+                      <span>{job.location}</span>
                     </div>
                   </div>
                 </div>
 
                 {/* Description */}
-                <p style={{ 
-                  color: '#6b7280', 
-                  lineHeight: '1.6',
-                  marginBottom: '1.5rem',
-                  fontSize: '0.95rem',
-                  display: '-webkit-box',
-                  WebkitLineClamp: '4',
-                  WebkitBoxOrient: 'vertical',
-                  overflow: 'hidden',
-                  textOverflow: 'ellipsis'
-                }}>
+                <p className="job-description">
                   {job.description}
                 </p>
 
                 {/* Employment Types */}
-                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem', marginBottom: '1.5rem' }}>
+                <div className="employment-types">
                   {job.employmentTypes.map((type, typeIndex) => (
                     <span 
                       key={typeIndex}
-                      style={{
-                        backgroundColor: `${job.color}15`,
-                        color: job.color,
-                        padding: '0.375rem 0.75rem',
-                        borderRadius: '20px',
-                        fontSize: '0.8rem',
-                        fontWeight: '600',
-                        transition: 'all 0.2s ease'
-                      }}
+                      className="employment-type"
+                      style={{ backgroundColor: `${job.color}15`, color: job.color }}
                     >
                       {type}
                     </span>
@@ -236,30 +156,8 @@ function Tjanster() {
 
                 {/* Apply Button */}
                 <button 
-                  style={{
-                    backgroundColor: job.color,
-                    color: 'white',
-                    border: 'none',
-                    padding: '0.75rem 1.5rem',
-                    borderRadius: '10px',
-                    cursor: 'pointer',
-                    width: '100%',
-                    fontWeight: '600',
-                    fontSize: '0.95rem',
-                    transition: 'all 0.3s ease',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    gap: '0.5rem'
-                  }}
-                  onMouseEnter={(e) => {
-                    e.target.style.transform = 'translateY(-2px)';
-                    e.target.style.boxShadow = `0 8px 20px ${job.color}40`;
-                  }}
-                  onMouseLeave={(e) => {
-                    e.target.style.transform = 'translateY(0)';
-                    e.target.style.boxShadow = 'none';
-                  }}
+                  className="apply-button"
+                  style={{ backgroundColor: job.color }}
                   onClick={() => navigate('/contact', { state: { jobTitle: job.title } })}
                 >
                   {hoveredCard === index ? (
@@ -274,15 +172,8 @@ function Tjanster() {
               
               {/* Hover Arrow */}
               {hoveredCard === index && (
-                <div style={{
-                  position: 'absolute',
-                  top: '1rem',
-                  right: '1rem',
-                  color: job.color,
-                  animation: 'slideInRight 0.3s ease forwards',
-                  opacity: 0
-                }}>
-                  <i className="bi bi-arrow-right-circle" style={{ fontSize: '1.25rem' }}></i>
+                <div className="hover-arrow" style={{ color: job.color }}>
+                  <i className="bi bi-arrow-right-circle"></i>
                 </div>
               )}
             </div>
@@ -290,170 +181,47 @@ function Tjanster() {
         </div>
 
         {/* Spontaneous Application CTA */}
-        <div style={{
-          background: 'linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%)',
-          borderRadius: '20px',
-          padding: '2.5rem',
-          textAlign: 'center',
-          border: '1px solid #bae6fd',
-          opacity: isVisible ? 1 : 0,
-          transform: isVisible ? 'translateY(0)' : 'translateY(20px)',
-          transition: 'all 0.6s ease-out 0.8s',
-          marginBottom: '2rem'
-        }}>
-          <div style={{
-            width: '4rem',
-            height: '4rem',
-            borderRadius: '50%',
-            background: 'linear-gradient(135deg, #fbbf24, #f59e0b)',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            margin: '0 auto 1.5rem',
-            color: 'white',
-            fontSize: '1.5rem'
-          }}>
+        <div className={`spontaneous-cta ${isVisible ? 'visible' : ''}`}>
+          <div className="cta-icon">
             <i className="bi bi-search"></i>
           </div>
           
-          <h3 style={{ 
-            fontSize: windowWidth >= 768 ? '1.75rem' : '1.5rem',
-            fontWeight: '700', 
-            color: '#111827', 
-            marginBottom: '1rem'
-          }}>
-            Inte hittat vad du söker?
-          </h3>
+          <h3 className="cta-title">Inte hittat vad du söker?</h3>
           
-          <p style={{ 
-            color: '#6b7280', 
-            marginBottom: '2rem',
-            fontSize: windowWidth >= 768 ? '1.1rem' : '1rem',
-            maxWidth: '600px',
-            margin: '0 auto',
-            lineHeight: '1.6'
-          }}>
+          <p className="cta-description">
             Skicka in en spontanansökan så hör vi av oss när vi har tjänster som matchar din kompetens och ambitioner.
           </p>
           
           <button 
+            className="cta-button"
             onClick={handleSpontaneousApplication}
-            style={{
-              background: 'linear-gradient(135deg, #fbbf24, #f59e0b)',
-              color: '#1e3a8a',
-              border: 'none',
-              padding: windowWidth >= 768 ? '1rem 2.5rem' : '0.875rem 2rem',
-              borderRadius: '12px',
-              fontSize: windowWidth >= 768 ? '1rem' : '0.95rem',
-              fontWeight: '700',
-              cursor: 'pointer',
-              transition: 'all 0.3s ease',
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: '0.5rem'
-            }}
-            onMouseEnter={(e) => {
-              e.target.style.transform = 'translateY(-2px)';
-              e.target.style.boxShadow = '0 12px 30px rgba(251, 191, 36, 0.4)';
-            }}
-            onMouseLeave={(e) => {
-              e.target.style.transform = 'translateY(0)';
-              e.target.style.boxShadow = 'none';
-            }}
           >
             <i className="bi bi-send"></i>
             Skicka spontanansökan
           </button>
           
-          <p style={{
-            fontSize: '0.875rem',
-            color: '#6b7280',
-            marginTop: '1.5rem',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            gap: '0.5rem'
-          }}>
-            <i className="bi bi-clock" style={{ color: '#f59e0b' }}></i>
+          <p className="cta-note">
+            <i className="bi bi-clock"></i>
             Vi återkommer inom 48 timmar
           </p>
         </div>
 
         {/* Stats Bar */}
-        <div style={{
-          display: 'grid',
-          gridTemplateColumns: windowWidth >= 640 ? 'repeat(4, 1fr)' : 'repeat(2, 1fr)',
-          gap: '1.5rem',
-          background: 'white',
-          borderRadius: '16px',
-          padding: '2rem',
-          boxShadow: '0 8px 30px rgba(0, 0, 0, 0.08)',
-          border: '1px solid #e5e7eb'
-        }}>
-          {[
-            { number: '7', label: 'Lediga tjänster', icon: 'bi-briefcase', color: '#2563eb' },
-            { number: '1', label: 'Stad', icon: 'bi-geo-alt', color: '#10b981' },
-            { number: '3', label: 'Anställningsformer', icon: 'bi-clock', color: '#8b5cf6' },
-            { number: '48h', label: 'Snabb respons', icon: 'bi-lightning', color: '#f59e0b' }
-          ].map((stat, index) => (
-            <div key={index} style={{ textAlign: 'center' }}>
-              <div style={{
-                width: '3rem',
-                height: '3rem',
-                borderRadius: '12px',
-                background: `${stat.color}15`,
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                margin: '0 auto 0.75rem',
-                color: stat.color,
-                fontSize: '1.25rem'
-              }}>
+        <div className="stats-bar">
+          {stats.map((stat, index) => (
+            <div key={index} className="stat-item">
+              <div 
+                className="stat-icon-wrapper"
+                style={{ backgroundColor: `${stat.color}15`, color: stat.color }}
+              >
                 <i className={`bi ${stat.icon}`}></i>
               </div>
-              <div style={{
-                fontSize: '1.75rem',
-                fontWeight: '800',
-                color: '#111827',
-                marginBottom: '0.25rem'
-              }}>
-                {stat.number}
-              </div>
-              <div style={{
-                fontSize: '0.875rem',
-                color: '#6b7280'
-              }}>
-                {stat.label}
-              </div>
+              <div className="stat-number">{stat.number}</div>
+              <div className="stat-label">{stat.label}</div>
             </div>
           ))}
         </div>
       </div>
-
-      {/* CSS Animations */}
-      <style>{`
-        @keyframes fadeInUp {
-          from {
-            opacity: 0;
-            transform: translateY(20px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-        
-        @keyframes slideInRight {
-          from {
-            opacity: 0;
-            transform: translateX(-10px);
-          }
-          to {
-            opacity: 1;
-            transform: translateX(0);
-          }
-        }
-      `}</style>
     </div>
   );
 }

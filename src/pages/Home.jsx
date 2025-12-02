@@ -1,415 +1,210 @@
-﻿import React, { useState, useEffect } from 'react';
+﻿import React, { useState, useEffect, useRef } from 'react';
 import HeroSection from '../components/HeroSection';
 import VideoRecorder from '../components/VideoRecorder';
 import RequestForm from '../components/RequestForm';
 import CompanyMap from '../components/CompanyMap';
 import WorkerMap from '../components/WorkerMap';
+import './Home.css';
 
 function Home() {
   const [isVisible, setIsVisible] = useState(false);
+  const [viewportWidth, setViewportWidth] = useState(typeof window !== 'undefined' ? window.innerWidth : 1024);
+  const sectionRef = useRef(null);
 
   useEffect(() => {
     setIsVisible(true);
+    
+    const handleResize = () => setViewportWidth(window.innerWidth);
+    window.addEventListener('resize', handleResize);
+    
+    return () => window.removeEventListener('resize', handleResize);
   }, []);
 
+  const processSteps = [
+    { 
+      number: '01', 
+      title: 'Skapa Profil', 
+      desc: 'Registrera dig på vår plattform', 
+      icon: 'bi-person-badge',
+      gradient: 'linear-gradient(135deg, #2563eb, #1d4ed8)'
+    },
+    { 
+      number: '02', 
+      title: 'Skicka Ansökan', 
+      desc: 'Fyll i dina uppgifter och CV', 
+      icon: 'bi-file-earmark-arrow-up',
+      gradient: 'linear-gradient(135deg, #7c3aed, #6d28d9)'
+    },
+    { 
+      number: '03', 
+      title: 'Möt Arbetsgivare', 
+      desc: 'Starta din nya karriär', 
+      icon: 'bi-briefcase',
+      gradient: 'linear-gradient(135deg, #059669, #047857)'
+    }
+  ];
+
+  const stats = [
+    { number: '8+', label: 'Länder', icon: 'bi-globe', color: '#2563eb', bgColor: '#dbeafe' },
+    { number: '500+', label: 'Arbetare', icon: 'bi-people', color: '#059669', bgColor: '#d1fae5' },
+    { number: '150+', label: 'Placeringar', icon: 'bi-briefcase', color: '#f59e0b', bgColor: '#fef3c7' },
+    { number: '98%', label: 'Nöjda kunder', icon: 'bi-star', color: '#ef4444', bgColor: '#fee2e2' }
+  ];
+
   return (
-    <div style={{
-      minHeight: '100vh',
-      background: 'linear-gradient(to bottom, #f8fafc, #ffffff)'
-    }}>
-      {/* Hero Section */}
-      <HeroSection />
+    <div className="home-container">
+      {/* Hero Section - Updated with wrapper */}
+      <div className="hero-section-wrapper">
+        <HeroSection />
+      </div>
       
-      {/* Video & CV Section */}
-      <div style={{
-        padding: '3rem 1rem',
-        opacity: isVisible ? 1 : 0,
-        transform: isVisible ? 'translateY(0)' : 'translateY(30px)',
-        transition: 'all 0.8s ease-out 0.3s'
-      }}>
-        <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
-          <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
-            <h2 style={{
-              fontSize: '2.25rem',
-              fontWeight: '800',
-              color: '#111827',
-              marginBottom: '1rem',
-              background: 'linear-gradient(to right, #2563eb, #1d4ed8)',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent'
-            }}>
+      {/* Process Steps Section - Added mobile spacing class */}
+      <section 
+        ref={sectionRef}
+        className={`process-section ${isVisible ? 'visible' : ''}`}
+        style={viewportWidth <= 768 ? { marginTop: '-1rem', paddingTop: '0.5rem' } : {}}
+      >
+        <div className="container">
+          <div className="section-header">
+            <h2 className="section-title gradient-text">
               Kom igång på 3 enkla steg
             </h2>
-            <p style={{
-              fontSize: '1.1rem',
-              color: '#6b7280',
-              maxWidth: '600px',
-              margin: '0 auto',
-              lineHeight: '1.6'
-            }}>
+            <p className="section-subtitle">
               Registrera dig, skicka din ansökan och möt arbetsgivare – helt digitalt
             </p>
           </div>
 
-          {/* Process Steps */}
-          <div style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
-            gap: '2rem',
-            marginBottom: '3rem'
-          }}>
-            {[
-             { number: '01', title: 'Skapa Profil', desc: 'Registrera dig på vår plattform', icon: 'bi-person-badge' },
-{ number: '02', title: 'Skicka Ansökan', desc: 'Fyll i dina uppgifter och CV', icon: 'bi-file-earmark-arrow-up' },
-{ number: '03', title: 'Möt Arbetsgivare', desc: 'Starta din nya karriär', icon: 'bi-briefcase' }
-            ].map((step, index) => (
-              <div key={index} style={{
-                textAlign: 'center',
-                padding: '1.5rem',
-                background: 'white',
-                borderRadius: '16px',
-                boxShadow: '0 4px 20px rgba(0, 0, 0, 0.08)',
-                border: '1px solid #e5e7eb',
-                transition: 'all 0.3s ease',
-                opacity: isVisible ? 1 : 0,
-                transform: isVisible ? 'translateY(0)' : 'translateY(20px)',
-                transitionDelay: `${0.5 + (index * 0.1)}s`
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.transform = 'translateY(-8px)';
-                e.currentTarget.style.boxShadow = '0 12px 30px rgba(0, 0, 0, 0.15)';
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.transform = 'translateY(0)';
-                e.currentTarget.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.08)';
-              }}>
-                <div style={{
-                  width: '3rem',
-                  height: '3rem',
-                  borderRadius: '12px',
-                  background: 'linear-gradient(135deg, #2563eb, #1d4ed8)',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  margin: '0 auto 1rem',
-                  color: 'white',
-                  fontWeight: '700',
-                  fontSize: '1.25rem'
-                }}>
+          <div className="process-steps-grid">
+            {processSteps.map((step, index) => (
+              <div 
+                key={index}
+                className="process-step-card"
+                style={{
+                  animationDelay: `${0.3 + (index * 0.1)}s`
+                }}
+              >
+                <div 
+                  className="step-number"
+                  style={{ background: step.gradient }}
+                >
                   {step.number}
                 </div>
-                <i className={`bi ${step.icon}`} style={{
-                  fontSize: '2rem',
-                  color: '#2563eb',
-                  marginBottom: '1rem'
-                }}></i>
-                <h3 style={{
-                  fontSize: '1.25rem',
-                  fontWeight: '600',
-                  color: '#111827',
-                  marginBottom: '0.5rem'
-                }}>
-                  {step.title}
-                </h3>
-                <p style={{ color: '#6b7280', fontSize: '0.9rem' }}>
-                  {step.desc}
-                </p>
+                <div className="step-icon-wrapper">
+                  <i className={`bi ${step.icon}`}></i>
+                </div>
+                <h3 className="step-title">{step.title}</h3>
+                <p className="step-description">{step.desc}</p>
               </div>
             ))}
           </div>
 
-          {/* Video Recorder & Request Form */}
-          <div style={{
-            display: 'grid',
-            gridTemplateColumns: '1fr',
-            gap: '2rem'
-          }}>
-            {/* Add responsive grid for larger screens */}
-            {window.innerWidth >= 1024 && (
-              <style>{`
-                @media (min-width: 1024px) {
-                  .form-grid {
-                    grid-template-columns: 1fr 1fr !important;
-                  }
-                }
-              `}</style>
-            )}
-            
-            <div className="form-grid" style={{ 
-              display: 'grid', 
-              gridTemplateColumns: '1fr',
-              gap: '2rem'
-            }}>
-              {/* Video Recorder Card - Fixed */}
-              <div style={{
-                background: 'white',
-                borderRadius: '16px',
-                boxShadow: '0 10px 40px rgba(0, 0, 0, 0.08)',
-                border: '1px solid #e5e7eb',
-                overflow: 'hidden',
-                height: '100%'
-              }}>
+          <div className="form-section">
+            <div className="form-grid">
+              <div className="form-card elevated-card">
+                <div className="card-header">
+                  <h3 className="card-title">
+                    <i className="bi bi-camera-video me-2"></i>
+                    Skapa Videointroduktion
+                  </h3>
+                  <p className="card-subtitle">Visar ditt bästa jag för arbetsgivare</p>
+                </div>
                 <VideoRecorder />
               </div>
 
-              {/* Request Form Card - Fixed */}
-              <div style={{
-                background: 'white',
-                borderRadius: '16px',
-                boxShadow: '0 10px 40px rgba(0, 0, 0, 0.08)',
-                border: '1px solid #e5e7eb',
-                overflow: 'hidden',
-                height: '100%'
-              }}>
+              <div className="form-card elevated-card">
+                <div className="card-header">
+                  <h3 className="card-title">
+                    <i className="bi bi-send-check me-2"></i>
+                    Skicka Ansökan
+                  </h3>
+                  <p className="card-subtitle">Fyll i formuläret för att komma igång</p>
+                </div>
                 <RequestForm />
               </div>
             </div>
           </div>
         </div>
-      </div>
+      </section>
 
       {/* Maps Section */}
-      <div style={{
-        padding: '3rem 1rem',
-        background: 'linear-gradient(to bottom, #ffffff, #f8fafc)'
-      }}>
-        <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
-          <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
-            <h2 style={{
-              fontSize: '2.25rem',
-              fontWeight: '800',
-              color: '#111827',
-              marginBottom: '1rem'
-            }}>
-              Global täckning
-            </h2>
-            <p style={{
-              fontSize: '1.1rem',
-              color: '#6b7280',
-              maxWidth: '600px',
-              margin: '0 auto',
-              lineHeight: '1.6'
-            }}>
+      <section className="maps-section">
+        <div className="container">
+          <div className="section-header">
+            <h2 className="section-title">Global täckning</h2>
+            <p className="section-subtitle">
               Vår närvaro sträcker sig över kontinenter – från kontor till talanger
             </p>
           </div>
 
-          <div style={{
-            display: 'grid',
-            gridTemplateColumns: '1fr',
-            gap: '2rem'
-          }}>
-            {/* Add responsive grid for larger screens */}
-            {window.innerWidth >= 1024 && (
-              <style>{`
-                @media (min-width: 1024px) {
-                  .maps-grid {
-                    grid-template-columns: 1fr 1fr !important;
-                  }
-                }
-              `}</style>
-            )}
-            
-            <div className="maps-grid" style={{ 
-              display: 'grid', 
-              gridTemplateColumns: '1fr',
-              gap: '2rem'
-            }}>
-              {/* Company Map */}
-              <div style={{
-                background: 'white',
-                borderRadius: '20px',
-                boxShadow: '0 15px 50px rgba(0, 0, 0, 0.1)',
-                border: '1px solid #e5e7eb',
-                overflow: 'hidden',
-                transition: 'all 0.4s ease'
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.transform = 'translateY(-5px)';
-                e.currentTarget.style.boxShadow = '0 20px 60px rgba(59, 130, 246, 0.15)';
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.transform = 'translateY(0)';
-                e.currentTarget.style.boxShadow = '0 15px 50px rgba(0, 0, 0, 0.1)';
-              }}>
-                <div style={{
-                  background: 'linear-gradient(135deg, #2563eb, #1d4ed8)',
-                  padding: '1.5rem',
-                  color: 'white'
-                }}>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-                    <div style={{
-                      width: '3rem',
-                      height: '3rem',
-                      borderRadius: '12px',
-                      background: 'rgba(255, 255, 255, 0.2)',
-                      backdropFilter: 'blur(10px)',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center'
-                    }}>
-                      <i className="bi bi-building" style={{ fontSize: '1.5rem' }}></i>
-                    </div>
-                    <div>
-                      <h3 style={{ fontSize: '1.5rem', fontWeight: '700', margin: 0 }}>
-                        Företag i 8 länder
-                      </h3>
-                      <p style={{ margin: '0.25rem 0 0 0', opacity: 0.9, fontSize: '0.9rem' }}>
-                        Global Worker kontor världen över
-                      </p>
-                    </div>
+          <div className="maps-grid">
+            <div className="map-card">
+              <div className="map-header company-gradient">
+                <div className="header-content">
+                  <div className="header-icon">
+                    <i className="bi bi-building"></i>
                   </div>
-                </div>
-                <div style={{ height: '300px' }}>
-                  <CompanyMap />
-                </div>
-                <div style={{
-                  padding: '1rem 1.5rem',
-                  background: '#f8fafc',
-                  borderTop: '1px solid #e5e7eb'
-                }}>
-                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                      <div style={{
-                        width: '8px',
-                        height: '8px',
-                        borderRadius: '50%',
-                        background: '#2563eb'
-                      }}></div>
-                      <span style={{ color: '#6b7280', fontSize: '0.85rem' }}>
-                        Aktiva kontor
-                      </span>
-                    </div>
-                    <span style={{
-                      background: '#dbeafe',
-                      color: '#1d4ed8',
-                      padding: '0.25rem 0.75rem',
-                      borderRadius: '20px',
-                      fontSize: '0.85rem',
-                      fontWeight: '600'
-                    }}>
-                      8 länder
-                    </span>
+                  <div>
+                    <h3 className="map-title">Företag i 8 länder</h3>
+                    <p className="map-subtitle">Global Worker kontor världen över</p>
                   </div>
                 </div>
               </div>
+              <div className="map-container">
+                <CompanyMap />
+              </div>
+              <div className="map-footer">
+                <div className="footer-content">
+                  <div className="status-indicator">
+                    <span className="status-dot company-dot"></span>
+                    <span className="status-label">Aktiva kontor</span>
+                  </div>
+                  <span className="status-badge company-badge">8 länder</span>
+                </div>
+              </div>
+            </div>
 
-              {/* Worker Map */}
-              <div style={{
-                background: 'white',
-                borderRadius: '20px',
-                boxShadow: '0 15px 50px rgba(0, 0, 0, 0.1)',
-                border: '1px solid #e5e7eb',
-                overflow: 'hidden',
-                transition: 'all 0.4s ease'
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.transform = 'translateY(-5px)';
-                e.currentTarget.style.boxShadow = '0 20px 60px rgba(16, 185, 129, 0.15)';
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.transform = 'translateY(0)';
-                e.currentTarget.style.boxShadow = '0 15px 50px rgba(0, 0, 0, 0.1)';
-              }}>
-                <div style={{
-                  background: 'linear-gradient(135deg, #059669, #047857)',
-                  padding: '1.5rem',
-                  color: 'white'
-                }}>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-                    <div style={{
-                      width: '3rem',
-                      height: '3rem',
-                      borderRadius: '12px',
-                      background: 'rgba(255, 255, 255, 0.2)',
-                      backdropFilter: 'blur(10px)',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center'
-                    }}>
-                      <i className="bi bi-people" style={{ fontSize: '1.5rem' }}></i>
-                    </div>
-                    <div>
-                      <h3 style={{ fontSize: '1.5rem', fontWeight: '700', margin: 0 }}>
-                        Arbetare världen över
-                      </h3>
-                      <p style={{ margin: '0.25rem 0 0 0', opacity: 0.9, fontSize: '0.9rem' }}>
-                        Talangfulla arbetare redo för nya uppdrag
-                      </p>
-                    </div>
+            <div className="map-card">
+              <div className="map-header worker-gradient">
+                <div className="header-content">
+                  <div className="header-icon">
+                    <i className="bi bi-people"></i>
+                  </div>
+                  <div>
+                    <h3 className="map-title">Arbetare världen över</h3>
+                    <p className="map-subtitle">Talangfulla arbetare redo för nya uppdrag</p>
                   </div>
                 </div>
-                <div style={{ height: '300px' }}>
-                  <WorkerMap />
-                </div>
-                <div style={{
-                  padding: '1rem 1.5rem',
-                  background: '#f8fafc',
-                  borderTop: '1px solid #e5e7eb'
-                }}>
-                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                      <div style={{
-                        width: '8px',
-                        height: '8px',
-                        borderRadius: '50%',
-                        background: '#059669'
-                      }}></div>
-                      <span style={{ color: '#6b7280', fontSize: '0.85rem' }}>
-                        Aktiva arbetare
-                      </span>
-                    </div>
-                    <span style={{
-                      background: '#d1fae5',
-                      color: '#065f46',
-                      padding: '0.25rem 0.75rem',
-                      borderRadius: '20px',
-                      fontSize: '0.85rem',
-                      fontWeight: '600'
-                    }}>
-                      500+ aktiva
-                    </span>
+              </div>
+              <div className="map-container">
+                <WorkerMap />
+              </div>
+              <div className="map-footer">
+                <div className="footer-content">
+                  <div className="status-indicator">
+                    <span className="status-dot worker-dot"></span>
+                    <span className="status-label">Aktiva arbetare</span>
                   </div>
+                  <span className="status-badge worker-badge">500+ aktiva</span>
                 </div>
               </div>
             </div>
           </div>
 
-          {/* Stats Bar */}
-          <div style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))',
-            gap: '1.5rem',
-            marginTop: '3rem',
-            padding: '2rem',
-            background: 'white',
-            borderRadius: '16px',
-            boxShadow: '0 8px 30px rgba(0, 0, 0, 0.08)',
-            border: '1px solid #e5e7eb'
-          }}>
-            {[
-              { number: '8+', label: 'Länder', icon: 'bi-globe', color: '#2563eb' },
-              { number: '500+', label: 'Arbetare', icon: 'bi-people', color: '#059669' },
-              { number: '150+', label: 'Placeringar', icon: 'bi-briefcase', color: '#f59e0b' },
-              { number: '98%', label: 'Nöjda kunder', icon: 'bi-star', color: '#ef4444' }
-            ].map((stat, index) => (
-              <div key={index} style={{ textAlign: 'center' }}>
-                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem', marginBottom: '0.5rem' }}>
-                  <i className={`bi ${stat.icon}`} style={{ fontSize: '1.5rem', color: stat.color }}></i>
-                  <span style={{
-                    fontSize: '2rem',
-                    fontWeight: '800',
-                    color: '#111827'
-                  }}>
-                    {stat.number}
-                  </span>
+          <div className="stats-container">
+            {stats.map((stat, index) => (
+              <div key={index} className="stat-item">
+                <div className="stat-icon" style={{ backgroundColor: stat.bgColor, color: stat.color }}>
+                  <i className={`bi ${stat.icon}`}></i>
                 </div>
-                <span style={{ color: '#6b7280', fontSize: '0.9rem' }}>{stat.label}</span>
+                <div className="stat-content">
+                  <h4 className="stat-number">{stat.number}</h4>
+                  <p className="stat-label">{stat.label}</p>
+                </div>
               </div>
             ))}
           </div>
         </div>
-      </div>
+      </section>
     </div>
   );
 }
