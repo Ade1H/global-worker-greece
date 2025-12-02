@@ -10,31 +10,31 @@ const createCustomIcon = (color) => {
   // Create SVG string manually for each color
   switch(color) {
     case '#FF6B6B': // Red
-      svgString = '<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"25\" height=\"41\" viewBox=\"0 0 25 41\"><path fill=\"#FF6B6B\" stroke=\"#fff\" stroke-width=\"2\" d=\"M12.5 1C6.7 1 2 5.7 2 11.5c0 7.5 10.5 18 10.5 18s10.5-10.5 10.5-18C23 5.7 18.3 1 12.5 1z\"/><circle cx=\"12.5\" cy=\"11.5\" r=\"4\" fill=\"#fff\"/></svg>';
+      svgString = '<svg xmlns="http://www.w3.org/2000/svg" width="25" height="41" viewBox="0 0 25 41"><path fill="#FF6B6B" stroke="#fff" stroke-width="2" d="M12.5 1C6.7 1 2 5.7 2 11.5c0 7.5 10.5 18 10.5 18s10.5-10.5 10.5-18C23 5.7 18.3 1 12.5 1z"/><circle cx="12.5" cy="11.5" r="4" fill="#fff"/></svg>';
       break;
     case '#4ECDC4': // Teal
-      svgString = '<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"25\" height=\"41\" viewBox=\"0 0 25 41\"><path fill=\"#4ECDC4\" stroke=\"#fff\" stroke-width=\"2\" d=\"M12.5 1C6.7 1 2 5.7 2 11.5c0 7.5 10.5 18 10.5 18s10.5-10.5 10.5-18C23 5.7 18.3 1 12.5 1z\"/><circle cx=\"12.5\" cy=\"11.5\" r=\"4\" fill=\"#fff\"/></svg>';
+      svgString = '<svg xmlns="http://www.w3.org/2000/svg" width="25" height="41" viewBox="0 0 25 41"><path fill="#4ECDC4" stroke="#fff" stroke-width="2" d="M12.5 1C6.7 1 2 5.7 2 11.5c0 7.5 10.5 18 10.5 18s10.5-10.5 10.5-18C23 5.7 18.3 1 12.5 1z"/><circle cx="12.5" cy="11.5" r="4" fill="#fff"/></svg>';
       break;
     case '#45B7D1': // Blue
-      svgString = '<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"25\" height=\"41\" viewBox=\"0 0 25 41\"><path fill=\"#45B7D1\" stroke=\"#fff\" stroke-width=\"2\" d=\"M12.5 1C6.7 1 2 5.7 2 11.5c0 7.5 10.5 18 10.5 18s10.5-10.5 10.5-18C23 5.7 18.3 1 12.5 1z\"/><circle cx=\"12.5\" cy=\"11.5\" r=\"4\" fill=\"#fff\"/></svg>';
+      svgString = '<svg xmlns="http://www.w3.org/2000/svg" width="25" height="41" viewBox="0 0 25 41"><path fill="#45B7D1" stroke="#fff" stroke-width="2" d="M12.5 1C6.7 1 2 5.7 2 11.5c0 7.5 10.5 18 10.5 18s10.5-10.5 10.5-18C23 5.7 18.3 1 12.5 1z"/><circle cx="12.5" cy="11.5" r="4" fill="#fff"/></svg>';
       break;
     case '#FFA07A': // Orange
-      svgString = '<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"25\" height=\"41\" viewBox=\"0 0 25 41\"><path fill=\"#FFA07A\" stroke=\"#fff\" stroke-width=\"2\" d=\"M12.5 1C6.7 1 2 5.7 2 11.5c0 7.5 10.5 18 10.5 18s10.5-10.5 10.5-18C23 5.7 18.3 1 12.5 1z\"/><circle cx=\"12.5\" cy=\"11.5\" r=\"4\" fill=\"#fff\"/></svg>';
+      svgString = '<svg xmlns="http://www.w3.org/2000/svg" width="25" height="41" viewBox="0 0 25 41"><path fill="#FFA07A" stroke="#fff" stroke-width="2" d="M12.5 1C6.7 1 2 5.7 2 11.5c0 7.5 10.5 18 10.5 18s10.5-10.5 10.5-18C23 5.7 18.3 1 12.5 1z"/><circle cx="12.5" cy="11.5" r="4" fill="#fff"/></svg>';
       break;
     case '#98D8C8': // Mint
-      svgString = '<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"25\" height=\"41\" viewBox=\"0 0 25 41\"><path fill=\"#98D8C8\" stroke=\"#fff\" stroke-width=\"2\" d=\"M12.5 1C6.7 1 2 5.7 2 11.5c0 7.5 10.5 18 10.5 18s10.5-10.5 10.5-18C23 5.7 18.3 1 12.5 1z\"/><circle cx=\"12.5\" cy=\"11.5\" r=\"4\" fill=\"#fff\"/></svg>';
+      svgString = '<svg xmlns="http://www.w3.org/2000/svg" width="25" height="41" viewBox="0 0 25 41"><path fill="#98D8C8" stroke="#fff" stroke-width="2" d="M12.5 1C6.7 1 2 5.7 2 11.5c0 7.5 10.5 18 10.5 18s10.5-10.5 10.5-18C23 5.7 18.3 1 12.5 1z"/><circle cx="12.5" cy="11.5" r="4" fill="#fff"/></svg>';
       break;
     case '#F7DC6F': // Yellow
-      svgString = '<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"25\" height=\"41\" viewBox=\"0 0 25 41\"><path fill=\"#F7DC6F\" stroke=\"#fff\" stroke-width=\"2\" d=\"M12.5 1C6.7 1 2 5.7 2 11.5c0 7.5 10.5 18 10.5 18s10.5-10.5 10.5-18C23 5.7 18.3 1 12.5 1z\"/><circle cx=\"12.5\" cy=\"11.5\" r=\"4\" fill=\"#fff\"/></svg>';
+      svgString = '<svg xmlns="http://www.w3.org/2000/svg" width="25" height="41" viewBox="0 0 25 41"><path fill="#F7DC6F" stroke="#fff" stroke-width="2" d="M12.5 1C6.7 1 2 5.7 2 11.5c0 7.5 10.5 18 10.5 18s10.5-10.5 10.5-18C23 5.7 18.3 1 12.5 1z"/><circle cx="12.5" cy="11.5" r="4" fill="#fff"/></svg>';
       break;
     case '#BB8FCE': // Purple
-      svgString = '<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"25\" height=\"41\" viewBox=\"0 0 25 41\"><path fill=\"#BB8FCE\" stroke=\"#fff\" stroke-width=\"2\" d=\"M12.5 1C6.7 1 2 5.7 2 11.5c0 7.5 10.5 18 10.5 18s10.5-10.5 10.5-18C23 5.7 18.3 1 12.5 1z\"/><circle cx=\"12.5\" cy=\"11.5\" r=\"4\" fill=\"#fff\"/></svg>';
+      svgString = '<svg xmlns="http://www.w3.org/2000/svg" width="25" height="41" viewBox="0 0 25 41"><path fill="#BB8FCE" stroke="#fff" stroke-width="2" d="M12.5 1C6.7 1 2 5.7 2 11.5c0 7.5 10.5 18 10.5 18s10.5-10.5 10.5-18C23 5.7 18.3 1 12.5 1z"/><circle cx="12.5" cy="11.5" r="4" fill="#fff"/></svg>';
       break;
     case '#85C1E9': // Light Blue
-      svgString = '<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"25\" height=\"41\" viewBox=\"0 0 25 41\"><path fill=\"#85C1E9\" stroke=\"#fff\" stroke-width=\"2\" d=\"M12.5 1C6.7 1 2 5.7 2 11.5c0 7.5 10.5 18 10.5 18s10.5-10.5 10.5-18C23 5.7 18.3 1 12.5 1z\"/><circle cx=\"12.5\" cy=\"11.5\" r=\"4\" fill=\"#fff\"/></svg>';
+      svgString = '<svg xmlns="http://www.w3.org/2000/svg" width="25" height="41" viewBox="0 0 25 41"><path fill="#85C1E9" stroke="#fff" stroke-width="2" d="M12.5 1C6.7 1 2 5.7 2 11.5c0 7.5 10.5 18 10.5 18s10.5-10.5 10.5-18C23 5.7 18.3 1 12.5 1z"/><circle cx="12.5" cy="11.5" r="4" fill="#fff"/></svg>';
       break;
     default: // Default blue
-      svgString = '<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"25\" height=\"41\" viewBox=\"0 0 25 41\"><path fill=\"#0077b6\" stroke=\"#fff\" stroke-width=\"2\" d=\"M12.5 1C6.7 1 2 5.7 2 11.5c0 7.5 10.5 18 10.5 18s10.5-10.5 10.5-18C23 5.7 18.3 1 12.5 1z\"/><circle cx=\"12.5\" cy=\"11.5\" r=\"4\" fill=\"#fff\"/></svg>';
+      svgString = '<svg xmlns="http://www.w3.org/2000/svg" width="25" height="41" viewBox="0 0 25 41"><path fill="#0077b6" stroke="#fff" stroke-width="2" d="M12.5 1C6.7 1 2 5.7 2 11.5c0 7.5 10.5 18 10.5 18s10.5-10.5 10.5-18C23 5.7 18.3 1 12.5 1z"/><circle cx="12.5" cy="11.5" r="4" fill="#fff"/></svg>';
   }
   
   return new L.Icon({
@@ -59,7 +59,14 @@ const sampleWorkers = [
 
 function WorkerMap({ workers = sampleWorkers }) {
   return (
-    <div style={{ height: '500px', width: '100%', borderRadius: '10px', overflow: 'hidden', border: '2px solid #dee2e6' }}>
+    <div style={{ 
+      height: '500px', 
+      width: '100%', 
+      borderRadius: '10px', 
+      overflow: 'hidden', 
+      border: '2px solid #dee2e6',
+      position: 'relative'  // ← ADD THIS
+    }}>
       <MapContainer
         center={[20, 0]}
         zoom={2}
@@ -102,6 +109,7 @@ function WorkerMap({ workers = sampleWorkers }) {
         ))}
       </MapContainer>
       
+      {/* FIXED OVERLAY - Add pointerEvents: 'none' */}
       <div style={{ 
         position: 'absolute', 
         top: '10px', 
@@ -112,7 +120,9 @@ function WorkerMap({ workers = sampleWorkers }) {
         border: '1px solid #ccc',
         zIndex: 1000,
         fontSize: '14px',
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+        pointerEvents: 'none',  // ← CRITICAL FIX
+        userSelect: 'none'      // ← Optional but recommended
       }}>
         👥 {workers.length} arbetare
       </div>
