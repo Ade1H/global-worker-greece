@@ -1,4 +1,4 @@
-﻿/* HeroSection.css - COMPLETELY RESPONSIVE VERSION */
+﻿/* HeroSection.css - COMPLETELY FIXED FOR BLACK BARS */
 
 /* Modern Hero Section CSS */
 .hero-section-container {
@@ -6,69 +6,96 @@
   min-height: 700px;
   position: relative;
   overflow: hidden;
-  margin-bottom: 0 !important;
-  padding-bottom: 0 !important;
-  width: 100%;
+  margin: 0 !important;
+  padding: 0 !important;
+  width: 100% !important;
+  background-color: #000; /* Black fallback to hide bars */
+}
+
+/* Carousel and slide fixes */
+.carousel,
+.carousel-inner,
+.carousel-item {
+  height: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  width: 100% !important;
+  position: relative;
+}
+
+.carousel-item {
+  height: 100vh !important;
+  min-height: 700px !important;
 }
 
 .carousel-slide {
-  height: 100vh;
-  min-height: 700px;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
+  height: 100vh !important;
+  min-height: 700px !important;
+  background-size: cover !important;
+  background-position: center center !important;
+  background-repeat: no-repeat !important;
   position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
+  width: 100% !important;
+  background-color: #000; /* Black fallback */
 }
 
-/* Modern gradient overlays */
+/* Fixed gradient overlays with proper background syntax */
 .slide-1 {
-  background-image: 
-    linear-gradient(to bottom, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5)),
-    url('/images/hero1.png');
+  background: 
+    linear-gradient(to bottom, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.6)),
+    url('/images/hero1.png') center/cover no-repeat fixed !important;
+  background-color: #000 !important;
 }
 
 .slide-2 {
-  background-image: 
-    linear-gradient(to bottom, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5)),
-    url('/images/hero3.png');
+  background: 
+    linear-gradient(to bottom, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.6)),
+    url('/images/hero3.png') center/cover no-repeat fixed !important;
+  background-color: #000 !important;
 }
 
 .slide-3 {
-  background-image: 
-    linear-gradient(to bottom, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5)),
-    url('/images/hero2.png');
+  background: 
+    linear-gradient(to bottom, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.6)),
+    url('/images/hero3.png') center/cover no-repeat fixed !important;
+  background-color: #000 !important;
 }
 
-/* Modern content container - RESPONSIVE */
+/* Modern content container - FIXED for proper centering */
 .carousel-content {
   text-align: center;
   color: white;
-  width: 90%;
+  width: 100%;
   max-width: 1200px;
   position: relative;
   z-index: 2;
-  padding: 1rem;
+  padding: 2rem;
   margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100%;
 }
 
 /* Logo with glow effect */
 .logo-img {
-  height: 60px;
+  height: 80px;
   width: auto;
-  margin-bottom: 1rem;
+  margin-bottom: 2rem;
   filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.3));
   animation: floatLogo 6s ease-in-out infinite;
 }
 
-/* Modern typography - RESPONSIVE SIZES */
+/* Modern typography */
 .hero-title {
-  font-size: 2.5rem;
+  font-size: 3.5rem;
   font-weight: 800;
   line-height: 1.1;
-  margin-bottom: 0.75rem;
+  margin-bottom: 1rem;
   background: linear-gradient(to right, #ffffff, #a8d8ff);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -77,9 +104,9 @@
 }
 
 .hero-subtitle {
-  font-size: 1.1rem;
+  font-size: 1.3rem;
   font-weight: 300;
-  margin-bottom: 1.5rem;
+  margin-bottom: 2rem;
   max-width: 800px;
   margin-left: auto;
   margin-right: auto;
@@ -88,20 +115,20 @@
   padding: 0 0.5rem;
 }
 
-/* Modern button group - RESPONSIVE */
+/* Modern button group */
 .button-group {
   display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
+  flex-direction: row;
+  gap: 1.5rem;
   justify-content: center;
   align-items: center;
-  margin-top: 1.5rem;
-  margin-bottom: 0.5rem;
+  margin-top: 2rem;
+  margin-bottom: 3rem;
 }
 
 .btn-modern {
-  padding: 0.875rem 1.5rem;
-  font-size: 1rem;
+  padding: 1rem 2.5rem;
+  font-size: 1.1rem;
   font-weight: 600;
   border-radius: 50px;
   border: none;
@@ -115,8 +142,7 @@
   align-items: center;
   justify-content: center;
   text-decoration: none !important;
-  width: 100%;
-  max-width: 280px;
+  min-width: 200px;
 }
 
 .btn-primary-modern {
@@ -149,14 +175,14 @@
   -webkit-backdrop-filter: blur(15px);
 }
 
-/* Floating feature icons - RESPONSIVE - UPDATED FOR 8 COUNTRIES */
+/* Floating feature icons - UPDATED FOR 8 COUNTRIES */
 .features-container {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 0.75rem;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
   justify-content: center;
-  margin-top: 1.5rem;
-  margin-bottom: 0.5rem;
+  margin-top: 2.5rem;
+  margin-bottom: 2rem;
   padding: 0 0.5rem;
   width: 100%;
 }
@@ -168,7 +194,7 @@
   -webkit-backdrop-filter: blur(15px);
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 12px;
-  padding: 1rem;
+  padding: 1.5rem;
   width: 100%;
   transition: all 0.4s ease;
   animation: floatIcon 3s ease-in-out infinite;
@@ -194,35 +220,26 @@
   -webkit-backdrop-filter: blur(20px);
 }
 
-/* Allow custom colors for country icons */
 .feature-icon i {
-  font-size: 1.75rem;
+  font-size: 2.25rem;
   margin-bottom: 0.5rem;
   display: block;
 }
 
-/* Override gradient text for country icons - they'll use inline styles */
-.feature-icon i[style*="color"] {
-  -webkit-background-clip: initial;
-  -webkit-text-fill-color: initial;
-  background-clip: initial;
-  background: none;
-}
-
 .feature-text {
-  font-size: 0.85rem;
+  font-size: 0.9rem;
   line-height: 1.3;
 }
 
 .feature-text .fw-bold {
-  font-size: 0.95rem;
+  font-size: 1rem;
   margin-bottom: 0.125rem;
   display: block;
   color: white;
 }
 
 .feature-text .small {
-  font-size: 0.75rem;
+  font-size: 0.8rem;
   opacity: 0.75;
   line-height: 1.2;
   color: rgba(255, 255, 255, 0.8);
@@ -231,7 +248,7 @@
 /* Modern carousel indicators */
 .carousel-indicators.custom-indicators {
   position: absolute;
-  bottom: 20px;
+  bottom: 40px;
   left: 0;
   right: 0;
   display: flex;
@@ -243,8 +260,8 @@
 }
 
 .carousel-indicators.custom-indicators button {
-  width: 25px;
-  height: 3px;
+  width: 40px;
+  height: 4px;
   border-radius: 2px;
   background-color: rgba(255, 255, 255, 0.3);
   border: none;
@@ -262,7 +279,7 @@
 
 .carousel-indicators.custom-indicators .active {
   background-color: #ffcd00;
-  width: 35px;
+  width: 60px;
   transform: scaleX(1.2);
 }
 
@@ -270,8 +287,8 @@
 .carousel-control-prev,
 .carousel-control-next {
   z-index: 10;
-  width: 35px;
-  height: 35px;
+  width: 50px;
+  height: 50px;
   top: 50%;
   transform: translateY(-50%);
   background: rgba(255, 255, 255, 0.1);
@@ -280,7 +297,7 @@
   -webkit-backdrop-filter: blur(10px);
   transition: all 0.3s ease;
   opacity: 0.7;
-  display: none; /* Hide on mobile */
+  display: flex;
 }
 
 .carousel-control-prev:hover,
@@ -290,34 +307,33 @@
 }
 
 .carousel-control-prev {
-  left: 10px;
+  left: 20px;
 }
 
 .carousel-control-next {
-  right: 10px;
+  right: 20px;
 }
 
-/* Scroll indicator - Hide on mobile */
+/* Scroll indicator */
 .scroll-indicator {
   position: absolute;
-  bottom: 50px;
+  bottom: 80px;
   left: 50%;
   transform: translateX(-50%);
   color: white;
   opacity: 0.7;
   animation: bounce 2s infinite;
   z-index: 10;
-  font-size: 0.8rem;
+  font-size: 0.9rem;
   text-transform: uppercase;
   letter-spacing: 1px;
-  display: none; /* Hide on mobile by default */
 }
 
 .scroll-indicator::after {
   content: '';
   display: block;
   width: 2px;
-  height: 30px;
+  height: 40px;
   background: white;
   margin: 8px auto 0;
   border-radius: 1px;
@@ -379,216 +395,48 @@
   animation: fadeIn 1s ease-out calc(0.8s + (var(--i, 0) * 0.1s)) both;
 }
 
-/* ========== TABLET AND DESKTOP STYLES ========== */
-@media (min-width: 768px) {
-  .hero-section-container {
-    height: 100vh;
-    min-height: 700px;
-  }
-  
-  .carousel-slide {
-    height: 100vh;
-    min-height: 700px;
-  }
-  
-  .carousel-content {
-    padding: 2rem;
-  }
-  
-  .logo-img {
-    height: 80px;
-    margin-bottom: 2rem;
-  }
-  
+/* ========== CRITICAL FIXES FOR BLACK BARS ========== */
+
+/* Add overlay to ensure no black bars show */
+.carousel-slide::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.6));
+  z-index: 1;
+}
+
+/* Make sure the gradient overlay covers any potential gaps */
+.carousel-slide::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #000;
+  z-index: -1; /* Behind everything but in front of any black bars */
+}
+
+/* Force the carousel item to fill completely */
+.carousel-item.active {
+  background-color: #000 !important;
+}
+
+/* ========== RESPONSIVE FIXES ========== */
+
+@media (max-width: 1024px) {
   .hero-title {
-    font-size: 3.5rem;
-    margin-bottom: 1rem;
+    font-size: 2.5rem;
   }
   
   .hero-subtitle {
-    font-size: 1.3rem;
-    margin-bottom: 2rem;
-  }
-  
-  .button-group {
-    flex-direction: row;
-    gap: 1.5rem;
-    margin-top: 2rem;
-  }
-  
-  .btn-modern {
-    width: auto;
-    padding: 1rem 2.5rem;
     font-size: 1.1rem;
   }
   
-  /* For desktop: Show 4 countries per row */
-  .features-container {
-    grid-template-columns: repeat(4, 1fr);
-    gap: 1.5rem;
-    margin-top: 2.5rem;
-    margin-bottom: 2rem;
-  }
-  
-  .feature-icon {
-    padding: 1.5rem;
-    border-radius: 16px;
-  }
-  
-  .feature-icon i {
-    font-size: 2.25rem;
-  }
-  
-  .feature-text {
-    font-size: 0.9rem;
-  }
-  
-  .feature-text .fw-bold {
-    font-size: 1rem;
-  }
-  
-  .feature-text .small {
-    font-size: 0.8rem;
-  }
-  
-  .carousel-indicators.custom-indicators {
-    bottom: 40px;
-  }
-  
-  .carousel-indicators.custom-indicators button {
-    width: 40px;
-    height: 4px;
-  }
-  
-  .carousel-indicators.custom-indicators .active {
-    width: 60px;
-  }
-  
-  .carousel-control-prev,
-  .carousel-control-next {
-    display: flex;
-    width: 50px;
-    height: 50px;
-  }
-  
-  .carousel-control-prev {
-    left: 20px;
-  }
-  
-  .carousel-control-next {
-    right: 20px;
-  }
-  
-  .scroll-indicator {
-    display: block;
-    bottom: 80px;
-    font-size: 0.9rem;
-  }
-  
-  .scroll-indicator::after {
-    height: 40px;
-  }
-}
-
-/* ========== LARGE DESKTOP ========== */
-@media (min-width: 1200px) {
-  .hero-title {
-    font-size: 4rem;
-  }
-  
-  .hero-subtitle {
-    font-size: 1.5rem;
-  }
-  
-  .features-container {
-    gap: 2rem;
-  }
-  
-  .feature-icon {
-    padding: 2rem;
-  }
-  
-  .feature-icon i {
-    font-size: 2.5rem;
-  }
-}
-
-/* ========== CRITICAL FIXES ========== */
-/* Remove Bootstrap defaults */
-.carousel,
-.carousel-inner,
-.carousel-item {
-  margin: 0 !important;
-  padding: 0 !important;
-}
-
-/* Ensure proper mobile height */
-@media (max-width: 767px) {
-  .hero-section-container {
-    height: auto;
-    min-height: 100vh;
-    max-height: none;
-  }
-  
-  .carousel-slide {
-    height: auto;
-    min-height: 100vh;
-    padding: 1rem 0;
-  }
-  
-  .carousel-content {
-    padding: 1rem 0.5rem;
-  }
-  
-  /* Remove the stats container styles since you don't use them */
-  .stats-container,
-  .stat-card {
-    display: none;
-  }
-}
-
-/* Extra small devices */
-@media (max-width: 480px) {
-  .hero-title {
-    font-size: 2rem;
-  }
-  
-  .hero-subtitle {
-    font-size: 1rem;
-  }
-  
-  .features-container {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 0.5rem;
-  }
-  
-  .feature-icon {
-    padding: 0.75rem;
-  }
-  
-  .feature-icon i {
-    font-size: 1.5rem;
-  }
-  
-  .feature-text {
-    font-size: 0.8rem;
-  }
-  
-  .feature-text .fw-bold {
-    font-size: 0.9rem;
-  }
-  
-  .feature-text .small {
-    font-size: 0.7rem;
-  }
-  
-  .carousel-indicators.custom-indicators {
-    bottom: 15px;
-  }
-}
-
-/* Medium devices (tablets) */
-@media (min-width: 481px) and (max-width: 767px) {
   .features-container {
     grid-template-columns: repeat(2, 1fr);
     gap: 1rem;
@@ -599,36 +447,184 @@
   }
 }
 
-/* FIX for multiple features-container in one slide */
-.carousel-content .features-container + .features-container {
-  margin-top: 0.5rem;
-}
-
-/* Mobile-specific adjustments */
-.mobile-indicators {
-  display: none;
-}
-
 @media (max-width: 768px) {
-  .mobile-indicators {
-    display: block;
-    position: absolute;
+  .hero-section-container {
+    min-height: 600px;
+    height: 100vh;
+  }
+  
+  .carousel-slide {
+    min-height: 600px !important;
+    height: 100vh !important;
+    background-attachment: scroll !important; /* Remove fixed on mobile */
+  }
+  
+  .slide-1,
+  .slide-2,
+  .slide-3 {
+    background-attachment: scroll !important;
+  }
+  
+  .carousel-content {
+    padding: 1rem;
+  }
+  
+  .logo-img {
+    height: 60px;
+    margin-bottom: 1rem;
+  }
+  
+  .hero-title {
+    font-size: 2rem;
+  }
+  
+  .hero-subtitle {
+    font-size: 1rem;
+  }
+  
+  .button-group {
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 1.5rem;
+  }
+  
+  .btn-modern {
+    padding: 0.875rem 1.5rem;
+    font-size: 1rem;
+    min-width: 250px;
+  }
+  
+  .carousel-control-prev,
+  .carousel-control-next {
+    display: none;
+  }
+  
+  .scroll-indicator {
+    display: none;
+  }
+  
+  .carousel-indicators.custom-indicators {
     bottom: 20px;
-    left: 0;
-    right: 0;
-    z-index: 10;
+  }
+  
+  .carousel-indicators.custom-indicators button {
+    width: 25px;
+    height: 3px;
+  }
+  
+  .carousel-indicators.custom-indicators .active {
+    width: 35px;
   }
 }
 
-/* Fix for countries layout on very small screens */
-@media (max-width: 360px) {
+@media (max-width: 480px) {
+  .hero-section-container {
+    min-height: 500px;
+  }
+  
+  .carousel-slide {
+    min-height: 500px !important;
+  }
+  
+  .hero-title {
+    font-size: 1.75rem;
+  }
+  
+  .hero-subtitle {
+    font-size: 0.95rem;
+  }
+  
   .features-container {
     grid-template-columns: 1fr;
-    gap: 0.5rem;
+    gap: 0.75rem;
   }
   
   .feature-icon {
     padding: 0.75rem;
   }
+  
+  .feature-icon i {
+    font-size: 1.75rem;
+  }
 }
 
+/* Landscape mode fixes */
+@media (max-height: 500px) and (orientation: landscape) {
+  .hero-section-container {
+    min-height: 100vh;
+    height: 100vh;
+  }
+  
+  .carousel-slide {
+    min-height: 100vh !important;
+  }
+  
+  .logo-img {
+    height: 40px;
+    margin-bottom: 0.5rem;
+  }
+  
+  .hero-title {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .hero-subtitle {
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+  }
+  
+  .features-container {
+    display: none; /* Hide countries in landscape */
+  }
+  
+  .button-group {
+    margin-top: 1rem;
+    margin-bottom: 1.5rem;
+  }
+}
+
+/* Touch device optimizations */
+@media (hover: none) and (pointer: coarse) {
+  .btn-modern:hover,
+  .feature-icon:hover {
+    transform: none;
+  }
+  
+  .btn-modern:active,
+  .feature-icon:active {
+    transform: scale(0.98);
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .logo-img,
+  .feature-icon,
+  .scroll-indicator {
+    animation: none;
+  }
+  
+  .animate-fade-in,
+  .animate-slide-up,
+  .animate-bounce-in,
+  .features-container > * {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+  
+  .btn-modern:hover,
+  .feature-icon:hover {
+    transition: none;
+  }
+}
+
+/* Nuclear option - if black bars still appear */
+.hero-section-container .carousel-inner {
+  background-color: #000 !important;
+}
+
+.carousel-item {
+  background-color: #000 !important;
+}

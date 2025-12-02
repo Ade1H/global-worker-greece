@@ -1,21 +1,32 @@
-/* Rekommendationer.css */
+/* Rekommendationer.css - FIXED COLOR CONTRAST VERSION */
 
-/* Same variables as Tjanster.css */
+/* Updated variables with better contrast colors */
 :root {
-  --primary-blue: #3b82f6;
-  --primary-green: #10b981;
-  --primary-purple: #8b5cf6;
-  --primary-yellow: #f59e0b;
-  --primary-red: #ef4444;
-  --primary-pink: #ec4899;
-  --primary-cyan: #06b6d4;
+  --primary-blue: #2563eb;
+  --primary-blue-dark: #1d4ed8;
+  --primary-green: #059669;
+  --primary-green-dark: #047857;
+  --primary-purple: #7c3aed;
+  --primary-purple-dark: #6d28d9;
+  --primary-yellow: #d97706;
+  --primary-yellow-dark: #b45309;
+  --primary-red: #dc2626;
+  --primary-red-dark: #b91c1c;
+  --primary-pink: #db2777;
+  --primary-pink-dark: #be185d;
+  --primary-cyan: #0891b2;
+  --primary-cyan-dark: #0e7490;
   --primary-brown: #7c2d12;
-  --primary-lime: #84cc16;
+  --primary-brown-dark: #5c2209;
+  --primary-lime: #65a30d;
+  --primary-lime-dark: #4d7c0f;
   
   --gray-50: #f8fafc;
   --gray-100: #f1f5f9;
   --gray-200: #e2e8f0;
   --gray-300: #cbd5e1;
+  --gray-400: #94a3b8;
+  --gray-500: #64748b;
   --gray-600: #475569;
   --gray-700: #334155;
   --gray-800: #1e293b;
@@ -50,15 +61,15 @@
   margin: 0 auto;
 }
 
-/* Hero Section */
+/* Hero Section - Improved contrast */
 .rekommendationer-hero {
-  background: linear-gradient(135deg, var(--gray-800) 0%, var(--gray-700) 100%);
+  background: linear-gradient(135deg, #0c4a6e 0%, #075985 100%); /* Darker blue for better contrast */
   color: white;
   padding: 4rem 2rem;
   border-radius: var(--radius-xl);
   text-align: center;
   margin-bottom: 3rem;
-  border: 1px solid var(--gray-600);
+  border: 1px solid #0369a1;
   opacity: 0;
   transform: translateY(20px);
   transition: all 0.6s ease-out;
@@ -78,10 +89,11 @@
   line-height: 1.2;
   position: relative;
   z-index: 1;
+  color: white; /* Explicit white for contrast */
 }
 
 .gradient-text {
-  background: linear-gradient(to right, #005293, #0077c8);
+  background: linear-gradient(to right, #60a5fa, #3b82f6);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -89,7 +101,7 @@
 
 .hero-subtitle {
   font-size: 1.25rem;
-  opacity: 0.9;
+  color: rgba(255, 255, 255, 0.95); /* White with high opacity */
   max-width: 700px;
   margin: 0 auto;
   line-height: 1.6;
@@ -97,7 +109,7 @@
   z-index: 1;
 }
 
-/* Section Titles */
+/* Section Titles - Improved contrast */
 .section-title {
   font-size: 2rem;
   font-weight: 800;
@@ -112,7 +124,7 @@
 
 .section-subtitle {
   font-size: 1.125rem;
-  color: var(--gray-600);
+  color: var(--gray-700); /* Darker gray for better contrast */
   max-width: 600px;
   margin: 0 auto 2rem;
   line-height: 1.6;
@@ -124,7 +136,7 @@
 }
 
 .section-counter {
-  background: var(--primary-blue);
+  background: var(--primary-blue-dark);
   color: white;
   padding: 0.5rem 1rem;
   border-radius: 20px;
@@ -133,7 +145,7 @@
   margin-left: 1rem;
 }
 
-/* Stats Section */
+/* Stats Section - Improved contrast */
 .stats-section {
   margin-bottom: 4rem;
 }
@@ -199,19 +211,19 @@
 
 .stat-sublabel {
   font-size: 1rem;
-  color: var(--gray-600);
+  color: var(--gray-700); /* Darker gray */
   font-weight: 600;
 }
 
 .stat-label {
   font-size: 0.875rem;
-  color: var(--gray-600);
+  color: var(--gray-700); /* Darker gray */
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.5px;
 }
 
-/* Filter Section */
+/* Filter Section - Improved contrast */
 .filter-section {
   margin-bottom: 3rem;
 }
@@ -226,8 +238,8 @@
 
 .filter-tab {
   background: white;
-  color: var(--gray-800);
-  border: 2px solid var(--gray-200);
+  color: var(--gray-900); /* Darker text */
+  border: 2px solid var(--gray-300);
   padding: 0.75rem 1.5rem;
   border-radius: 50px;
   cursor: pointer;
@@ -242,15 +254,15 @@
 }
 
 .filter-tab:hover {
-  background: var(--gray-50);
+  background: var(--gray-100);
   border-color: var(--gray-800);
   transform: translateY(-2px);
 }
 
 .filter-tab.active {
-  background: var(--gray-800);
+  background: var(--gray-900); /* Dark background */
   color: white;
-  border-color: var(--gray-800);
+  border-color: var(--gray-900);
 }
 
 .filter-emoji {
@@ -258,7 +270,7 @@
 }
 
 .filter-count {
-  background: rgba(255, 255, 255, 0.2);
+  background: rgba(0, 0, 0, 0.1);
   color: currentColor;
   padding: 0.125rem 0.5rem;
   border-radius: 12px;
@@ -293,7 +305,7 @@
   }
 }
 
-/* Testimonial Card */
+/* Testimonial Card - Improved contrast */
 .testimonial-card {
   background: white;
   border-radius: var(--radius-xl);
@@ -344,7 +356,7 @@
   font-size: 1rem;
 }
 
-/* Rating Section */
+/* Rating Section - Improved contrast */
 .rating-section {
   display: flex;
   align-items: center;
@@ -362,6 +374,7 @@
 .star {
   font-size: 1.25rem;
   transition: all var(--transition-fast);
+  color: #fbbf24; /* Yellow color for stars */
 }
 
 .star.filled {
@@ -369,15 +382,16 @@
 }
 
 .rating-text {
-  color: var(--gray-600);
+  color: var(--gray-700); /* Darker gray */
   font-size: 0.875rem;
   font-weight: 600;
   background: var(--gray-100);
   padding: 0.25rem 0.75rem;
   border-radius: 12px;
+  border: 1px solid var(--gray-200);
 }
 
-/* Testimonial Quote */
+/* Testimonial Quote - Improved contrast */
 .testimonial-quote {
   color: var(--gray-900);
   line-height: 1.6;
@@ -398,7 +412,7 @@
   z-index: -1;
 }
 
-/* Testimonial Meta */
+/* Testimonial Meta - Improved contrast */
 .testimonial-meta {
   display: flex;
   align-items: center;
@@ -407,6 +421,7 @@
   padding: 1rem;
   background: var(--gray-50);
   border-radius: var(--radius-md);
+  border: 1px solid var(--gray-200);
 }
 
 .meta-item {
@@ -417,20 +432,21 @@
 
 .meta-icon {
   font-size: 1rem;
+  color: var(--gray-600);
 }
 
 .meta-text {
   font-size: 0.875rem;
-  color: var(--gray-700);
+  color: var(--gray-700); /* Darker gray */
   font-weight: 500;
 }
 
-/* Author Section */
+/* Author Section - Improved contrast */
 .author-section {
   display: flex;
   align-items: center;
   padding-top: 1.5rem;
-  border-top: 2px solid var(--gray-100);
+  border-top: 2px solid var(--gray-200);
   margin-bottom: 1rem;
 }
 
@@ -462,14 +478,14 @@
 
 .author-position {
   font-size: 0.95rem;
-  color: var(--primary-blue);
+  color: var(--primary-blue-dark); /* Darker blue */
   margin-bottom: 0.25rem;
   font-weight: 600;
 }
 
 .author-company {
   font-size: 0.875rem;
-  color: var(--gray-600);
+  color: var(--gray-700); /* Darker gray */
   display: flex;
   align-items: center;
   gap: 0.25rem;
@@ -477,6 +493,7 @@
 
 .company-icon {
   font-size: 1rem;
+  color: var(--gray-600);
 }
 
 /* Category Tag */
@@ -492,13 +509,14 @@
   align-items: center;
   gap: 0.5rem;
   backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .category-icon {
   font-size: 1rem;
 }
 
-/* Trust Section */
+/* Trust Section - Improved contrast */
 .trust-section {
   margin-bottom: 4rem;
 }
@@ -525,7 +543,7 @@
   transform: translateY(20px);
   animation: fadeInUp 0.6s ease forwards;
   height: 100%;
-  border: 1px solid var(--gray-100);
+  border: 1px solid var(--gray-200);
   text-align: center;
 }
 
@@ -543,6 +561,7 @@
   justify-content: center;
   font-size: 2rem;
   margin: 0 auto 1.5rem;
+  background: var(--gray-100);
 }
 
 .trust-title {
@@ -553,18 +572,18 @@
 }
 
 .trust-description {
-  color: var(--gray-600);
+  color: var(--gray-700); /* Darker gray */
   line-height: 1.6;
   font-size: 0.95rem;
 }
 
-/* CTA Section */
+/* ========== CTA SECTION - MAJOR CONTRAST FIX ========== */
 .rekommendationer-cta {
-  background: linear-gradient(135deg, var(--gray-800) 0%, var(--gray-700) 100%);
+  background: linear-gradient(135deg, #0c4a6e 0%, #075985 100%); /* Dark blue background */
   border-radius: var(--radius-xl);
   padding: 3rem 2rem;
   text-align: center;
-  border: 1px solid var(--gray-600);
+  border: 1px solid #0369a1;
   opacity: 0;
   transform: translateY(20px);
   transition: all 0.6s ease-out 0.8s;
@@ -591,7 +610,7 @@
   margin: 0 auto 1.5rem;
   color: white;
   font-size: 1.5rem;
-  border: 2px solid rgba(255, 255, 255, 0.2);
+  border: 2px solid rgba(255, 255, 255, 0.3);
 }
 
 .cta-title {
@@ -600,10 +619,11 @@
   margin-bottom: 1rem;
   position: relative;
   z-index: 1;
+  color: white;
 }
 
 .cta-description {
-  color: rgba(255, 255, 255, 0.9);
+  color: rgba(255, 255, 255, 0.95); /* White with high opacity */
   margin-bottom: 2rem;
   font-size: 1.1rem;
   max-width: 600px;
@@ -648,18 +668,21 @@
 
 .cta-button.primary {
   background: white;
-  color: var(--gray-800);
+  color: #0c4a6e;
+  border: 2px solid white;
 }
 
 .cta-button.primary:hover {
+  background: #f0f9ff;
+  color: #0c4a6e;
   transform: translateY(-2px);
-  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 15px 40px rgba(255, 255, 255, 0.3);
 }
 
 .cta-button.secondary {
   background: rgba(255, 255, 255, 0.1);
   color: white;
-  border: 2px solid rgba(255, 255, 255, 0.3);
+  border: 2px solid rgba(255, 255, 255, 0.5);
   backdrop-filter: blur(10px);
 }
 
@@ -671,7 +694,7 @@
 
 .cta-note {
   font-size: 0.875rem;
-  color: rgba(255, 255, 255, 0.8);
+  color: rgba(255, 255, 255, 0.9);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -682,7 +705,7 @@
 }
 
 .cta-note i {
-  color: var(--primary-yellow);
+  color: #fbbf24;
 }
 
 /* Animations */
@@ -697,7 +720,7 @@
   }
 }
 
-/* Responsive Design */
+/* ========== RESPONSIVE DESIGN ========== */
 @media (max-width: 768px) {
   .rekommendationer-container {
     padding: 1.5rem 1rem;
@@ -750,7 +773,7 @@
   }
 }
 
-/* Accessibility */
+/* ========== ACCESSIBILITY ========== */
 @media (prefers-reduced-motion: reduce) {
   * {
     animation-duration: 0.01ms !important;
@@ -768,10 +791,219 @@
   }
 }
 
-/* Focus states */
+/* ========== FOCUS STATES ========== */
 .filter-tab:focus,
 .cta-button:focus,
 .testimonial-card:focus-within {
-  outline: 2px solid var(--primary-blue);
-  outline-offset: 2px;
+  outline: 3px solid var(--primary-blue);
+  outline-offset: 3px;
+}
+
+/* ========== DARK MODE SUPPORT ========== */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --gray-50: #0f172a;
+    --gray-100: #1e293b;
+    --gray-200: #334155;
+    --gray-300: #475569;
+    --gray-400: #64748b;
+    --gray-500: #94a3b8;
+    --gray-600: #cbd5e1;
+    --gray-700: #e2e8f0;
+    --gray-800: #f1f5f9;
+    --gray-900: #f8fafc;
+  }
+  
+  .rekommendationer-container {
+    background: linear-gradient(to bottom, #0f172a, #1e293b);
+  }
+  
+  .rekommendationer-hero {
+    background: linear-gradient(135deg, #1e3a8a, #1e40af);
+    border-color: #3b82f6;
+  }
+  
+  .stat-card,
+  .testimonial-card,
+  .trust-card,
+  .filter-tab {
+    background: var(--gray-100);
+    border-color: var(--gray-200);
+  }
+  
+  .section-title,
+  .section-subtitle,
+  .stat-number,
+  .stat-label,
+  .stat-sublabel,
+  .testimonial-quote,
+  .author-name,
+  .author-company,
+  .trust-title,
+  .trust-description {
+    color: var(--gray-800);
+  }
+  
+  .author-position {
+    color: #60a5fa;
+  }
+  
+  .filter-tab {
+    color: var(--gray-800);
+    border-color: var(--gray-300);
+  }
+  
+  .filter-tab.active {
+    background: var(--gray-800);
+    color: var(--gray-50);
+    border-color: var(--gray-800);
+  }
+  
+  .testimonial-meta {
+    background: var(--gray-200);
+    border-color: var(--gray-300);
+  }
+  
+  /* Dark mode CTA */
+  .rekommendationer-cta {
+    background: linear-gradient(135deg, #1e3a8a, #1e40af);
+    border-color: #3b82f6;
+  }
+  
+  .cta-icon {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.1);
+  }
+  
+  .cta-button.primary {
+    background: #60a5fa;
+    color: #0f172a;
+    border-color: #60a5fa;
+  }
+  
+  .cta-button.primary:hover {
+    background: #93c5fd;
+    color: #0f172a;
+  }
+  
+  .cta-button.secondary {
+    background: rgba(96, 165, 250, 0.1);
+    color: #93c5fd;
+    border-color: #60a5fa;
+  }
+  
+  .cta-button.secondary:hover {
+    background: rgba(96, 165, 250, 0.2);
+    color: #93c5fd;
+    border-color: #93c5fd;
+  }
+}
+
+/* ========== HIGH CONTRAST MODE ========== */
+@media (prefers-contrast: high) {
+  .gradient-text {
+    background: none;
+    -webkit-text-fill-color: #005293;
+    color: #005293;
+  }
+  
+  .filter-tab,
+  .cta-button,
+  .testimonial-card {
+    border: 2px solid currentColor;
+  }
+  
+  .rekommendationer-hero,
+  .rekommendationer-cta {
+    background: #00008b !important;
+    border: 2px solid yellow !important;
+  }
+  
+  .cta-button.primary {
+    background: white !important;
+    color: black !important;
+    border: 2px solid black !important;
+  }
+  
+  .cta-button.secondary {
+    background: black !important;
+    color: white !important;
+    border: 2px solid white !important;
+  }
+  
+  .filter-tab.active {
+    background: black !important;
+    color: white !important;
+    border: 2px solid white !important;
+  }
+}
+
+/* ========== PRINT STYLES ========== */
+@media print {
+  .rekommendationer-container {
+    background: white;
+    padding: 0;
+  }
+  
+  .rekommendationer-hero,
+  .stat-card,
+  .testimonial-card,
+  .trust-card,
+  .rekommendationer-cta {
+    box-shadow: none;
+    border: 1px solid #ddd;
+    break-inside: avoid;
+  }
+  
+  .cta-button,
+  .filter-tab {
+    display: none;
+  }
+  
+  .rekommendationer-cta {
+    background: #f8fafc !important;
+    color: #000 !important;
+    border-color: #ddd !important;
+  }
+  
+  .cta-title,
+  .cta-description {
+    color: #000 !important;
+  }
+}
+
+/* ========== ADDITIONAL CONTRAST FIXES ========== */
+/* Ensure all text has sufficient contrast */
+.section-subtitle,
+.stat-label,
+.stat-sublabel,
+.author-company,
+.trust-description,
+.testimonial-quote,
+.meta-text,
+.rating-text {
+  color: var(--gray-700) !important;
+}
+
+/* In dark mode */
+@media (prefers-color-scheme: dark) {
+  .section-subtitle,
+  .stat-label,
+  .stat-sublabel,
+  .author-company,
+  .trust-description,
+  .testimonial-quote,
+  .meta-text,
+  .rating-text {
+    color: var(--gray-500) !important;
+  }
+}
+
+/* Ensure stars are visible */
+.star {
+  color: #f59e0b !important;
+}
+
+.star.filled {
+  color: #fbbf24 !important;
 }

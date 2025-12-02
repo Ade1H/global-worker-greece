@@ -1,19 +1,27 @@
-/* Tjanster.css */
+/* Tjanster.css - FIXED COLOR CONTRAST VERSION */
 
-/* Variables */
+/* Variables with improved contrast colors */
 :root {
   --primary-blue: #2563eb;
+  --primary-blue-dark: #1d4ed8;
   --primary-green: #10b981;
+  --primary-green-dark: #059669;
   --primary-purple: #8b5cf6;
+  --primary-purple-dark: #7c3aed;
   --primary-yellow: #f59e0b;
+  --primary-yellow-dark: #d97706;
   --primary-red: #ef4444;
+  --primary-red-dark: #dc2626;
   --primary-pink: #ec4899;
   --primary-cyan: #06b6d4;
+  --primary-cyan-dark: #0891b2;
   
   --gray-50: #f8fafc;
   --gray-100: #f1f5f9;
   --gray-200: #e2e8f0;
   --gray-300: #cbd5e1;
+  --gray-400: #94a3b8;
+  --gray-500: #64748b;
   --gray-600: #475569;
   --gray-700: #334155;
   --gray-800: #1e293b;
@@ -48,7 +56,7 @@
   margin: 0 auto;
 }
 
-/* Section Headers */
+/* ========== SECTION HEADERS - IMPROVED CONTRAST ========== */
 .section-header {
   text-align: center;
   margin-bottom: 3rem;
@@ -78,7 +86,7 @@
 
 .section-subtitle {
   font-size: 1.25rem;
-  color: var(--gray-600);
+  color: var(--gray-700); /* Changed from gray-600 for better contrast */
   max-width: 600px;
   margin: 0 auto;
   line-height: 1.6;
@@ -92,7 +100,7 @@
   transform: translateY(0);
 }
 
-/* Job Grid */
+/* ========== JOB GRID ========== */
 .job-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -112,7 +120,7 @@
   }
 }
 
-/* Job Card */
+/* ========== JOB CARD - IMPROVED CONTRAST ========== */
 .job-card {
   background: white;
   border-radius: var(--radius-xl);
@@ -171,15 +179,16 @@
   align-items: center;
   gap: 0.5rem;
   font-size: 0.875rem;
-  color: var(--gray-600);
+  color: var(--gray-700); /* Improved contrast */
 }
 
 .job-location i {
   font-size: 0.875rem;
+  color: var(--gray-600);
 }
 
 .job-description {
-  color: var(--gray-600);
+  color: var(--gray-700); /* Improved contrast */
   line-height: 1.6;
   margin-bottom: 1.5rem;
   font-size: 0.95rem;
@@ -190,7 +199,7 @@
   text-overflow: ellipsis;
 }
 
-/* Employment Types */
+/* ========== EMPLOYMENT TYPES - IMPROVED CONTRAST ========== */
 .employment-types {
   display: flex;
   flex-wrap: wrap;
@@ -204,9 +213,41 @@
   font-size: 0.8rem;
   font-weight: 600;
   transition: all var(--transition-fast);
+  border: 1px solid rgba(0, 0, 0, 0.1);
 }
 
-/* Apply Button */
+/* Specific type colors with better contrast */
+.employment-type.full-time {
+  background-color: rgba(37, 99, 235, 0.1);
+  color: var(--primary-blue-dark);
+}
+
+.employment-type.part-time {
+  background-color: rgba(16, 185, 129, 0.1);
+  color: var(--primary-green-dark);
+}
+
+.employment-type.contract {
+  background-color: rgba(139, 92, 246, 0.1);
+  color: var(--primary-purple-dark);
+}
+
+.employment-type.temporary {
+  background-color: rgba(245, 158, 11, 0.1);
+  color: var(--primary-yellow-dark);
+}
+
+.employment-type.internship {
+  background-color: rgba(236, 72, 153, 0.1);
+  color: var(--primary-pink);
+}
+
+.employment-type.freelance {
+  background-color: rgba(6, 182, 212, 0.1);
+  color: var(--primary-cyan-dark);
+}
+
+/* ========== APPLY BUTTON - IMPROVED CONTRAST ========== */
 .apply-button {
   background-color: var(--primary-blue);
   color: white;
@@ -225,8 +266,9 @@
 }
 
 .apply-button:hover {
+  background-color: var(--primary-blue-dark);
   transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 8px 20px rgba(37, 99, 235, 0.3);
 }
 
 /* Hover Arrow */
@@ -236,19 +278,21 @@
   right: 1rem;
   animation: slideInRight 0.3s ease forwards;
   font-size: 1.25rem;
+  color: var(--gray-600);
 }
 
-/* Spontaneous CTA */
+/* ========== SPONTANEOUS CTA - MAJOR CONTRAST FIX ========== */
 .spontaneous-cta {
-  background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+  background: linear-gradient(135deg, #0c4a6e 0%, #075985 100%); /* Dark blue background */
   border-radius: var(--radius-xl);
   padding: 2.5rem;
   text-align: center;
-  border: 1px solid #bae6fd;
+  border: 1px solid #0369a1;
   opacity: 0;
   transform: translateY(20px);
   transition: all 0.6s ease-out 0.8s;
   margin-bottom: 2rem;
+  color: white; /* White text for contrast */
 }
 
 .spontaneous-cta.visible {
@@ -260,24 +304,24 @@
   width: 4rem;
   height: 4rem;
   border-radius: 50%;
-  background: linear-gradient(135deg, #fbbf24, #f59e0b);
+  background: linear-gradient(135deg, #ffffff, #dbeafe); /* Light background for icon */
   display: flex;
   align-items: center;
   justify-content: center;
   margin: 0 auto 1.5rem;
-  color: white;
+  color: #0c4a6e; /* Dark blue icon color */
   font-size: 1.5rem;
 }
 
 .cta-title {
   font-size: 1.75rem;
   font-weight: 700;
-  color: var(--gray-900);
+  color: white; /* White for contrast */
   margin-bottom: 1rem;
 }
 
 .cta-description {
-  color: var(--gray-600);
+  color: rgba(255, 255, 255, 0.95); /* Light white with high opacity */
   margin-bottom: 2rem;
   font-size: 1.1rem;
   max-width: 600px;
@@ -286,8 +330,8 @@
 }
 
 .cta-button {
-  background: linear-gradient(135deg, #fbbf24, #f59e0b);
-  color: #1e3a8a;
+  background: white; /* White button on dark blue */
+  color: #0c4a6e; /* Dark blue text */
   border: none;
   padding: 1rem 2.5rem;
   border-radius: var(--radius-md);
@@ -298,16 +342,19 @@
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
+  border: 2px solid white;
 }
 
 .cta-button:hover {
+  background: #f0f9ff; /* Light blue on hover */
+  color: #0c4a6e;
   transform: translateY(-2px);
-  box-shadow: 0 12px 30px rgba(251, 191, 36, 0.4);
+  box-shadow: 0 12px 30px rgba(255, 255, 255, 0.3);
 }
 
 .cta-note {
   font-size: 0.875rem;
-  color: var(--gray-600);
+  color: rgba(255, 255, 255, 0.8); /* Light white */
   margin-top: 1.5rem;
   display: flex;
   align-items: center;
@@ -316,10 +363,10 @@
 }
 
 .cta-note i {
-  color: #f59e0b;
+  color: #fbbf24; /* Yellow icon for visibility */
 }
 
-/* Stats Bar */
+/* ========== STATS BAR - IMPROVED CONTRAST ========== */
 .stats-bar {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -361,10 +408,10 @@
 
 .stat-label {
   font-size: 0.875rem;
-  color: var(--gray-600);
+  color: var(--gray-700); /* Improved contrast */
 }
 
-/* Animations */
+/* ========== ANIMATIONS ========== */
 @keyframes fadeInUp {
   from {
     opacity: 0;
@@ -387,7 +434,7 @@
   }
 }
 
-/* Responsive Design */
+/* ========== RESPONSIVE DESIGN ========== */
 @media (max-width: 768px) {
   .tjanster-container {
     padding: 1.5rem 1rem;
@@ -405,6 +452,10 @@
     grid-template-columns: 1fr;
   }
   
+  .spontaneous-cta {
+    padding: 2rem;
+  }
+  
   .cta-title {
     font-size: 1.5rem;
   }
@@ -419,7 +470,7 @@
   }
 }
 
-/* Accessibility */
+/* ========== ACCESSIBILITY ========== */
 @media (prefers-reduced-motion: reduce) {
   * {
     animation-duration: 0.01ms !important;
@@ -436,10 +487,203 @@
   }
 }
 
-/* Focus states */
+/* ========== FOCUS STATES ========== */
 .job-card:focus-within,
 .apply-button:focus,
 .cta-button:focus {
-  outline: 2px solid var(--primary-blue);
-  outline-offset: 2px;
+  outline: 3px solid var(--primary-blue);
+  outline-offset: 3px;
+}
+
+/* ========== DARK MODE SUPPORT ========== */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --gray-50: #0f172a;
+    --gray-100: #1e293b;
+    --gray-200: #334155;
+    --gray-300: #475569;
+    --gray-400: #64748b;
+    --gray-500: #94a3b8;
+    --gray-600: #cbd5e1;
+    --gray-700: #e2e8f0;
+    --gray-800: #f1f5f9;
+    --gray-900: #f8fafc;
+  }
+  
+  .tjanster-container {
+    background: linear-gradient(to bottom, #0f172a, #1e293b);
+  }
+  
+  .job-card,
+  .stats-bar {
+    background: var(--gray-100);
+    border-color: var(--gray-200);
+  }
+  
+  .section-title,
+  .section-subtitle,
+  .job-title,
+  .job-location,
+  .job-description,
+  .stat-number,
+  .stat-label {
+    color: var(--gray-800);
+  }
+  
+  .job-location i,
+  .hover-arrow {
+    color: var(--gray-600);
+  }
+  
+  /* Dark mode CTA */
+  .spontaneous-cta {
+    background: linear-gradient(135deg, #1e3a8a, #1e40af);
+    border-color: #3b82f6;
+  }
+  
+  .cta-icon {
+    background: linear-gradient(135deg, #93c5fd, #60a5fa);
+    color: #1e3a8a;
+  }
+  
+  .cta-button {
+    background: #60a5fa;
+    color: #0f172a;
+    border-color: #60a5fa;
+  }
+  
+  .cta-button:hover {
+    background: #93c5fd;
+    color: #0f172a;
+  }
+  
+  .cta-note {
+    color: rgba(147, 197, 253, 0.8);
+  }
+  
+  .cta-note i {
+    color: #fbbf24;
+  }
+}
+
+/* ========== HIGH CONTRAST MODE ========== */
+@media (prefers-contrast: high) {
+  .gradient-text {
+    background: none;
+    -webkit-text-fill-color: #005293;
+    color: #005293;
+  }
+  
+  .apply-button,
+  .cta-button {
+    border: 2px solid currentColor;
+  }
+  
+  .spontaneous-cta {
+    background: #00008b !important;
+    border: 2px solid yellow !important;
+  }
+  
+  .cta-button {
+    background: white !important;
+    color: black !important;
+    border: 2px solid black !important;
+  }
+  
+  .cta-note {
+    color: white !important;
+  }
+  
+  .job-card {
+    border: 2px solid var(--gray-800);
+  }
+  
+  .employment-type {
+    border: 1px solid currentColor;
+  }
+}
+
+/* ========== PRINT STYLES ========== */
+@media print {
+  .tjanster-container {
+    background: white;
+    padding: 0;
+  }
+  
+  .job-card,
+  .spontaneous-cta,
+  .stats-bar {
+    box-shadow: none;
+    border: 1px solid #ddd;
+    break-inside: avoid;
+  }
+  
+  .apply-button,
+  .cta-button {
+    display: none;
+  }
+  
+  .spontaneous-cta {
+    background: #f8fafc !important;
+    color: #000 !important;
+  }
+  
+  .cta-title,
+  .cta-description {
+    color: #000 !important;
+  }
+}
+
+/* ========== ADDITIONAL CONTRAST FIXES ========== */
+/* Ensure all text has sufficient contrast */
+.job-description,
+.job-location,
+.section-subtitle,
+.stat-label,
+.cta-description,
+.cta-note {
+  color: var(--gray-700) !important;
+}
+
+/* In dark mode */
+@media (prefers-color-scheme: dark) {
+  .job-description,
+  .job-location,
+  .section-subtitle,
+  .stat-label,
+  .cta-description,
+  .cta-note {
+    color: var(--gray-500) !important;
+  }
+}
+
+/* Employment type specific contrast fixes */
+.employment-type.full-time {
+  background-color: rgba(37, 99, 235, 0.15);
+  color: #1e40af;
+}
+
+.employment-type.part-time {
+  background-color: rgba(16, 185, 129, 0.15);
+  color: #065f46;
+}
+
+.employment-type.contract {
+  background-color: rgba(139, 92, 246, 0.15);
+  color: #5b21b6;
+}
+
+.employment-type.temporary {
+  background-color: rgba(245, 158, 11, 0.15);
+  color: #92400e;
+}
+
+.employment-type.internship {
+  background-color: rgba(236, 72, 153, 0.15);
+  color: #9d174d;
+}
+
+.employment-type.freelance {
+  background-color: rgba(6, 182, 212, 0.15);
+  color: #155e75;
 }
