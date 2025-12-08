@@ -384,15 +384,15 @@ function Sidebar() {
           </div>
           <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '10px', fontSize: '0.85rem', color: '#cbd5e1' }}>
             <span>Placerade arbetare:</span>
-            <span style={{ color: '#0ea5e9', fontWeight: 'bold' }}>156</span>
+            <span style={{ color: '#0ea5e9', fontWeight: 'bold' }}>13</span>
           </div>
-          <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '10px', fontSize: '0.85rem', color: '#cbd5e1' }}>
+          {/* <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '10px', fontSize: '0.85rem', color: '#cbd5e1' }}>
             <span>Samarbetspartners:</span>
             <span style={{ color: '#0ea5e9', fontWeight: 'bold' }}>42</span>
-          </div>
+          </div> */}
           <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.85rem', color: '#cbd5e1' }}>
             <span>Jobb just nu:</span>
-            <span style={{ color: '#0ea5e9', fontWeight: 'bold' }}>28</span>
+            <span style={{ color: '#0ea5e9', fontWeight: 'bold' }}>9</span>
           </div>
         </div>
       </div>

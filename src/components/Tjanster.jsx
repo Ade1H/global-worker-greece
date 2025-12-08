@@ -72,9 +72,9 @@ function Tjanster() {
   ];
 
   const stats = [
-    { number: '7', label: 'Lediga tjänster', icon: 'bi-briefcase' },
-    { number: '1', label: 'Stad', icon: 'bi-geo-alt' },
-    { number: '3', label: 'Anställningsformer', icon: 'bi-clock' },
+    { number: '9', label: 'Lediga tjänster', icon: 'bi-briefcase' },
+    { number: '8', label: 'Stad', icon: 'bi-geo-alt' },
+    { number: '13', label: 'Anställningsformer', icon: 'bi-clock' },
     { number: '48h', label: 'Snabb respons', icon: 'bi-lightning' }
   ];
 

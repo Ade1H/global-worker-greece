@@ -46,9 +46,9 @@ function Home() {
 
   const stats = [
     { number: '8+', label: 'Länder', icon: 'bi-globe', color: '#2563eb', bgColor: '#dbeafe' },
-    { number: '500+', label: 'Arbetare', icon: 'bi-people', color: '#059669', bgColor: '#d1fae5' },
-    { number: '150+', label: 'Placeringar', icon: 'bi-briefcase', color: '#f59e0b', bgColor: '#fef3c7' },
-    { number: '98%', label: 'Nöjda kunder', icon: 'bi-star', color: '#ef4444', bgColor: '#fee2e2' }
+    { number: '13+', label: 'Arbetare', icon: 'bi-people', color: '#059669', bgColor: '#d1fae5' },
+    { number: '8+', label: 'Placeringar', icon: 'bi-briefcase', color: '#f59e0b', bgColor: '#fef3c7' },
+    { number: '98%', label: 'Nöjda arbetare', icon: 'bi-star', color: '#ef4444', bgColor: '#fee2e2' }
   ];
 
   return (
@@ -102,13 +102,7 @@ function Home() {
       {/* Maps Section */}
       <section className="maps-section">
         <div className="container">
-          <div className="section-header">
-            <h2 className="section-title">Global täckning</h2>
-            <p className="section-subtitle">
-              Vår närvaro sträcker sig över kontinenter – från kontor till talanger
-            </p>
-          </div>
-
+       
           <div className="maps-grid">
             <div className="map-card">
               <div className="map-header company-gradient">

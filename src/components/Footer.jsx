@@ -66,7 +66,7 @@ function Footer() {
                   fontSize: '0.75rem',
                   margin: 0,
                 }}>
-                  Grekland • Sverige
+                  Grekland 
                 </p>
               </div>
             </div>
@@ -85,11 +85,11 @@ function Footer() {
               <div style={{ fontSize: '0.85rem' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '5px' }}>
                   <span style={{ color: '#cbd5e1' }}>Placerade arbetare:</span>
-                  <span style={{ color: '#0ea5e9', fontWeight: '600' }}>156</span>
+                  <span style={{ color: '#0ea5e9', fontWeight: '600' }}>13</span>
                 </div>
                 <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                   <span style={{ color: '#cbd5e1' }}>Jobb just nu:</span>
-                  <span style={{ color: '#0ea5e9', fontWeight: '600' }}>28</span>
+                  <span style={{ color: '#0ea5e9', fontWeight: '600' }}>9</span>
                 </div>
               </div>
             </div>

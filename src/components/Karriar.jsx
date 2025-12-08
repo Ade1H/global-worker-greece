@@ -48,7 +48,7 @@ function Karriar() {
   ];
 
   const successStories = [
-    {
+   /*  {
       name: "Maria Andersson",
       role: "Säljare B2C",
       story: "Började som mötesbokare och är nu teamledare för säljavdelningen efter 2 år.",
@@ -65,7 +65,7 @@ function Karriar() {
       role: "Marknadsföring",
       story: "Från kundtjänst till marknadsföringsspecialist på 18 månader.",
       time: "3 år hos oss"
-    }
+    } */
   ];
 
   const stats = [
@@ -116,13 +116,13 @@ function Karriar() {
 
         {/* Career Paths */}
         <section className="career-paths-section">
-          <div className="section-header">
+         {/*  <div className="section-header">
             <h2 className="section-title">Utforska Karriärvägar</h2>
             <p className="section-subtitle">
               Hitta din väg bland våra populära karriärspår
             </p>
           </div>
-
+ */}
           <div className="career-grid">
             {careerPaths.map((career, index) => (
               <div 
@@ -185,7 +185,7 @@ function Karriar() {
         </section>
 
         {/* Success Stories */}
-        <section className="stories-section">
+      {/*   <section className="stories-section">
           <div className="section-header">
             <h2 className="section-title">Framgångsberättelser</h2>
             <p className="section-subtitle">
@@ -228,7 +228,7 @@ function Karriar() {
             ))}
           </div>
         </section>
-
+ */}
         {/* Call to Action */}
         <div className={`karriar-cta ${isVisible ? 'visible' : ''}`}>
           <div className="cta-content">

@@ -71,7 +71,7 @@ function Team() {
     <div className="team-container">
       <div className="team-content">
         {/* Hero Section */}
-    <div className="hero-section">
+        <div className="hero-section">
           <div className="hero-content">
             <h1 className={`hero-title ${isVisible ? 'visible' : ''}`}>
               Vårt Team
@@ -85,7 +85,7 @@ function Team() {
         </div>
 
         {/* Team Stats */}
-        <div className="stats-grid">
+        {/*     <div className="stats-grid">
           {teamStats.map((stat, index) => (
             <div 
               key={index}
@@ -103,7 +103,7 @@ function Team() {
               </div>
             </div>
           ))}
-        </div>
+        </div> */}
 
         {/* Team Members */}
         <div style={{ marginBottom: '4rem' }}>

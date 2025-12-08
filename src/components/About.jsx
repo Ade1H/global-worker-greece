@@ -130,7 +130,7 @@ function Om() {
             </h3>
             <p 
               className="card-description"
-              style={{ color: '#334155' }}  /* var(--gray-700) */
+              style={{ color: '#f2f4f8ff' }}  /* var(--gray-700) */
             >
               En värld där varje individ har möjlighet att hitta meningsfullt arbete 
               och varje företag kan nå sin fulla potential genom rätt talanger.
@@ -234,7 +234,7 @@ function Om() {
           
           <p 
             className="cta-description"
-            style={{ color: '#334155' }}  /* var(--gray-700) */
+            style={{ color: '#d9e0ebff' }}  /* var(--gray-700) */
           >
             Oavsett om du är en arbetssökande eller ett företag - vi hjälper dig att nå dina mål.
           </p>
