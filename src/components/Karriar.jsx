@@ -23,43 +23,27 @@ function Karriar() {
       title: "Sälj & Marknadsföring",
       description: "Bygg en karriär inom försäljning och marknadsföring. Perfekt för dig som är kommunikativ, resultatinriktad och gillar att arbeta med människor.",
       positions: ["Säljare B2C", "Säljare B2B", "Mötesbokare", "Marknadsföringsspecialist"],
-      icon: "bi-person-badge",
-      color: "#3b82f6"
+      icon: "bi-person-badge"
     },
     {
       title: "IT & Teknik",
       description: "Utveckla din karriär inom IT-branschen. Vi erbjuder möjligheter inom tekniksupport, systemadministration och mjukvaruutveckling.",
       positions: ["IT-tekniker", "IT-support", "Systemadministratör", "Nätverkstekniker"],
-      icon: "bi-laptop",
-      color: "#10b981"
+      icon: "bi-laptop"
     },
     {
       title: "Administration & Ekonomi",
       description: "Karriärmöjligheter inom administration, ekonomi och revision. Idealisk för detaljorienterade och organiserade personer.",
       positions: ["Revisor", "Administratör", "Ekonomiassistent", "Kundservice"],
-      icon: "bi-calculator",
-      color: "#8b5cf6"
+      icon: "bi-calculator"
     },
-    {
-      title: "Bygg & Anläggning",
-      description: "Arbete inom byggbranschen för dig som gillar praktiskt arbete och att se konkreta resultat av ditt arbete.",
-      positions: ["Byggarbetare", "Snickare", "Målare", "Anläggningsarbetare"],
-      icon: "bi-hammer",
-      color: "#f59e0b"
-    },
-    {
-      title: "Logistik & Lager",
-      description: "Karriär inom logistik, lager och transport. Viktiga roller som håller samhället i rörelse.",
-      positions: ["Lagerarbetare", "Logistikansvarig", "Transport", "Förrådsarbetare"],
-      icon: "bi-truck",
-      color: "#ef4444"
-    },
+  
+   
     {
       title: "Kundservice & Support",
       description: "Arbeta direkt med kunder och hjälp dem lösa sina behov. Utveckla dina kommunikationsfärdigheter.",
       positions: ["Kundtjänst", "Kundsupport", "Servicepersonal", "Supporttekniker"],
-      icon: "bi-headset",
-      color: "#ec4899"
+      icon: "bi-headset"
     }
   ];
 
@@ -68,62 +52,60 @@ function Karriar() {
       name: "Maria Andersson",
       role: "Säljare B2C",
       story: "Började som mötesbokare och är nu teamledare för säljavdelningen efter 2 år.",
-      time: "2 år hos oss",
-      color: "#3b82f6"
+      time: "2 år hos oss"
     },
     {
       name: "Erik Johansson",
       role: "IT-tekniker",
       story: "Startade som IT-praktikant och har nu en fast anställning med utvecklingsmöjligheter.",
-      time: "18 månader hos oss",
-      color: "#10b981"
+      time: "18 månader hos oss"
     },
     {
       name: "Sofia Nilsson",
       role: "Marknadsföring",
       story: "Från kundtjänst till marknadsföringsspecialist på 18 månader.",
-      time: "3 år hos oss",
-      color: "#8b5cf6"
+      time: "3 år hos oss"
     }
   ];
 
   const stats = [
-    { number: '6', label: 'Karriärvägar', icon: 'bi-diagram-3', color: '#3b82f6' },
-    { number: '20+', label: 'Olika roller', icon: 'bi-briefcase', color: '#10b981' },
-    { number: '3', label: 'Framgångsberättelser', icon: 'bi-star', color: '#8b5cf6' },
-    { number: '48h', label: 'Snabb respons', icon: 'bi-lightning', color: '#f59e0b' }
+    { number: '6', label: 'Karriärvägar', icon: 'bi-diagram-3' },
+    { number: '20+', label: 'Olika roller', icon: 'bi-briefcase' },
+    { number: '3', label: 'Framgångsberättelser', icon: 'bi-star' },
+    { number: '48h', label: 'Snabb respons', icon: 'bi-lightning' }
   ];
 
   return (
     <div className="karriar-container">
       <div className="container">
-        {/* Hero Section */}
-        <div className={`karriar-hero ${isVisible ? 'visible' : ''}`}>
-          <h1 className="hero-title gradient-text">
-            Karriärmöjligheter
-          </h1>
-          
-          <p className="hero-subtitle">
-            Upptäck spännande karriärvägar och bygg din framtid med Global Worker
-          </p>
-          
-          <button 
-            className="hero-button"
-            onClick={() => navigate('/tjanster')}
-          >
-            <i className="bi bi-search me-2"></i>
-            Se Alla Lediga Tjänster
-          </button>
+       
+          {/* Hero Section */}
+        <div className="hero-section">
+          <div className="hero-content">
+            <h1 className={`hero-title ${isVisible ? 'visible' : ''}`}>
+              Karriärmöjligheter
+            </h1>
+            <p className={`hero-subtitle ${isVisible ? 'visible' : ''}`}>
+             Upptäck spännande karriärvägar och bygg din framtid med Global Worker
+            </p>
+
+            <button 
+              className="hero-button"
+              onClick={() => navigate('/tjanster')}
+            >
+              <i className="bi bi-search me-2"></i>
+              Se Alla Lediga Tjänster
+            </button>
+            
+          </div>
         </div>
+       
 
         {/* Stats Bar */}
         <div className="stats-bar">
           {stats.map((stat, index) => (
             <div key={index} className="stat-item">
-              <div 
-                className="stat-icon-wrapper"
-                style={{ backgroundColor: `${stat.color}15`, color: stat.color }}
-              >
+              <div className="stat-icon-wrapper">
                 <i className={`bi ${stat.icon}`}></i>
               </div>
               <div className="stat-number">{stat.number}</div>
@@ -148,22 +130,15 @@ function Karriar() {
                 className={`career-card ${isVisible ? 'visible' : ''}`}
                 style={{ 
                   animationDelay: `${index * 0.1}s`,
-                  '--career-color': career.color 
                 }}
               >
                 {/* Top Color Bar */}
-                <div 
-                  className="career-card-bar"
-                  style={{ background: `linear-gradient(90deg, ${career.color}, ${career.color}dd)` }}
-                ></div>
+                <div className="career-card-bar"></div>
                 
                 <div className="career-card-content">
                   {/* Career Header */}
                   <div className="career-card-header">
-                    <div 
-                      className="career-icon"
-                      style={{ backgroundColor: `${career.color}15`, color: career.color }}
-                    >
+                    <div className="career-icon">
                       <i className={`bi ${career.icon}`}></i>
                     </div>
                     <div>
@@ -188,7 +163,6 @@ function Karriar() {
                         <span
                           key={posIndex}
                           className="position-tag"
-                          style={{ backgroundColor: `${career.color}15`, color: career.color }}
                         >
                           {position}
                         </span>
@@ -199,7 +173,6 @@ function Karriar() {
                   {/* Button */}
                   <button
                     className="career-button"
-                    style={{ backgroundColor: career.color }}
                     onClick={() => navigate('/tjanster')}
                   >
                     <i className="bi bi-search me-2"></i>
@@ -227,14 +200,14 @@ function Karriar() {
                 className={`story-card ${isVisible ? 'visible' : ''}`}
                 style={{ animationDelay: `${0.3 + index * 0.1}s` }}
               >
-                <div className="story-card-header" style={{ backgroundColor: `${story.color}15` }}>
-                  <div className="story-avatar" style={{ backgroundColor: story.color }}>
+                <div className="story-card-header">
+                  <div className="story-avatar">
                     {story.name.split(' ').map(n => n[0]).join('')}
                   </div>
                   
                   <div className="story-info">
                     <h3 className="story-name">{story.name}</h3>
-                    <div className="story-role" style={{ color: story.color }}>
+                    <div className="story-role">
                       <i className="bi bi-briefcase me-1"></i>
                       {story.role}
                     </div>
@@ -243,11 +216,10 @@ function Karriar() {
                 
                 <div className="story-card-body">
                   <p className="story-quote">
-                    <i className="bi bi-quote me-2" style={{ color: story.color }}></i>
                     "{story.story}"
                   </p>
                   
-                  <div className="story-time" style={{ color: story.color }}>
+                  <div className="story-time">
                     <i className="bi bi-clock me-2"></i>
                     {story.time}
                   </div>
@@ -259,38 +231,40 @@ function Karriar() {
 
         {/* Call to Action */}
         <div className={`karriar-cta ${isVisible ? 'visible' : ''}`}>
-          <div className="cta-icon">
-            <i className="bi bi-rocket-takeoff"></i>
-          </div>
-          
-          <h3 className="cta-title">Redo att starta din karriär?</h3>
-          
-          <p className="cta-description">
-            Oavsett om du letar efter ditt första jobb eller vill byta karriärriktning - vi hjälper dig hitta rätt väg.
-          </p>
-          
-          <div className="cta-buttons">
-            <button 
-              className="cta-button primary"
-              onClick={() => navigate('/tjanster')}
-            >
-              <i className="bi bi-search me-2"></i>
-              Se Lediga Jobb
-            </button>
+          <div className="cta-content">
+            <div className="cta-icon">
+              <i className="bi bi-rocket-takeoff"></i>
+            </div>
             
-            <button 
-              className="cta-button secondary"
-              onClick={() => navigate('/contact')}
-            >
-              <i className="bi bi-send me-2"></i>
-              Skicka Spontanansökan
-            </button>
+            <h3 className="cta-title">Redo att starta din karriär?</h3>
+            
+            <p className="cta-description">
+              Oavsett om du letar efter ditt första jobb eller vill byta karriärriktning - vi hjälper dig hitta rätt väg.
+            </p>
+            
+            <div className="cta-buttons">
+              <button 
+                className="cta-button primary"
+                onClick={() => navigate('/tjanster')}
+              >
+                <i className="bi bi-search me-2"></i>
+                Se Lediga Jobb
+              </button>
+              
+              <button 
+                className="cta-button secondary"
+                onClick={() => navigate('/contact')}
+              >
+                <i className="bi bi-send me-2"></i>
+                Skicka Spontanansökan
+              </button>
+            </div>
+            
+            <p className="cta-note">
+              <i className="bi bi-clock me-2"></i>
+              Vi återkommer inom 48 timmar
+            </p>
           </div>
-          
-          <p className="cta-note">
-            <i className="bi bi-clock me-2" style={{ color: '#f59e0b' }}></i>
-            Vi återkommer inom 48 timmar
-          </p>
         </div>
       </div>
     </div>

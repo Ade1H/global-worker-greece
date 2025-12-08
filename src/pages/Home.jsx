@@ -20,7 +20,7 @@ function Home() {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  const processSteps = [
+ /*  */ const processSteps = [
     { 
       number: '01', 
       title: 'Skapa Profil', 
@@ -59,73 +59,46 @@ function Home() {
       </div>
       
       {/* Process Steps Section - Added mobile spacing class */}
-      <section 
-        ref={sectionRef}
-        className={`process-section ${isVisible ? 'visible' : ''}`}
-        style={viewportWidth <= 768 ? { marginTop: '-1rem', paddingTop: '0.5rem' } : {}}
-      >
-        <div className="container">
-          <div className="section-header">
-            <h2 className="section-title gradient-text">
-              Kom igång på 3 enkla steg
-            </h2>
-            <p className="section-subtitle">
-              Registrera dig, skicka din ansökan och möt arbetsgivare – helt digitalt
-            </p>
-          </div>
+     <div className="form-section">
+  {/* Combined Container */}
+  <div className="combined-application-container elevated-card">
+    {/* Combined Header */}
+ 
+    {/* Combined Body */}
+    <div className="combined-body">
+      {/* Request Form Section */}
+      <div className="form-section-container">
+        
+        <RequestForm />
+      </div>
 
-          <div className="process-steps-grid">
-            {processSteps.map((step, index) => (
-              <div 
-                key={index}
-                className="process-step-card"
-                style={{
-                  animationDelay: `${0.3 + (index * 0.1)}s`
-                }}
-              >
-                <div 
-                  className="step-number"
-                  style={{ background: step.gradient }}
-                >
-                  {step.number}
-                </div>
-                <div className="step-icon-wrapper">
-                  <i className={`bi ${step.icon}`}></i>
-                </div>
-                <h3 className="step-title">{step.title}</h3>
-                <p className="step-description">{step.desc}</p>
-              </div>
-            ))}
-          </div>
+      {/* Divider */}
+      <div className="combined-divider">
+        <span className="combined-divider-text">ELLER</span>
+      </div>
 
-          <div className="form-section">
-            <div className="form-grid">
-              <div className="form-card elevated-card">
-                <div className="card-header">
-                  <h3 className="card-title">
-                    <i className="bi bi-camera-video me-2"></i>
-                    Skapa Videointroduktion
-                  </h3>
-                  <p className="card-subtitle">Visar ditt bästa jag för arbetsgivare</p>
-                </div>
-                <VideoRecorder />
-              </div>
+      {/* Video Recorder Section */}
+      <div className="video-section-container">
+        
+    
+        <VideoRecorder />
+      </div>
 
-              <div className="form-card elevated-card">
-                <div className="card-header">
-                  <h3 className="card-title">
-                    <i className="bi bi-send-check me-2"></i>
-                    Skicka Ansökan
-                  </h3>
-                  <p className="card-subtitle">Fyll i formuläret för att komma igång</p>
-                </div>
-                <RequestForm />
-              </div>
-            </div>
+      {/* Footer Note */}
+      <div className="combined-footer">
+        <div className="combined-footer-content">
+          <div className="combined-footer-icon">
+            <i className="bi bi-lightbulb"></i>
           </div>
+          <p className="combined-footer-text">
+            <strong>Tips:</strong> Både formuläret och videon hjälper oss att förstå dina behov bättre. 
+            Du kan välja att skicka båda eller enbart ett av alternativen.
+          </p>
         </div>
-      </section>
-
+      </div>
+    </div>
+  </div>
+</div>
       {/* Maps Section */}
       <section className="maps-section">
         <div className="container">
@@ -190,19 +163,35 @@ function Home() {
             </div>
           </div>
 
-          <div className="stats-container">
-            {stats.map((stat, index) => (
-              <div key={index} className="stat-item">
-                <div className="stat-icon" style={{ backgroundColor: stat.bgColor, color: stat.color }}>
-                  <i className={`bi ${stat.icon}`}></i>
-                </div>
-                <div className="stat-content">
-                  <h4 className="stat-number">{stat.number}</h4>
-                  <p className="stat-label">{stat.label}</p>
-                </div>
-              </div>
-            ))}
-          </div>
+     <div className="stats-container">
+  {stats.map((stat, index) => (
+    <div key={index} className="stat-item">
+      <div 
+        className="stat-icon" 
+        style={{ 
+          backgroundColor: stat.bgColor,
+          color: stat.color
+        }}
+      >
+        <i className={`bi ${stat.icon}`}></i>
+      </div>
+      <div className="stat-content">
+        <h4 
+          className="stat-number" 
+          style={{ color: '#0f172a' }}  
+        >
+          {stat.number}
+        </h4>
+        <p 
+          className="stat-label" 
+          style={{ color: '#1e293b' }}  
+        >
+          {stat.label}
+        </p>
+      </div>
+    </div>
+  ))}
+</div>
         </div>
       </section>
     </div>

@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://globalworker.nu/sitemap.xml
+
+# Crawl-delay: 10
+# Disallow: /admin/
+# Disallow: /private/

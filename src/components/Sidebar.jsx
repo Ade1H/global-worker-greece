@@ -334,7 +334,7 @@ function Sidebar() {
           </ul>
         </div>
 
-        <div style={navSectionStyle}>
+       {/*   <div style={navSectionStyle}>
           <div style={sectionTitleStyle}>Resurser</div>
           <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
             <li>
@@ -359,7 +359,7 @@ function Sidebar() {
               </Link>
             </li>
           </ul>
-        </div>
+        </div>*/}
 
         <div style={navSectionStyle}>
           <div style={sectionTitleStyle}>Kontakt</div>

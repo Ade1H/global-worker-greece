@@ -169,14 +169,14 @@ function Footer() {
               gap: '8px',
             }}>
               {[
-                { flag: '🇬🇷', name: 'Grekland', jobs: '35+' },
-                { flag: '🇪🇸', name: 'Spanien', jobs: '28+' },
-                { flag: '🇸🇪', name: 'Sverige', jobs: '42+' },
-                { flag: '🇹🇭', name: 'Thailand', jobs: '22+' },
-                { flag: '🇧🇷', name: 'Brasilien', jobs: '18+' },
-                { flag: '🇦🇪', name: 'Dubai', jobs: '31+' },
-                { flag: '🇸🇨', name: 'Seychellerna', jobs: '12+' },
-                { flag: '🇨🇴', name: 'Colombia', jobs: '15+' },
+                { flag: '🇬🇷', name: 'Grekland'},
+                { flag: '🇪🇸', name: 'Spanien' },
+                { flag: '🇸🇪', name: 'Sverige'},
+                { flag: '🇹🇭', name: 'Thailand'},
+                { flag: '🇧🇷', name: 'Brasilien'},
+                { flag: '🇦🇪', name: 'Dubai'},
+                { flag: '🇸🇨', name: 'Seychellerna' },
+                { flag: '🇨🇴', name: 'Colombia' },
               ].map((country) => (
                 <div 
                   key={country.name}
@@ -285,10 +285,11 @@ function Footer() {
                     Telefon
                   </div>
                   <div style={{ color: '#94a3b8', fontSize: '0.8rem' }}>
-                    +30 210 123 4567
+                    +30 697 263 6053
                   </div>
                 </div>
               </div>
+              
               
               <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
                 <div style={{

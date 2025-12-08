@@ -1,6 +1,10 @@
-﻿import React, { useState, useRef } from 'react';
+﻿import React, { useState, useRef, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import './VideoRecorder.css'; // Vi skapar en separat CSS-fil
 
 function VideoRecorder() {
+  const navigate = useNavigate();
+  const [isVisible, setIsVisible] = useState(false);
   const [recording, setRecording] = useState(false);
   const [recordedVideo, setRecordedVideo] = useState(null);
   const [uploading, setUploading] = useState(false);
@@ -9,12 +13,25 @@ function VideoRecorder() {
   const [streamError, setStreamError] = useState(null);
   const [videoDevices, setVideoDevices] = useState([]);
   const [selectedDevice, setSelectedDevice] = useState('');
+  const [hovered, setHovered] = useState(false);
   
   const videoRef = useRef(null);
   const mediaRecorderRef = useRef(null);
   const streamRef = useRef(null);
   const recordedChunksRef = useRef([]);
   const timerRef = useRef(null);
+
+  useEffect(() => {
+    setIsVisible(true);
+    getVideoDevices();
+    
+    return () => {
+      if (streamRef.current) {
+        streamRef.current.getTracks().forEach(track => track.stop());
+      }
+      clearInterval(timerRef.current);
+    };
+  }, []);
 
   const getVideoDevices = async () => {
     try {
@@ -162,243 +179,79 @@ function VideoRecorder() {
     return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
   };
 
-  React.useEffect(() => {
-    getVideoDevices();
-    
-    return () => {
-      if (streamRef.current) {
-        streamRef.current.getTracks().forEach(track => track.stop());
-      }
-      clearInterval(timerRef.current);
-    };
-  }, []);
-
   return (
-    <div style={{
-      background: 'white',
-      borderRadius: '8px',
-      border: '1px solid #e5e7eb',
-      boxShadow: '0 1px 3px rgba(0, 0, 0, 0.1)',
-      overflow: 'hidden',
-      height: '100%'
-    }}>
-      <div style={{ 
-        padding: '1.5rem',
-        borderLeft: '4px solid #ef4444'
-      }}>
-        {uploaded ? (
-          <div style={{
-            textAlign: 'center',
-            padding: '1rem'
-          }}>
-            <div style={{
-              width: '3rem',
-              height: '3rem',
-              borderRadius: '6px',
-              background: '#10b981',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              margin: '0 auto 1rem',
-              color: 'white',
-              fontSize: '1.25rem'
-            }}>
-              ✓
-            </div>
-            <h3 style={{
-              fontSize: '1.125rem',
-              fontWeight: '600',
-              color: '#1f2937',
-              marginBottom: '0.5rem'
-            }}>
-              Video CV skickat!
-            </h3>
-            <p style={{ 
-              color: '#6b7280', 
-              marginBottom: '1rem',
-              fontSize: '0.875rem'
-            }}>
-              Din video har skickats.
-            </p>
-            <button 
-              onClick={resetRecorder}
-              style={{
-                padding: '0.625rem 1.25rem',
-                background: '#ef4444',
-                color: 'white',
-                border: 'none',
-                borderRadius: '6px',
-                fontWeight: '600',
-                cursor: 'pointer',
-                fontSize: '0.875rem',
-                transition: 'all 0.2s ease'
-              }}
-              onMouseEnter={(e) => {
-                e.target.style.opacity = '0.9';
-              }}
-              onMouseLeave={(e) => {
-                e.target.style.opacity = '1';
-              }}
-            >
-              Spela in ny video
-            </button>
-          </div>
-        ) : (
-          <>
-            <div style={{
-              display: 'flex',
-              alignItems: 'flex-start',
-              gap: '1rem',
-              marginBottom: '1.5rem'
-            }}>
-              <div style={{
-                width: '2.5rem',
-                height: '2.5rem',
-                borderRadius: '6px',
-                background: '#fee2e2',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                color: '#ef4444',
-                fontSize: '1rem',
-                flexShrink: 0
-              }}>
-                🎬
+    <div className={`video-recorder-container ${isVisible ? 'visible' : ''}`}>
+      <div className="container">
+    
+        {/* Main Recorder Card - exakt samma stil som jobbkort */}
+        <div className="recorder-card">
+          {/* Top Color Bar - exakt som jobbkort */}
+          <div className="recorder-card-bar"></div>
+          
+          <div className="recorder-card-content">
+            {/* Header med ikon - samma stil */}
+            <div className="recorder-header">
+              <div className="recorder-icon">
+                <i className="bi bi-camera-video"></i>
               </div>
-              <div style={{ flex: 1 }}>
-                <h3 style={{
-                  fontSize: '1.125rem',
-                  fontWeight: '600',
-                  color: '#1f2937',
-                  marginBottom: '0.25rem'
-                }}>
-                  Video CV
-                </h3>
-                <p style={{ 
-                  color: '#6b7280', 
-                  fontSize: '0.875rem'
-                }}>
-                  Spela in ett personligt video CV
-                </p>
+              <div>
+                <h3 className="recorder-title">Spela in Video CV</h3>
+                <div className="recorder-subtitle">
+                  <i className="bi bi-info-circle"></i>
+                  <span>Maximal längd: 5 minuter</span>
+                </div>
               </div>
             </div>
 
-            {/* Video Preview */}
-            <div style={{
-              position: 'relative',
-              borderRadius: '6px',
-              overflow: 'hidden',
-              marginBottom: '1rem',
-              backgroundColor: '#000',
-              border: '1px solid #e5e7eb'
-            }}>
+            {/* Video Preview Container */}
+            <div className="video-preview-container">
               <video 
                 ref={videoRef} 
                 autoPlay 
                 muted 
-                style={{
-                  width: '100%',
-                  height: '200px',
-                  objectFit: 'cover',
-                  display: 'block'
-                }}
+                className="video-preview"
               />
               
               {recording && (
-                <div style={{
-                  position: 'absolute',
-                  top: '0.75rem',
-                  left: '0.75rem',
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '0.5rem',
-                  background: '#ef4444',
-                  color: 'white',
-                  padding: '0.375rem 0.75rem',
-                  borderRadius: '4px',
-                  fontSize: '0.75rem',
-                  fontWeight: '500'
-                }}>
-                  <div style={{
-                    width: '8px',
-                    height: '8px',
-                    borderRadius: '50%',
-                    background: 'white'
-                  }}></div>
-                  <span>{formatTime(recordingTime)}</span>
+                <div className="recording-indicator">
+                  <div className="recording-dot"></div>
+                  <span className="recording-time">{formatTime(recordingTime)}</span>
                 </div>
               )}
 
               {!recordedVideo && !recording && (
-                <div style={{
-                  position: 'absolute',
-                  top: '0',
-                  left: '0',
-                  right: '0',
-                  bottom: '0',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  flexDirection: 'column',
-                  color: 'white',
-                  background: 'rgba(0, 0, 0, 0.2)'
-                }}>
-                  <div style={{
-                    width: '3rem',
-                    height: '3rem',
-                    borderRadius: '6px',
-                    background: 'rgba(255, 255, 255, 0.1)',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    marginBottom: '0.75rem',
-                    fontSize: '1.25rem'
-                  }}>
-                    📹
+                <div className="video-placeholder">
+                  <div className="placeholder-icon">
+                    <i className="bi bi-camera"></i>
                   </div>
-                  <p style={{ 
-                    margin: 0, 
-                    fontSize: '0.75rem', 
-                    opacity: 0.9,
-                    fontWeight: '500'
-                  }}>
-                    Kameran är redo
-                  </p>
+                  <p className="placeholder-text">Kameran är redo för inspelning</p>
+                </div>
+              )}
+
+              {recordedVideo && !recording && (
+                <div className="video-playback-controls">
+                  <button 
+                    className="playback-button"
+                    onClick={() => videoRef.current?.play()}
+                  >
+                    <i className="bi bi-play-fill"></i>
+                    Spela upp
+                  </button>
                 </div>
               )}
             </div>
 
-            {/* Camera Selector */}
+            {/* Camera Selector - med samma stil som dropdowns */}
             {videoDevices.length > 1 && !recording && !recordedVideo && (
-              <div style={{ marginBottom: '1rem' }}>
-                <label style={{
-                  display: 'block',
-                  fontSize: '0.75rem',
-                  fontWeight: '500',
-                  color: '#4b5563',
-                  marginBottom: '0.375rem'
-                }}>
+              <div className="camera-selector">
+                <label className="selector-label">
+                  <i className="bi bi-camera"></i>
                   Välj kamera:
                 </label>
                 <select
                   value={selectedDevice}
                   onChange={(e) => setSelectedDevice(e.target.value)}
-                  style={{
-                    width: '100%',
-                    padding: '0.5rem',
-                    borderRadius: '6px',
-                    border: '1px solid #d1d5db',
-                    background: 'white',
-                    fontSize: '0.875rem',
-                    outline: 'none',
-                    transition: 'all 0.2s ease'
-                  }}
-                  onFocus={(e) => {
-                    e.target.style.borderColor = '#3b82f6';
-                  }}
-                  onBlur={(e) => {
-                    e.target.style.borderColor = '#d1d5db';
-                  }}
+                  className="device-select"
                 >
                   {videoDevices.map(device => (
                     <option key={device.deviceId} value={device.deviceId}>
@@ -409,217 +262,166 @@ function VideoRecorder() {
               </div>
             )}
 
-            {/* Error Message */}
+            {/* Error Message - med samma stil */}
             {streamError && (
-              <div style={{
-                background: '#fee2e2',
-                border: '1px solid #fecaca',
-                color: '#991b1b',
-                padding: '0.75rem',
-                borderRadius: '6px',
-                marginBottom: '1rem',
-                fontSize: '0.75rem'
-              }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.25rem' }}>
-                  <span style={{ fontSize: '0.875rem' }}>⚠️</span>
+              <div className="error-message">
+                <div className="error-header">
+                  <i className="bi bi-exclamation-triangle"></i>
                   <strong>Kameraåtkomst krävs</strong>
                 </div>
-                <p style={{ margin: 0, fontSize: '0.75rem' }}>{streamError}</p>
+                <p>{streamError}</p>
               </div>
             )}
 
-            {/* Controls */}
-            <div style={{ marginBottom: '1rem' }}>
+            {/* Main Controls - med samma knappstil */}
+            <div className="recorder-controls">
               {!recordedVideo ? (
-                <div>
+                <div className="recording-controls">
                   {!recording ? (
                     <button 
                       onClick={startRecording}
-                      style={{
-                        width: '100%',
-                        padding: '0.75rem',
-                        background: '#ef4444',
-                        color: 'white',
-                        border: 'none',
-                        borderRadius: '6px',
-                        fontWeight: '600',
-                        cursor: 'pointer',
-                        fontSize: '0.875rem',
-                        transition: 'all 0.2s ease',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        gap: '0.5rem'
-                      }}
-                      onMouseEnter={(e) => {
-                        e.target.style.opacity = '0.9';
-                      }}
-                      onMouseLeave={(e) => {
-                        e.target.style.opacity = '1';
-                      }}
+                      className="start-button"
+                      onMouseEnter={() => setHovered(true)}
+                      onMouseLeave={() => setHovered(false)}
                     >
-                      <span style={{ fontSize: '0.875rem' }}>●</span>
-                      Börja spela in video CV
+                      {hovered ? (
+                        <>
+                          Börja spela in <i className="bi bi-arrow-right"></i>
+                        </>
+                      ) : (
+                        <>
+                          <i className="bi bi-record-circle"></i>
+                          Börja spela in video CV
+                        </>
+                      )}
                     </button>
                   ) : (
                     <button 
                       onClick={stopRecording}
-                      style={{
-                        width: '100%',
-                        padding: '0.75rem',
-                        background: 'white',
-                        color: '#ef4444',
-                        border: '1px solid #ef4444',
-                        borderRadius: '6px',
-                        fontWeight: '600',
-                        cursor: 'pointer',
-                        fontSize: '0.875rem',
-                        transition: 'all 0.2s ease',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        gap: '0.5rem'
-                      }}
-                      onMouseEnter={(e) => {
-                        e.target.style.background = '#fee2e2';
-                      }}
-                      onMouseLeave={(e) => {
-                        e.target.style.background = 'white';
-                      }}
+                      className="stop-button"
                     >
-                      <span style={{ fontSize: '0.875rem' }}>■</span>
+                      <i className="bi bi-stop-circle"></i>
                       Stoppa inspelning
                     </button>
                   )}
                 </div>
               ) : (
-                <div style={{ display: 'flex', gap: '0.5rem' }}>
+                <div className="upload-controls">
                   <button 
                     onClick={uploadVideo}
                     disabled={uploading}
-                    style={{
-                      flex: 1,
-                      padding: '0.75rem',
-                      background: uploading ? '#9ca3af' : '#10b981',
-                      color: 'white',
-                      border: 'none',
-                      borderRadius: '6px',
-                      fontWeight: '600',
-                      cursor: uploading ? 'not-allowed' : 'pointer',
-                      fontSize: '0.875rem',
-                      transition: 'all 0.2s ease',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      gap: '0.5rem'
-                    }}
-                    onMouseEnter={(e) => {
-                      if (!uploading) {
-                        e.target.style.opacity = '0.9';
-                      }
-                    }}
-                    onMouseLeave={(e) => {
-                      if (!uploading) {
-                        e.target.style.opacity = '1';
-                      }
-                    }}
+                    className="upload-button"
                   >
                     {uploading ? (
                       <>
-                        <div style={{
-                          width: '12px',
-                          height: '12px',
-                          border: '2px solid white',
-                          borderTop: '2px solid transparent',
-                          borderRadius: '50%',
-                          animation: 'spin 1s linear infinite'
-                        }}></div>
+                        <div className="upload-spinner"></div>
                         Skickar...
                       </>
                     ) : (
                       <>
-                        <span style={{ fontSize: '0.875rem' }}>📤</span>
+                        <i className="bi bi-cloud-upload"></i>
                         Skicka video CV
                       </>
                     )}
                   </button>
                   <button 
                     onClick={resetRecorder}
-                    style={{
-                      padding: '0.75rem 1rem',
-                      background: '#f3f4f6',
-                      color: '#4b5563',
-                      border: 'none',
-                      borderRadius: '6px',
-                      fontWeight: '600',
-                      cursor: 'pointer',
-                      fontSize: '0.75rem',
-                      transition: 'all 0.2s ease',
-                      display: 'flex',
-                      alignItems: 'center',
-                      gap: '0.375rem'
-                    }}
-                    onMouseEnter={(e) => {
-                      e.target.style.background = '#e5e7eb';
-                    }}
-                    onMouseLeave={(e) => {
-                      e.target.style.background = '#f3f4f6';
-                    }}
+                    className="reset-button"
                   >
-                    <span style={{ fontSize: '0.75rem' }}>🔄</span>
+                    <i className="bi bi-arrow-clockwise"></i>
                     Spela om
                   </button>
                 </div>
               )}
             </div>
 
-            {/* Instructions */}
-            <div style={{ 
-              marginTop: '1rem', 
-              paddingTop: '0.75rem', 
-              borderTop: '1px solid #e5e7eb' 
-            }}>
-              <p style={{
-                color: '#6b7280',
-                fontSize: '0.75rem',
-                margin: 0,
-                lineHeight: '1.5',
-                display: 'flex',
-                alignItems: 'flex-start',
-                gap: '0.5rem'
-              }}>
-                <span style={{ fontSize: '0.875rem', color: '#f59e0b' }}>💡</span>
+            {/* Instructions - samma stil som tips */}
+            <div className="recorder-instructions">
+              <div className="instruction-icon">
+                <i className="bi bi-lightbulb"></i>
+              </div>
+              <p className="instruction-text">
                 {!recordedVideo 
-                  ? 'Tips: Ha god belysning, titta in i kameran och var dig själv.' 
-                  : 'Tips: Lyssna på din inspelning innan du skickar.'}
+                  ? 'Tips: Ha god belysning, titta in i kameran, var professionell och prata tydligt.' 
+                  : 'Tips: Lyssna på din inspelning och se till att ljudet är tydligt innan du skickar.'}
               </p>
             </div>
-          </>
-        )}
-      </div>
+          </div>
+        </div>
 
-      {/* CSS Animations */}
-      <style jsx>{`
-        @keyframes spin {
-          0% { transform: rotate(0deg); }
-          100% { transform: rotate(360deg); }
-        }
-        
-        video {
-          border-radius: 6px;
-        }
-        
-        select:focus {
-          border-color: #3b82f6;
-          outline: none;
-          box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
-        }
-        
-        button:disabled {
-          opacity: 0.6;
-          cursor: not-allowed;
-        }
-      `}</style>
+        {/* Success State - samma stil som spontanansökan CTA */}
+        {uploaded && (
+          <div className={`success-cta ${isVisible ? 'visible' : ''}`}>
+            <div className="success-icon">
+              <i className="bi bi-check-circle"></i>
+            </div>
+            
+            <h3 className="success-title">Video CV skickat!</h3>
+            
+            <p className="success-description">
+              Ditt video CV har skickats till vår rekryteringsteam. Vi återkommer inom 48 timmar med feedback.
+            </p>
+            
+            <div className="success-actions">
+              <button 
+                className="success-button primary"
+                onClick={resetRecorder}
+              >
+                <i className="bi bi-camera-video"></i>
+                Spela in ny video
+              </button>
+              
+              <button 
+                className="success-button secondary"
+                onClick={() => navigate('/tjanster')}
+              >
+                <i className="bi bi-briefcase"></i>
+                Se lediga tjänster
+              </button>
+            </div>
+            
+            <p className="success-note">
+              <i className="bi bi-clock"></i>
+              Återkoppling inom 48 timmar
+            </p>
+          </div>
+        )}
+
+        {/* Stats Bar - exakt samma som i Tjänster */}
+        <div className="stats-bar">
+          <div className="stat-item">
+            <div className="stat-icon-wrapper">
+              <i className="bi bi-camera-video"></i>
+            </div>
+            <div className="stat-number">HD</div>
+            <div className="stat-label">Video Kvalitet</div>
+          </div>
+          
+          <div className="stat-item">
+            <div className="stat-icon-wrapper">
+              <i className="bi bi-clock-history"></i>
+            </div>
+            <div className="stat-number">5 min</div>
+            <div className="stat-label">Max Längd</div>
+          </div>
+          
+          <div className="stat-item">
+            <div className="stat-icon-wrapper">
+              <i className="bi bi-shield-check"></i>
+            </div>
+            <div className="stat-number">100%</div>
+            <div className="stat-label">Säkerhet</div>
+          </div>
+          
+          <div className="stat-item">
+            <div className="stat-icon-wrapper">
+              <i className="bi bi-chat-dots"></i>
+            </div>
+            <div className="stat-number">48h</div>
+            <div className="stat-label">Respons</div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

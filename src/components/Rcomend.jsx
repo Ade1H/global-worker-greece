@@ -4,12 +4,20 @@ import './Rcomend.css';
 
 function Rekommendationer() {
   const navigate = useNavigate();
-  const [activeFilter, setActiveFilter] = useState('Alla');
-  const [hoveredCard, setHoveredCard] = useState(null);
   const [isVisible, setIsVisible] = useState(false);
+  const [windowWidth, setWindowWidth] = useState(typeof window !== 'undefined' ? window.innerWidth : 1024);
+  const [hoveredCard, setHoveredCard] = useState(null);
+  const [activeFilter, setActiveFilter] = useState('Alla');
 
   useEffect(() => {
     setIsVisible(true);
+    
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+    
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
   }, []);
 
   const testimonials = [
@@ -24,7 +32,7 @@ function Rekommendationer() {
       date: "2024-01-10",
       category: "IT-rekrytering",
       country: "🇸🇪 Sverige",
-      color: "#3b82f6"
+      color: "#2c5282"
     },
     {
       id: 2,
@@ -37,7 +45,7 @@ function Rekommendationer() {
       date: "2024-01-08",
       category: "Internationell rekrytering",
       country: "🇬🇷 Grekland",
-      color: "#10b981"
+      color: "#3182ce"
     },
     {
       id: 3,
@@ -50,7 +58,7 @@ function Rekommendationer() {
       date: "2024-01-05",
       category: "Tech",
       country: "🇸🇪 → 🇬🇷",
-      color: "#8b5cf6"
+      color: "#4299e1"
     },
     {
       id: 4,
@@ -63,7 +71,7 @@ function Rekommendationer() {
       date: "2024-01-03",
       category: "Sales-rekrytering",
       country: "🇸🇪 Sverige",
-      color: "#f59e0b"
+      color: "#2b6cb0"
     },
     {
       id: 5,
@@ -76,7 +84,7 @@ function Rekommendationer() {
       date: "2023-12-28",
       category: "Tech",
       country: "🇬🇷 → 🇸🇪",
-      color: "#ef4444"
+      color: "#2a4365"
     },
     {
       id: 6,
@@ -89,7 +97,7 @@ function Rekommendationer() {
       date: "2023-12-25",
       category: "Finance-rekrytering",
       country: "🇸🇪 Sverige",
-      color: "#ec4899"
+      color: "#1a365d"
     },
     {
       id: 7,
@@ -102,7 +110,7 @@ function Rekommendationer() {
       date: "2023-12-20",
       category: "Marketing",
       country: "🇬🇷 → 🇸🇪",
-      color: "#06b6d4"
+      color: "#22527a"
     },
     {
       id: 8,
@@ -115,108 +123,119 @@ function Rekommendationer() {
       date: "2023-12-18",
       category: "Internationell rekrytering",
       country: "🇪🇸 Spanien",
-      color: "#84cc16"
+      color: "#2d3748"
     }
   ];
 
   const stats = [
-    { number: "98%", label: "Nöjda kunder", emoji: "😊", color: "#ef4444" },
-    { number: "4.9", label: "Genomsnittligt betyg", emoji: "⭐", color: "#f59e0b", sublabel: "/5" },
-    { number: "500+", label: "Recensioner", emoji: "💬", color: "#10b981" },
-    { number: "95%", label: "Återkommande kunder", emoji: "🔄", color: "#3b82f6" },
-    { number: "24h", label: "Snitt svarstid", emoji: "⚡", color: "#8b5cf6" },
-    { number: "50+", label: "Länder", emoji: "🌍", color: "#7c2d12" }
+    { number: '98%', label: 'Nöjda kunder', icon: 'bi-emoji-smile' },
+    { number: '4.9', label: 'Genomsnittligt betyg', icon: 'bi-star', sublabel: '/5' },
+    { number: '500+', label: 'Recensioner', icon: 'bi-chat' },
+    { number: '95%', label: 'Återkommande kunder', icon: 'bi-arrow-repeat' }
   ];
 
   const filters = [
-    { label: 'Alla', emoji: '📋', count: testimonials.length },
-    { label: 'Företag', emoji: '🏢', count: testimonials.filter(t => t.type === 'Företag').length },
-    { label: 'Arbetare', emoji: '👤', count: testimonials.filter(t => t.type === 'Arbetare').length },
-    { label: 'Tech', emoji: '💻', count: testimonials.filter(t => t.category.includes('Tech')).length },
-    { label: 'Sales', emoji: '📈', count: testimonials.filter(t => t.category.includes('Sales')).length },
-    { label: 'Marketing', emoji: '📢', count: testimonials.filter(t => t.category.includes('Marketing')).length },
-    { label: 'Internationell', emoji: '✈️', count: testimonials.filter(t => t.category.includes('Internationell')).length }
+    { label: 'Alla', icon: 'bi-list', count: testimonials.length },
+    { label: 'Företag', icon: 'bi-building', count: testimonials.filter(t => t.type === 'Företag').length },
+    { label: 'Arbetare', icon: 'bi-person', count: testimonials.filter(t => t.type === 'Arbetare').length },
+    { label: 'Tech', icon: 'bi-laptop', count: testimonials.filter(t => t.category.includes('Tech')).length },
+    { label: 'Sales', icon: 'bi-graph-up', count: testimonials.filter(t => t.category.includes('Sales')).length },
+    { label: 'Marketing', icon: 'bi-megaphone', count: testimonials.filter(t => t.category.includes('Marketing')).length }
   ];
 
   const trustIndicators = [
     { 
-      emoji: '🏆', 
+      icon: 'bi-award', 
       title: 'Certifierade Proffs', 
-      desc: 'Alla våra rekryterare är certifierade med gedigen branscherfarenhet',
-      color: '#ef4444'
+      desc: 'Alla våra rekryterare är certifierade med gedigen branscherfarenhet'
     },
     { 
-      emoji: '🛡️', 
+      icon: 'bi-shield-check', 
       title: 'DataSkydd', 
-      desc: 'Strikt GDPR-compliance för maximal integritet och säkerhet',
-      color: '#10b981'
+      desc: 'Strikt GDPR-compliance för maximal integritet och säkerhet'
     },
     { 
-      emoji: '🔒', 
+      icon: 'bi-lock', 
       title: 'Bekräftat Förtroende', 
-      desc: 'Verifierade recensioner från riktiga kunder och kandidater',
-      color: '#3b82f6'
+      desc: 'Verifierade recensioner från riktiga kunder och kandidater'
     }
   ];
 
   const filteredTestimonials = activeFilter === 'Alla' 
     ? testimonials 
-    : testimonials.filter(testimonial => 
-        testimonial.type === activeFilter || testimonial.category.includes(activeFilter)
-      );
+    : activeFilter === 'Företag' 
+      ? testimonials.filter(t => t.type === 'Företag')
+      : activeFilter === 'Arbetare' 
+        ? testimonials.filter(t => t.type === 'Arbetare')
+        : testimonials.filter(t => t.category.includes(activeFilter));
 
   const formatDate = (dateString) => {
     const options = { year: 'numeric', month: 'short', day: 'numeric' };
     return new Date(dateString).toLocaleDateString('sv-SE', options);
   };
 
+  const handleCTAClick = () => {
+    navigate('/contact');
+  };
+
   return (
     <div className="rekommendationer-container">
       <div className="container">
-        {/* Hero Section */}
-        <div className={`rekommendationer-hero ${isVisible ? 'visible' : ''}`}>
-          <h1 className="hero-title gradient-text">
-            Rekommendationer
-          </h1>
-          
-          <p className="hero-subtitle">
-            Läs vad våra kunder och kandidater säger om sitt samarbete med Global Worker
+        {/* Hero Section - EXACT SAME STRUCTURE */}
+        <div className="hero-section">
+          <div className="hero-content">
+            <h1 className={`hero-title ${isVisible ? 'visible' : ''}`}>
+              Rekommendationer
+            </h1>
+            <p className={`hero-subtitle ${isVisible ? 'visible' : ''}`}>
+              Läs vad våra kunder och kandidater säger om sitt samarbete med Global Worker
+            </p>
+            <div className={`hero-search ${isVisible ? 'visible' : ''}`}>
+              <p style={{ margin: 0, color: 'rgba(255, 255, 255, 0.9)', fontSize: '0.95rem' }}>
+                {testimonials.length} verifierade rekommendationer
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {/* Section Header - EXACT SAME STRUCTURE */}
+        <div className="section-header">
+          <h2 className={`section-title gradient-text ${isVisible ? 'visible' : ''}`}>
+            Vårt Rykte i Siffror
+          </h2>
+          <p className={`section-subtitle ${isVisible ? 'visible' : ''}`}>
+            Förtroende byggt på verkliga resultat och nöjda kunder
           </p>
         </div>
 
-        {/* Stats Section */}
-        <section className="stats-section">
-          <h2 className="section-title">Vårt Rykte i Siffror</h2>
-          <div className="stats-grid">
-            {stats.map((stat, index) => (
-              <div 
-                key={index}
-                className={`stat-card ${isVisible ? 'visible' : ''}`}
-                style={{ animationDelay: `${index * 0.1}s` }}
-              >
-                <div 
-                  className="stat-emoji"
-                  style={{ color: stat.color }}
-                >
-                  {stat.emoji}
-                </div>
-                <div className="stat-content">
-                  <div className="stat-number">
-                    {stat.number}
-                    {stat.sublabel && (
-                      <span className="stat-sublabel">{stat.sublabel}</span>
-                    )}
-                  </div>
-                  <div className="stat-label">{stat.label}</div>
-                </div>
+        {/* Stats Bar - EXACT SAME STRUCTURE */}
+        <div className="stats-bar">
+          {stats.map((stat, index) => (
+            <div key={index} className="stat-item">
+              <div className="stat-icon-wrapper">
+                <i className={`bi ${stat.icon}`}></i>
               </div>
-            ))}
-          </div>
-        </section>
+              <div className="stat-number">
+                {stat.number}
+                {stat.sublabel && <span className="stat-sublabel">{stat.sublabel}</span>}
+              </div>
+              <div className="stat-label">{stat.label}</div>
+            </div>
+          ))}
+        </div>
+
+        {/* Filter Tabs - Similar to job grid header */}
+        <div className="section-header">
+          <h2 className={`section-title gradient-text ${isVisible ? 'visible' : ''}`}>
+            Rekommendationer efter kategori
+          </h2>
+          <p className={`section-subtitle ${isVisible ? 'visible' : ''}`}>
+            Filtrera rekommendationer baserat på typ och kategori
+          </p>
+        </div>
 
         {/* Filter Tabs */}
-        <section className="filter-section">
-          <h3 className="section-subtitle">Filtrera Rekommendationer</h3>
+        <div className="filter-tabs-container">
           <div className="filter-tabs">
             {filters.map((filter) => (
               <button
@@ -224,154 +243,152 @@ function Rekommendationer() {
                 className={`filter-tab ${activeFilter === filter.label ? 'active' : ''}`}
                 onClick={() => setActiveFilter(filter.label)}
               >
-                <span className="filter-emoji">{filter.emoji}</span>
+                <i className={`bi ${filter.icon}`}></i>
                 <span className="filter-label">{filter.label}</span>
                 <span className="filter-count">{filter.count}</span>
               </button>
             ))}
           </div>
-        </section>
+        </div>
 
-        {/* Testimonials Grid */}
-        <section className="testimonials-section">
-          <h2 className="section-title">
-            <span className="section-icon">💬</span>
-            {activeFilter === 'Alla' ? 'Alla Rekommendationer' : `${activeFilter} Rekommendationer`}
-            <span className="section-counter">{filteredTestimonials.length} st</span>
-          </h2>
-          
-          <div className="testimonials-grid">
-            {filteredTestimonials.map((testimonial, index) => (
+        {/* Testimonials Grid - EXACT SAME STRUCTURE as job grid */}
+        <div className="testimonials-grid">
+          {filteredTestimonials.map((testimonial, index) => (
+            <div 
+              key={testimonial.id}
+              className={`testimonial-card ${isVisible ? 'visible' : ''}`}
+              style={{ animationDelay: `${index * 0.1}s` }}
+              onMouseEnter={() => setHoveredCard(testimonial.id)}
+              onMouseLeave={() => setHoveredCard(null)}
+            >
+              {/* Top Color Bar - EXACT SAME as job card */}
               <div 
-                key={testimonial.id}
-                className={`testimonial-card ${isVisible ? 'visible' : ''}`}
-                style={{ animationDelay: `${index * 0.1}s` }}
-                onMouseEnter={() => setHoveredCard(testimonial.id)}
-                onMouseLeave={() => setHoveredCard(null)}
-              >
-                {/* Top Color Bar */}
-                <div 
-                  className="testimonial-card-bar"
-                  style={{ background: `linear-gradient(90deg, ${testimonial.color}, ${testimonial.color}dd)` }}
-                ></div>
-                
-                <div className="testimonial-card-content">
-                  {/* Type Badge */}
+                className="testimonial-card-bar"
+                style={{ background: `linear-gradient(90deg, ${testimonial.color}, #4299e1)` }}
+              ></div>
+              
+              <div className="testimonial-card-content">
+                {/* Type Badge - Similar to job header */}
+                <div className="testimonial-card-header">
                   <div 
-                    className="type-badge"
+                    className="testimonial-icon"
                     style={{ 
-                      background: `linear-gradient(135deg, ${testimonial.color}, ${testimonial.color}dd)`
+                      background: `linear-gradient(135deg, ${testimonial.color}, #2c5282)`,
+                      color: 'white'
                     }}
                   >
-                    <span className="type-emoji">
-                      {testimonial.type === 'Företag' ? '🏢' : '👤'}
-                    </span>
-                    {testimonial.type}
+                    <i className={`bi ${testimonial.type === 'Företag' ? 'bi-building' : 'bi-person'}`}></i>
                   </div>
-
-                  {/* Stars Rating */}
-                  <div className="rating-section">
-                    <div className="stars">
-                      {[...Array(5)].map((_, i) => (
-                        <span 
-                          key={i}
-                          className={`star ${i < testimonial.rating ? 'filled' : ''}`}
-                          style={{ 
-                            color: i < testimonial.rating ? testimonial.color : '#e5e7eb'
-                          }}
-                        >
-                          ★
-                        </span>
-                      ))}
+                  <div>
+                    <h3 className="testimonial-title">{testimonial.name}</h3>
+                    <div className="testimonial-type">
+                      <i className={`bi ${testimonial.type === 'Företag' ? 'bi-building' : 'bi-person'}`}></i>
+                      <span>{testimonial.type}</span>
                     </div>
-                    <span className="rating-text">
-                      {testimonial.rating}.0 betyg
-                    </span>
-                  </div>
-
-                  {/* Testimonial Quote */}
-                  <div className="testimonial-quote">
-                    <span className="quote-mark">"</span>
-                    {testimonial.text}
-                  </div>
-
-                  {/* Location & Date */}
-                  <div className="testimonial-meta">
-                    <div className="meta-item">
-                      <span className="meta-icon">📍</span>
-                      <span className="meta-text">{testimonial.country}</span>
-                    </div>
-                    <div className="meta-item">
-                      <span className="meta-icon">📅</span>
-                      <span className="meta-text">{formatDate(testimonial.date)}</span>
-                    </div>
-                  </div>
-
-                  {/* Author Info */}
-                  <div className="author-section">
-                    <div 
-                      className="author-avatar"
-                      style={{ backgroundColor: testimonial.color }}
-                    >
-                      {testimonial.name.split(' ').map(n => n[0]).join('')}
-                    </div>
-                    <div className="author-info">
-                      <div className="author-name">{testimonial.name}</div>
-                      <div className="author-position">{testimonial.position}</div>
-                      <div className="author-company">
-                        <span className="company-icon">🏢</span>
-                        {testimonial.company}
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Category Tag */}
-                  <div 
-                    className="category-tag"
-                    style={{ 
-                      backgroundColor: `${testimonial.color}15`,
-                      color: testimonial.color,
-                      border: `1px solid ${testimonial.color}30`
-                    }}
-                  >
-                    <span className="category-icon">🏷️</span>
-                    {testimonial.category}
                   </div>
                 </div>
-              </div>
-            ))}
-          </div>
-        </section>
 
-        {/* Trust Indicators */}
-        <section className="trust-section">
-          <h2 className="section-title">Varför Välja Oss?</h2>
-          <div className="trust-grid">
-            {trustIndicators.map((indicator, index) => (
-              <div 
-                key={index}
-                className={`trust-card ${isVisible ? 'visible' : ''}`}
-                style={{ animationDelay: `${0.5 + index * 0.1}s` }}
-              >
-                <div 
-                  className="trust-emoji"
-                  style={{ 
-                    backgroundColor: `${indicator.color}15`,
-                    border: `2px solid ${indicator.color}30`,
-                    color: indicator.color
-                  }}
+                {/* Stars Rating */}
+                <div className="rating-section">
+                  <div className="stars">
+                    {[...Array(5)].map((_, i) => (
+                      <i 
+                        key={i}
+                        className={`bi ${i < testimonial.rating ? 'bi-star-fill' : 'bi-star'}`}
+                        style={{ 
+                          color: i < testimonial.rating ? '#d69e2e' : '#cbd5e1'
+                        }}
+                      ></i>
+                    ))}
+                  </div>
+                  <span className="rating-text">
+                    {testimonial.rating}.0 betyg
+                  </span>
+                </div>
+
+                {/* Testimonial Quote - Similar to job description */}
+                <p className="testimonial-quote">
+                  <i className="bi bi-quote quote-mark"></i>
+                  {testimonial.text}
+                </p>
+
+                {/* Location & Date */}
+                <div className="testimonial-meta">
+                  <div className="meta-item">
+                    <i className="bi bi-geo-alt"></i>
+                    <span>{testimonial.country}</span>
+                  </div>
+                  <div className="meta-item">
+                    <i className="bi bi-calendar"></i>
+                    <span>{formatDate(testimonial.date)}</span>
+                  </div>
+                </div>
+
+                {/* Position and Company */}
+                <div className="employment-types">
+                  <span className="employment-type">
+                    <i className="bi bi-briefcase"></i>
+                    {testimonial.position}
+                  </span>
+                  <span className="employment-type">
+                    <i className="bi bi-building"></i>
+                    {testimonial.company}
+                  </span>
+                </div>
+
+                {/* View Details Button - EXACT SAME as apply button */}
+                <button 
+                  className="view-button"
+                  onClick={() => navigate('/contact', { state: { testimonialId: testimonial.id } })}
                 >
-                  {indicator.emoji}
-                </div>
-                <h3 className="trust-title">{indicator.title}</h3>
-                <p className="trust-description">{indicator.desc}</p>
+                  {hoveredCard === testimonial.id ? (
+                    <>
+                      Kontakta oss <i className="bi bi-arrow-right"></i>
+                    </>
+                  ) : (
+                    'Kontakta oss'
+                  )}
+                </button>
               </div>
-            ))}
-          </div>
-        </section>
+              
+              {/* Hover Arrow - EXACT SAME as job card */}
+              {hoveredCard === testimonial.id && (
+                <div className="hover-arrow">
+                  <i className="bi bi-arrow-right-circle"></i>
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
 
-        {/* CTA Section */}
-        <div className={`rekommendationer-cta ${isVisible ? 'visible' : ''}`}>
+        {/* Trust Indicators Section - Similar to spontaneous CTA */}
+        <div className="section-header">
+          <h2 className={`section-title gradient-text ${isVisible ? 'visible' : ''}`}>
+            Varför Välja Oss?
+          </h2>
+          <p className={`section-subtitle ${isVisible ? 'visible' : ''}`}>
+            Professionella tjänster med hög kvalitet och säkerhet
+          </p>
+        </div>
+
+        <div className="trust-grid">
+          {trustIndicators.map((indicator, index) => (
+            <div 
+              key={index}
+              className={`trust-card ${isVisible ? 'visible' : ''}`}
+              style={{ animationDelay: `${0.5 + index * 0.1}s` }}
+            >
+              <div className="trust-icon-wrapper">
+                <i className={`bi ${indicator.icon}`}></i>
+              </div>
+              <h3 className="trust-title">{indicator.title}</h3>
+              <p className="trust-description">{indicator.desc}</p>
+            </div>
+          ))}
+        </div>
+
+        {/* CTA Section - EXACT SAME STRUCTURE as spontaneous CTA */}
+        <div className={`spontaneous-cta ${isVisible ? 'visible' : ''}`}>
           <div className="cta-icon">
             <i className="bi bi-chat-heart"></i>
           </div>
@@ -382,26 +399,16 @@ function Rekommendationer() {
             Oavsett om du är ett företag som behöver talanger eller en arbetssökande som vill hitta ditt drömjobb - vi hjälper dig att nå dina mål.
           </p>
           
-          <div className="cta-buttons">
-            <button 
-              className="cta-button primary"
-              onClick={() => navigate('/tjanster')}
-            >
-              <i className="bi bi-search me-2"></i>
-              Se Lediga Tjänster
-            </button>
-            
-            <button 
-              className="cta-button secondary"
-              onClick={() => navigate('/contact')}
-            >
-              <i className="bi bi-envelope me-2"></i>
-              Kontakta Oss
-            </button>
-          </div>
+          <button 
+            className="cta-button"
+            onClick={handleCTAClick}
+          >
+            <i className="bi bi-envelope"></i>
+            Kontakta Oss
+          </button>
           
           <p className="cta-note">
-            <i className="bi bi-clock me-2"></i>
+            <i className="bi bi-clock"></i>
             Vi återkommer inom 48 timmar
           </p>
         </div>

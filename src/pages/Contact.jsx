@@ -1,8 +1,10 @@
 ﻿import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import VideoRecorder from '../components/VideoRecorder';
 import RequestForm from '../components/RequestForm';
 
 function Contact() {
+  const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState('contact');
   const [isVisible, setIsVisible] = useState(false);
 
@@ -10,19 +12,65 @@ function Contact() {
     setIsVisible(true);
   }, []);
 
+  // Same color variables as Tjanster.css
+  const colors = {
+    primaryNavy: '#0a1f44',
+    primaryNavyLight: '#1a2f5a',
+    primaryBlue: '#2c5282',
+    primaryBlueLight: '#4299e1',
+    accentBlue: '#3182ce',
+    accentGold: '#d69e2e',
+    accentGreen: '#10b981',
+    accentRed: '#dc2626',
+    accentPurple: '#8b5cf6',
+    
+    navy50: '#f0f4f8',
+    navy100: '#d9e2ec',
+    navy200: '#bcccdc',
+    navy300: '#9fb3c8',
+    navy400: '#829ab1',
+    navy500: '#627d98',
+    navy600: '#486581',
+    navy700: '#334e68',
+    navy800: '#243b53',
+    navy900: '#102a43',
+    
+    gray50: '#f8fafc',
+    gray100: '#f1f5f9',
+    gray200: '#e2e8f0',
+    gray300: '#cbd5e1',
+    gray600: '#475569',
+    gray700: '#334155',
+    gray800: '#1e293b',
+    gray900: '#0f172a',
+    
+    textPrimary: '#1f2937',
+    textSecondary: '#4b5563',
+    textTertiary: '#6b7280',
+    
+    borderLight: '#e5e7eb',
+    borderMedium: '#d1d5db',
+    borderDark: '#9ca3af',
+    
+    // Background gradients like Tjanster
+    bgGradient: 'linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%)',
+    bgCard: 'white',
+    bgDarkCard: 'linear-gradient(135deg, #0a1f44 0%, #1a2f5a 100%)',
+  };
+
   return (
-    <div style={{
+    <div className="contact-container" style={{
       minHeight: '100vh',
-      background: 'linear-gradient(to bottom, #f8fafc, #ffffff)',
+      background: colors.bgGradient, // SAME as Tjanster container
       padding: '2rem 1rem',
     }}>
-      <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
+      <div className="container" style={{ maxWidth: '1200px', margin: '0 auto' }}>
         {/* Hero Header - Professional */}
         <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
           <h1 style={{
             fontSize: '2.5rem',
             fontWeight: '700',
-            color: '#1f2937',
+            color: colors.navy900,
             marginBottom: '1rem',
             opacity: isVisible ? 1 : 0,
             transform: isVisible ? 'translateY(0)' : 'translateY(20px)',
@@ -33,7 +81,7 @@ function Contact() {
           </h1>
           <p style={{
             fontSize: '1.125rem',
-            color: '#6b7280',
+            color: colors.navy600,
             maxWidth: '600px',
             margin: '0 auto',
             lineHeight: '1.6',
@@ -50,7 +98,7 @@ function Contact() {
           display: 'flex', 
           justifyContent: 'center', 
           marginBottom: '2.5rem',
-          borderBottom: '1px solid #e5e7eb',
+          borderBottom: `1px solid ${colors.borderLight}`,
           paddingBottom: '2rem'
         }}>
           <div style={{
@@ -67,18 +115,18 @@ function Contact() {
                 border: 'none',
                 cursor: 'pointer',
                 transition: 'all 0.2s ease',
-                background: activeTab === 'contact' ? '#1e293b' : 'transparent',
-                color: activeTab === 'contact' ? 'white' : '#4b5563',
+                background: activeTab === 'contact' ? colors.primaryNavy : 'transparent',
+                color: activeTab === 'contact' ? 'white' : colors.textSecondary,
                 fontSize: '0.875rem'
               }}
               onMouseEnter={(e) => {
                 if (activeTab !== 'contact') {
-                  e.target.style.color = '#1f2937';
+                  e.target.style.color = colors.textPrimary;
                 }
               }}
               onMouseLeave={(e) => {
                 if (activeTab !== 'contact') {
-                  e.target.style.color = '#4b5563';
+                  e.target.style.color = colors.textSecondary;
                 }
               }}
             >
@@ -93,18 +141,18 @@ function Contact() {
                 border: 'none',
                 cursor: 'pointer',
                 transition: 'all 0.2s ease',
-                background: activeTab === 'form' ? '#1e293b' : 'transparent',
-                color: activeTab === 'form' ? 'white' : '#4b5563',
+                background: activeTab === 'form' ? colors.primaryNavy : 'transparent',
+                color: activeTab === 'form' ? 'white' : colors.textSecondary,
                 fontSize: '0.875rem'
               }}
               onMouseEnter={(e) => {
                 if (activeTab !== 'form') {
-                  e.target.style.color = '#1f2937';
+                  e.target.style.color = colors.textPrimary;
                 }
               }}
               onMouseLeave={(e) => {
                 if (activeTab !== 'form') {
-                  e.target.style.color = '#4b5563';
+                  e.target.style.color = colors.textSecondary;
                 }
               }}
             >
@@ -118,14 +166,15 @@ function Contact() {
           <div style={{ 
             display: 'grid',
             gridTemplateColumns: '1fr',
-            gap: '2rem'
+            gap: '0',
+             height: '100%'
           }}>
-            {/* Contact Information Card */}
+            {/* Contact Information Card - SAME as Tjanster cards */}
             <div style={{
-              background: 'white',
-              borderRadius: '8px',
-              border: '1px solid #e5e7eb',
-              boxShadow: '0 1px 3px rgba(0, 0, 0, 0.1)',
+              background: colors.bgCard,
+              borderRadius: 'var(--radius-xl, 20px)',
+              border: `2px solid ${colors.navy200}`,
+              boxShadow: 'var(--shadow-lg, 0 10px 40px rgba(0, 0, 0, 0.2))',
               overflow: 'hidden',
               opacity: isVisible ? 1 : 0,
               transform: isVisible ? 'translateX(0)' : 'translateX(-20px)',
@@ -134,7 +183,7 @@ function Contact() {
             }}>
               <div style={{ 
                 padding: '2rem',
-                borderLeft: '4px solid #3b82f6'
+                borderLeft: `4px solid ${colors.accentBlue}`
               }}>
                 <div style={{ 
                   display: 'flex', 
@@ -145,23 +194,24 @@ function Contact() {
                   <div style={{
                     width: '2.5rem',
                     height: '2.5rem',
-                    borderRadius: '8px',
-                    background: '#eff6ff',
+                    borderRadius: '12px',
+                    background: 'linear-gradient(135deg, var(--primary-navy) 0%, var(--navy-700) 100%)',
                     display: 'flex',
                     alignItems: 'center',
-                    justifyContent: 'center'
+                    justifyContent: 'center',
+                    boxShadow: '0 4px 12px rgba(10, 31, 68, 0.2)'
                   }}>
                     <div style={{ 
                       fontSize: '1.25rem',
-                      color: '#3b82f6'
+                      color: 'white'
                     }}>
                       📞
                     </div>
                   </div>
                   <h2 style={{ 
                     fontSize: '1.25rem', 
-                    fontWeight: '600', 
-                    color: '#1f2937' 
+                    fontWeight: '700', 
+                    color: colors.navy900 
                   }}>
                     Kontaktinformation
                   </h2>
@@ -174,25 +224,25 @@ function Contact() {
                       width: '2rem',
                       height: '2rem',
                       borderRadius: '6px',
-                      background: '#eff6ff',
+                      background: colors.navy50,
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'center',
                       flexShrink: '0'
                     }}>
-                      <div style={{ fontSize: '0.875rem', color: '#3b82f6' }}>📍</div>
+                      <div style={{ fontSize: '0.875rem', color: colors.accentBlue }}>📍</div>
                     </div>
                     <div>
                       <h3 style={{ 
                         fontWeight: '600', 
-                        color: '#1f2937', 
+                        color: colors.navy900, 
                         marginBottom: '0.25rem',
                         fontSize: '0.875rem'
                       }}>
                         Adress
                       </h3>
                       <p style={{ 
-                        color: '#6b7280', 
+                        color: colors.navy600, 
                         lineHeight: '1.5',
                         fontSize: '0.875rem'
                       }}>
@@ -210,39 +260,42 @@ function Contact() {
                       width: '2rem',
                       height: '2rem',
                       borderRadius: '6px',
-                      background: '#eff6ff',
+                      background: colors.navy50,
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'center',
                       flexShrink: '0'
                     }}>
-                      <div style={{ fontSize: '0.875rem', color: '#3b82f6' }}>📱</div>
+                      <div style={{ fontSize: '0.875rem', color: colors.accentBlue }}>📱</div>
                     </div>
                     <div>
                       <h3 style={{ 
                         fontWeight: '600', 
-                        color: '#1f2937', 
+                        color: colors.navy900, 
                         marginBottom: '0.25rem',
                         fontSize: '0.875rem'
                       }}>
                         Telefon
                       </h3>
                       <a 
-                        href="tel:+302101234567" 
+                        href="tel:+30 697 263 6053" 
                         style={{ 
-                          color: '#3b82f6', 
+                          color: colors.accentBlue, 
                           fontWeight: '500',
                           fontSize: '0.875rem',
-                          textDecoration: 'none'
+                          textDecoration: 'none',
+                          transition: 'all 0.2s ease'
                         }}
                         onMouseEnter={(e) => {
+                          e.target.style.color = colors.primaryBlueLight;
                           e.target.style.textDecoration = 'underline';
                         }}
                         onMouseLeave={(e) => {
+                          e.target.style.color = colors.accentBlue;
                           e.target.style.textDecoration = 'none';
                         }}
                       >
-                        +30 210 123 4567
+                         +30 697 263 6053
                       </a>
                     </div>
                   </div>
@@ -253,39 +306,42 @@ function Contact() {
                       width: '2rem',
                       height: '2rem',
                       borderRadius: '6px',
-                      background: '#eff6ff',
+                      background: colors.navy50,
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'center',
                       flexShrink: '0'
                     }}>
-                      <div style={{ fontSize: '0.875rem', color: '#3b82f6' }}>✉️</div>
+                      <div style={{ fontSize: '0.875rem', color: colors.accentBlue }}>✉️</div>
                     </div>
                     <div>
                       <h3 style={{ 
                         fontWeight: '600', 
-                        color: '#1f2937', 
+                        color: colors.navy900, 
                         marginBottom: '0.25rem',
                         fontSize: '0.875rem'
                       }}>
                         E-post
                       </h3>
                       <a 
-                        href="mailto:info@globalworker.se" 
+                        href="mailto:Johan.karlsson@globalworker.nu" 
                         style={{ 
-                          color: '#3b82f6', 
+                          color: colors.accentBlue, 
                           fontWeight: '500',
                           fontSize: '0.875rem',
-                          textDecoration: 'none'
+                          textDecoration: 'none',
+                          transition: 'all 0.2s ease'
                         }}
                         onMouseEnter={(e) => {
+                          e.target.style.color = colors.primaryBlueLight;
                           e.target.style.textDecoration = 'underline';
                         }}
                         onMouseLeave={(e) => {
+                          e.target.style.color = colors.accentBlue;
                           e.target.style.textDecoration = 'none';
                         }}
                       >
-                        info@globalworker.se
+                        Johan.karlsson@globalworker.nu
                       </a>
                     </div>
                   </div>
@@ -296,30 +352,30 @@ function Contact() {
                       width: '2rem',
                       height: '2rem',
                       borderRadius: '6px',
-                      background: '#eff6ff',
+                      background: colors.navy50,
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'center',
                       flexShrink: '0'
                     }}>
-                      <div style={{ fontSize: '0.875rem', color: '#3b82f6' }}>🕒</div>
+                      <div style={{ fontSize: '0.875rem', color: colors.accentBlue }}>🕒</div>
                     </div>
                     <div>
                       <h3 style={{ 
                         fontWeight: '600', 
-                        color: '#1f2937', 
+                        color: colors.navy900, 
                         marginBottom: '0.25rem',
                         fontSize: '0.875rem'
                       }}>
                         Öppettider
                       </h3>
                       <p style={{ 
-                        color: '#6b7280',
+                        color: colors.navy600,
                         fontSize: '0.875rem'
                       }}>
-                        <span style={{ fontWeight: '500' }}>Måndag - Fredag:</span> 09:00 - 18:00<br />
-                        <span style={{ fontWeight: '500' }}>Lördag:</span> Stängt<br />
-                        <span style={{ fontWeight: '500' }}>Söndag:</span> Stängt
+                        <span style={{ fontWeight: '500', color: colors.navy900 }}>Måndag - Fredag:</span> 09:00 - 18:00<br />
+                        <span style={{ fontWeight: '500', color: colors.navy900 }}>Lördag:</span> Stängt<br />
+                        <span style={{ fontWeight: '500', color: colors.navy900 }}>Söndag:</span> Stängt
                       </p>
                     </div>
                   </div>
@@ -329,146 +385,182 @@ function Contact() {
                 <div style={{ 
                   marginTop: '2rem', 
                   paddingTop: '1.5rem', 
-                  borderTop: '1px solid #e5e7eb' 
+                  borderTop: `1px solid ${colors.borderLight}` 
                 }}>
                   <h3 style={{ 
                     fontWeight: '600', 
-                    color: '#1f2937', 
+                    color: colors.navy900, 
                     marginBottom: '1rem',
                     fontSize: '0.875rem'
                   }}>
                     Följ oss
                   </h3>
                   <div style={{ display: 'flex', gap: '0.75rem' }}>
-                    {[
-                      { platform: 'LinkedIn', icon: '🔗' },
-                      { platform: 'Facebook', icon: '📘' },
-                      { platform: 'Instagram', icon: '📷' },
-                      { platform: 'Twitter', icon: '🐦' }
-                    ].map((item) => (
-                      <a
-                        key={item.platform}
-                        href={`https://${item.platform.toLowerCase()}.com`}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        style={{
-                          width: '2.25rem',
-                          height: '2.25rem',
-                          borderRadius: '6px',
-                          background: '#f3f4f6',
-                          display: 'flex',
-                          alignItems: 'center',
-                          justifyContent: 'center',
-                          color: '#4b5563',
-                          textDecoration: 'none',
-                          fontSize: '1rem',
-                          transition: 'all 0.2s ease'
-                        }}
-                        onMouseEnter={(e) => {
-                          e.currentTarget.style.background = '#eff6ff';
-                          e.currentTarget.style.color = '#3b82f6';
-                          e.currentTarget.style.transform = 'translateY(-2px)';
-                        }}
-                        onMouseLeave={(e) => {
-                          e.currentTarget.style.background = '#f3f4f6';
-                          e.currentTarget.style.color = '#4b5563';
-                          e.currentTarget.style.transform = 'translateY(0)';
-                        }}
-                      >
-                        {item.icon}
-                      </a>
-                    ))}
+           {[
+  { platform: 'LinkedIn', icon: 'bi-linkedin' },
+  { platform: 'Facebook', icon: 'bi-facebook' },
+  { platform: 'Instagram', icon: 'bi-instagram' },
+  { platform: 'Twitter', icon: 'bi-twitter' }
+].map((item) => (
+  <a
+    key={item.platform}
+    href={`https://${item.platform.toLowerCase()}.com`}
+    target="_blank"
+    rel="noopener noreferrer"
+    style={{
+      width: '2.25rem',
+      height: '2.25rem',
+      borderRadius: '6px',
+      background: colors.gray100,
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      color: colors.textSecondary,
+      textDecoration: 'none',
+      fontSize: '1rem',
+      transition: 'all 0.2s ease'
+    }}
+    onMouseEnter={(e) => {
+      e.currentTarget.style.background = colors.navy50;
+      e.currentTarget.style.color = colors.accentBlue;
+      e.currentTarget.style.transform = 'translateY(-2px)';
+    }}
+    onMouseLeave={(e) => {
+      e.currentTarget.style.background = colors.gray100;
+      e.currentTarget.style.color = colors.textSecondary;
+      e.currentTarget.style.transform = 'translateY(0)';
+    }}
+  >
+    <i className={`bi ${item.icon}`}></i> {/* Här är ändringen */}
+  </a>
+))}
                   </div>
                 </div>
               </div>
             </div>
 
-            {/* Request Form */}
+            {/* Combined Video Recorder and Request Form Container */}
             <div style={{
-              background: 'white',
-              borderRadius: '8px',
-              border: '1px solid #e5e7eb',
-              boxShadow: '0 1px 3px rgba(0, 0, 0, 0.1)',
+              background: colors.bgCard,
+              borderRadius: 'var(--radius-xl, 20px)',
+              border: `2px solid ${colors.navy200}`,
+              boxShadow: 'var(--shadow-lg, 0 10px 40px rgba(0, 0, 0, 0.2))',
               overflow: 'hidden',
               opacity: isVisible ? 1 : 0,
               transform: isVisible ? 'translateX(0)' : 'translateX(20px)',
               transition: 'all 0.6s ease-out 0.4s',
               height: '100%'
             }}>
-              <div style={{
-                borderLeft: '4px solid #10b981'
-              }}>
-                <RequestForm />
-              </div>
-            </div>
-          </div>
-        </div>
+              {/* Combined Container Header */}
+              
 
-        {/* Video Recorder Section */}
-        <div style={{
-          marginBottom: '3rem',
-          opacity: isVisible ? 1 : 0,
-          transform: isVisible ? 'translateY(0)' : 'translateY(20px)',
-          transition: 'all 0.6s ease-out 0.5s'
-        }}>
-          <div style={{
-            background: 'white',
-            borderRadius: '8px',
-            border: '1px solid #e5e7eb',
-            boxShadow: '0 1px 3px rgba(0, 0, 0, 0.1)',
-            padding: '1.5rem'
-          }}>
-            <div style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: '1rem',
-              marginBottom: '1.5rem',
-              paddingBottom: '1rem',
-              borderBottom: '1px solid #e5e7eb'
-            }}>
+              {/* Combined Content Area - Equal sized sections */}
               <div style={{
-                width: '2.5rem',
-                height: '2.5rem',
-                borderRadius: '8px',
-                background: '#fef3c7',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center'
-              }}>
-                <div style={{ 
-                  fontSize: '1.25rem',
-                  color: '#d97706'
+                display: 'grid',
+                gridTemplateColumns: '1fr',
+                gap: '0',
+                height: '100%'
                 }}>
-                  🎥
+                {/* Request Form Section - Equal height */}
+                <div style={{
+                  padding: '2rem',
+                  borderBottom: `1px solid ${colors.borderLight}`
+                }}>
+                 
+                  
+                  {/* RequestForm wrapper with fixed height */}
+                  <div style={{
+                    minHeight: '350px',
+                    height: '100%',
+                    position: 'relative'
+                  }}>
+                    <RequestForm />
+                  </div>
+                </div>
+
+                {/* Divider */}
+                <div style={{
+                  height: '1px',
+                  background: `linear-gradient(to right, transparent, ${colors.borderLight}, transparent)`,
+                  position: 'relative'
+                }}>
+                  <div style={{
+                    position: 'absolute',
+                    left: '50%',
+                    top: '50%',
+                    transform: 'translate(-50%, -50%)',
+                    background: colors.bgCard,
+                    padding: '0 1rem',
+                    color: colors.navy400,
+                    fontSize: '0.75rem',
+                    fontWeight: '600',
+                    textTransform: 'uppercase',
+                    letterSpacing: '0.1em'
+                  }}>
+                    ELLER
+                  </div>
+                </div>
+
+                {/* Video Recorder Section - Equal height */}
+                <div style={{
+                  padding: '2rem',
+                  borderTop: `1px solid ${colors.borderLight}`
+                }}>
+                 
+                  
+                  
+                  {/* VideoRecorder wrapper with fixed height */}
+                  <div style={{
+                    minHeight: '350px',
+                    height: '100%',
+                    position: 'relative'
+                  }}>
+                    <VideoRecorder />
+                  </div>
                 </div>
               </div>
-              <div>
-                <h2 style={{ 
-                  fontSize: '1.25rem', 
-                  fontWeight: '600', 
-                  color: '#1f2937',
-                  marginBottom: '0.25rem'
+
+              {/* Combined Footer Note */}
+              <div style={{
+                padding: '1rem 2rem',
+                background: colors.navy50,
+                borderTop: `1px solid ${colors.borderLight}`
+              }}>
+                <div style={{
+                  display: 'flex',
+                  alignItems: 'flex-start',
+                  gap: '0.75rem'
                 }}>
-                  Video Presentation
-                </h2>
-                <p style={{ 
-                  color: '#6b7280',
-                  fontSize: '0.875rem'
-                }}>
-                  Skicka en videopresentation för att öka dina chanser
-                </p>
+                  <div style={{
+                    fontSize: '1rem',
+                    color: colors.accentGold
+                  }}>
+                    💡
+                  </div>
+                  <div>
+                    <p style={{
+                      fontSize: '0.75rem',
+                      color: colors.navy600,
+                      lineHeight: '1.4',
+                      margin: 0
+                    }}>
+                      <strong style={{ color: colors.navy900 }}>Tips:</strong> 
+                      Både formuläret och videon hjälper oss att förstå dina behov bättre. 
+                      Du kan välja att skicka båda eller enbart ett av alternativen.
+                    </p>
+                  </div>
+                </div>
               </div>
             </div>
-            <VideoRecorder />
           </div>
         </div>
 
         {/* Map Section */}
         <div style={{
-          background: 'white',
-          borderRadius: '8px',
-          border: '1px solid #e5e7eb',
-          boxShadow: '0 1px 3px rgba(0, 0, 0, 0.1)',
+          background: colors.bgCard,
+          borderRadius: 'var(--radius-xl, 20px)',
+          border: `2px solid ${colors.navy200}`,
+          boxShadow: 'var(--shadow-lg, 0 10px 40px rgba(0, 0, 0, 0.2))',
           overflow: 'hidden',
           marginBottom: '3rem',
           opacity: isVisible ? 1 : 0,
@@ -477,7 +569,7 @@ function Contact() {
         }}>
           <div style={{ 
             padding: '2rem',
-            borderLeft: '4px solid #8b5cf6'
+            borderLeft: `4px solid ${colors.accentPurple}`
           }}>
             <div style={{ 
               display: 'flex', 
@@ -489,22 +581,22 @@ function Contact() {
                 width: '2.5rem',
                 height: '2.5rem',
                 borderRadius: '8px',
-                background: '#f5f3ff',
+                background: colors.navy50,
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center'
               }}>
                 <div style={{ 
                   fontSize: '1.25rem',
-                  color: '#7c3aed'
+                  color: colors.accentPurple
                 }}>
                   🗺️
                 </div>
               </div>
               <h2 style={{ 
                 fontSize: '1.25rem', 
-                fontWeight: '600', 
-                color: '#1f2937' 
+                fontWeight: '700', 
+                color: colors.navy900 
               }}>
                 Hitta till oss
               </h2>
@@ -513,7 +605,7 @@ function Contact() {
             <div style={{ 
               borderRadius: '6px', 
               overflow: 'hidden', 
-              border: '1px solid #e5e7eb',
+              border: `1px solid ${colors.borderLight}`,
               marginBottom: '1.5rem' 
             }}>
               <iframe 
@@ -532,17 +624,17 @@ function Contact() {
               textAlign: 'center', 
               marginBottom: '2rem',
               padding: '1rem',
-              background: '#f9fafb',
+              background: colors.gray50,
               borderRadius: '6px'
             }}>
               <p style={{ 
-                color: '#6b7280', 
+                color: colors.navy600, 
                 display: 'inline-flex',
                 alignItems: 'center',
                 gap: '0.5rem',
                 fontSize: '0.875rem'
               }}>
-                <span style={{ fontSize: '1rem' }}>📍</span>
+                <span style={{ fontSize: '1rem', color: colors.accentBlue }}>📍</span>
                 Vi ligger centralt i Kallithea, nära Aten – lätt att nå med kollektivtrafik
               </p>
             </div>
@@ -555,27 +647,7 @@ function Contact() {
                 gap: '1rem'
               }}>
                 {[
-                  { 
-                    icon: '🚇', 
-                    color: '#3b82f6', 
-                    bg: '#eff6ff', 
-                    title: 'Metro', 
-                    text: '10 min gång från Kallithea Station' 
-                  },
-                  { 
-                    icon: '🚌', 
-                    color: '#10b981', 
-                    bg: '#ecfdf5', 
-                    title: 'Buss', 
-                    text: 'Busshållplats 50m bort (linje 550)' 
-                  },
-                  { 
-                    icon: '🅿️', 
-                    color: '#8b5cf6', 
-                    bg: '#f5f3ff', 
-                    title: 'Parkering', 
-                    text: 'Gratis gatu-parkering i området' 
-                  }
+              
                 ].map((item, index) => (
                   <div 
                     key={index}
@@ -588,9 +660,11 @@ function Contact() {
                     }}
                     onMouseEnter={(e) => {
                       e.currentTarget.style.transform = 'translateX(4px)';
+                      e.currentTarget.style.boxShadow = '0 4px 12px rgba(0, 0, 0, 0.1)';
                     }}
                     onMouseLeave={(e) => {
                       e.currentTarget.style.transform = 'translateX(0)';
+                      e.currentTarget.style.boxShadow = 'none';
                     }}
                   >
                     <div style={{
@@ -608,19 +682,19 @@ function Contact() {
                         justifyContent: 'center',
                         border: `1px solid ${item.color}30`
                       }}>
-                        <div style={{ fontSize: '1.25rem' }}>{item.icon}</div>
+                        <div style={{ fontSize: '1.25rem', color: item.color }}>{item.icon}</div>
                       </div>
                       <div style={{ flex: 1 }}>
                         <h3 style={{ 
                           fontWeight: '600', 
-                          color: '#1f2937', 
+                          color: colors.navy900, 
                           marginBottom: '0.25rem',
                           fontSize: '0.875rem'
                         }}>
                           {item.title}
                         </h3>
                         <p style={{ 
-                          color: '#6b7280',
+                          color: colors.navy600,
                           fontSize: '0.875rem',
                           lineHeight: '1.4'
                         }}>
@@ -635,104 +709,208 @@ function Contact() {
           </div>
         </div>
 
-        {/* Quick Contact CTA */}
+        {/* Quick Contact CTA - SAME as Tjanster spontaneous-cta */}
         <div style={{
-          background: '#1e293b',
-          borderRadius: '8px',
-          padding: '2rem',
+          background: colors.bgDarkCard,
+          borderRadius: 'var(--radius-xl, 20px)',
+          padding: '3rem',
           textAlign: 'center',
           color: 'white',
           opacity: isVisible ? 1 : 0,
           transform: isVisible ? 'translateY(0)' : 'translateY(20px)',
-          transition: 'all 0.6s ease-out 0.7s'
+          transition: 'all 0.6s ease-out 0.7s',
+          position: 'relative',
+          overflow: 'hidden',
+          border: `1px solid ${colors.navy700}`
         }}>
-          <div style={{ maxWidth: '600px', margin: '0 auto' }}>
-            <h2 style={{ 
-              fontSize: '1.5rem', 
-              fontWeight: '600', 
-              marginBottom: '1rem',
-              lineHeight: '1.3'
-            }}>
-              Behöver du omedelbar hjälp?
-            </h2>
-            <p style={{ 
-              color: '#cbd5e1', 
-              marginBottom: '2rem',
-              fontSize: '0.875rem',
-              lineHeight: '1.5'
-            }}>
-              Ring oss direkt eller skicka ett meddelande – vi svarar inom 24 timmar
-            </p>
-            <div style={{ 
-              display: 'flex',
-              flexDirection: 'column',
-              gap: '1rem',
-              alignItems: 'center'
-            }}>
-              <a
-                href="tel:+302101234567"
-                style={{
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  padding: '0.875rem 1.75rem',
-                  background: 'white',
-                  color: '#1e293b',
-                  fontWeight: '600',
-                  borderRadius: '6px',
-                  textDecoration: 'none',
-                  fontSize: '0.875rem',
-                  transition: 'all 0.2s ease',
-                  gap: '0.5rem'
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.background = '#f8fafc';
-                  e.currentTarget.style.transform = 'translateY(-2px)';
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.background = 'white';
-                  e.currentTarget.style.transform = 'translateY(0)';
-                }}
-              >
-                <span style={{ fontSize: '1rem' }}>📞</span>
-                Ring Nu: +30 210 123 4567
-              </a>
-              <a
-                href="mailto:info@globalworker.se"
-                style={{
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  padding: '0.875rem 1.75rem',
-                  background: 'transparent',
-                  color: 'white',
-                  fontWeight: '600',
-                  border: '1px solid #475569',
-                  borderRadius: '6px',
-                  textDecoration: 'none',
-                  fontSize: '0.875rem',
-                  transition: 'all 0.2s ease',
-                  gap: '0.5rem'
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.background = '#475569';
-                  e.currentTarget.style.transform = 'translateY(-2px)';
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.background = 'transparent';
-                  e.currentTarget.style.transform = 'translateY(0)';
-                }}
-              >
-                <span style={{ fontSize: '1rem' }}>✉️</span>
-                Skicka Email
-              </a>
-            </div>
+          {/* Gradient top border */}
+          <div style={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            right: 0,
+            height: '4px',
+            background: `linear-gradient(to right, ${colors.accentBlue}, ${colors.accentGold})`
+          }}></div>
+          
+          {/* Radial gradient overlay */}
+          <div style={{
+            position: 'absolute',
+            top: 0,
+            right: 0,
+            width: '200px',
+            height: '200px',
+            background: 'radial-gradient(circle, rgba(66, 153, 225, 0.1) 0%, transparent 70%)',
+            transform: 'translate(30%, -30%)'
+          }}></div>
+
+          <div className="cta-icon" style={{
+            width: '4rem',
+            height: '4rem',
+            borderRadius: '50%',
+            background: `linear-gradient(135deg, ${colors.accentBlue}, ${colors.primaryBlueLight})`,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            margin: '0 auto 1.5rem',
+            color: 'white',
+            fontSize: '1.5rem',
+            position: 'relative',
+            zIndex: 1,
+            boxShadow: '0 4px 20px rgba(49, 130, 206, 0.3)'
+          }}>
+            <i className="bi bi-telephone"></i>
           </div>
+          
+          <h3 className="cta-title" style={{
+            fontSize: '1.75rem',
+            fontWeight: '700',
+            color: 'white',
+            marginBottom: '1rem',
+            position: 'relative',
+            zIndex: 1,
+            textShadow: '0 2px 4px rgba(0, 0, 0, 0.3)'
+          }}>
+            Behöver du omedelbar hjälp?
+          </h3>
+          
+          <p className="cta-description" style={{
+            color: 'rgba(255, 255, 255, 0.9)',
+            marginBottom: '2rem',
+            fontSize: '1.1rem',
+            maxWidth: '600px',
+            margin: '0 auto 2rem',
+            lineHeight: '1.6',
+            position: 'relative',
+            zIndex: 1
+          }}>
+            Ring oss direkt eller skicka ett meddelande – vi svarar inom 24 timmar
+          </p>
+          
+          <div style={{ 
+            display: 'flex',
+            flexDirection: 'column',
+            gap: '1rem',
+            alignItems: 'center',
+            position: 'relative',
+            zIndex: 1
+          }}>
+            <a
+              href="tel:+30 697 263 6053"
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                padding: '1rem 2.5rem',
+                background: `linear-gradient(135deg, ${colors.accentBlue}, ${colors.primaryBlueLight})`,
+                color: 'white',
+                fontWeight: '700',
+                borderRadius: 'var(--radius-md, 12px)',
+                textDecoration: 'none',
+                fontSize: '1rem',
+                transition: 'all 0.2s ease',
+                gap: '0.5rem',
+                boxShadow: '0 4px 20px rgba(49, 130, 206, 0.3)'
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.background = `linear-gradient(135deg, ${colors.primaryBlueLight}, ${colors.accentBlue})`;
+                e.currentTarget.style.transform = 'translateY(-2px)';
+                e.currentTarget.style.boxShadow = '0 12px 30px rgba(49, 130, 206, 0.4)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.background = `linear-gradient(135deg, ${colors.accentBlue}, ${colors.primaryBlueLight})`;
+                e.currentTarget.style.transform = 'translateY(0)';
+                e.currentTarget.style.boxShadow = '0 4px 20px rgba(49, 130, 206, 0.3)';
+              }}
+            >
+              <span style={{ fontSize: '1rem' }}>📞</span>
+              Ring Nu: +30 697 263 6053
+            </a>
+            <a
+              href="mailto:Johan.karlsson@globalworker.nu"
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                padding: '1rem 2.5rem',
+                background: 'rgba(255, 255, 255, 0.1)',
+                color: 'white',
+                fontWeight: '700',
+                border: '1px solid rgba(255, 255, 255, 0.3)',
+                borderRadius: 'var(--radius-md, 12px)',
+                textDecoration: 'none',
+                fontSize: '1rem',
+                transition: 'all 0.2s ease',
+                gap: '0.5rem',
+                backdropFilter: 'blur(10px)'
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.background = 'rgba(255, 255, 255, 0.2)';
+                e.currentTarget.style.transform = 'translateY(-2px)';
+                e.currentTarget.style.boxShadow = '0 6px 16px rgba(0, 0, 0, 0.2)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.background = 'rgba(255, 255, 255, 0.1)';
+                e.currentTarget.style.transform = 'translateY(0)';
+                e.currentTarget.style.boxShadow = 'none';
+              }}
+            >
+              <span style={{ fontSize: '1rem' }}>✉️</span>
+              Skicka Email
+            </a>
+          </div>
+          
+          <p className="cta-note" style={{
+            fontSize: '0.875rem',
+            color: 'rgba(255, 255, 255, 0.7)',
+            marginTop: '1.5rem',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            gap: '0.5rem',
+            position: 'relative',
+            zIndex: 1
+          }}>
+            <i className="bi bi-clock" style={{ color: colors.accentGold }}></i>
+            Vi återkommer inom 48 timmar
+          </p>
         </div>
       </div>
 
-      {/* Media Queries */}
+      {/* CSS Animations */}
       <style jsx>{`
+        @keyframes fadeInUp {
+          from {
+            opacity: 0;
+            transform: translateY(20px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+        
+        @keyframes slideInRight {
+          from {
+            opacity: 0;
+            transform: translateX(-10px);
+          }
+          to {
+            opacity: 1;
+            transform: translateX(0);
+          }
+        }
+        
+        @keyframes pulse {
+          0%, 100% {
+            opacity: 1;
+          }
+          50% {
+            opacity: 0.7;
+          }
+        }
+        
+        /* Responsive Design */
         @media (min-width: 768px) {
           .contact-grid {
             grid-template-columns: 1fr 1fr !important;
@@ -746,11 +924,45 @@ function Contact() {
           }
         }
         
-        @media (min-width: 640px) {
-          .transport-item {
-            flex-direction: row !important;
-            align-items: center !important;
+        @media (max-width: 768px) {
+          .contact-container {
+            padding: 1.5rem 1rem;
           }
+          
+          .hero-title {
+            font-size: 2.25rem;
+          }
+          
+          .hero-subtitle {
+            font-size: 1.125rem;
+          }
+        }
+        
+        /* Accessibility */
+        @media (prefers-reduced-motion: reduce) {
+          * {
+            animation-duration: 0.01ms !important;
+            animation-iteration-count: 1 !important;
+            transition-duration: 0.01ms !important;
+          }
+          
+          .hero-title,
+          .hero-subtitle,
+          .contact-card,
+          .form-card,
+          .video-card,
+          .map-card,
+          .cta-card {
+            opacity: 1;
+            transform: none;
+          }
+        }
+        
+        /* Focus states */
+        button:focus,
+        a:focus {
+          outline: 2px solid ${colors.accentBlue};
+          outline-offset: 2px;
         }
       `}</style>
     </div>

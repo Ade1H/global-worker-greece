@@ -23,7 +23,7 @@ function HeroSection() {
         id="heroCarousel" 
         className="carousel slide" 
         data-bs-ride="carousel"
-        data-bs-interval="3000"
+        data-bs-interval="8000"
         data-bs-pause="false"
       >
         {/* Carousel Indicators */}
@@ -55,7 +55,7 @@ function HeroSection() {
                   <div className="button-group">
                     <Link to="/Tjanster" className="btn-modern btn-primary-modern">
                       <i className="bi bi-sun me-2"></i>
-                      Hitta jobb i varma länder
+                      våra lediga tjänster
                     </Link>
                   </div>
                 </div>
@@ -141,7 +141,7 @@ function HeroSection() {
 
                   <Link to="/Tjanster" className="btn-modern btn-primary-modern">
                     <i className="bi bi-briefcase me-2"></i>
-                    Se alla jobbmöjligheter
+                    ansök här
                   </Link>
                 </div>
               </div>

@@ -25,64 +25,57 @@ function Tjanster() {
       description: "Bygg karriär inom försäljning direkt till konsumenter. Utveckla kommunikationsförmåga och förstå kundbehov för en framgångsrik säljkarriär.",
       location: "Aten, Grekland",
       employmentTypes: ["Deltid", "Heltid", "Projekt"],
-      icon: "bi-person-badge",
-      color: "#2563eb"
+      icon: "bi-person-badge"
     },
     {
       title: "Säljare B2B",
       description: "Arbeta med försäljning till företag. Utveckla affärsförmåga, bygg långsiktiga kundrelationer och skapa värde genom strategisk marknadsföring.",
       location: "Aten, Grekland",
       employmentTypes: ["Deltid", "Heltid", "Projekt"],
-      icon: "bi-building",
-      color: "#10b981"
+      icon: "bi-building"
     },
     {
       title: "Mötesbokare B2C",
       description: "Inkörsport till säljkarriär. Utveckla stark kommunikationsförmåga och lär dig förstå kundbehov för att bli attraktiv på arbetsmarknaden.",
       location: "Aten, Grekland",
       employmentTypes: ["Deltid", "Heltid", "Projekt"],
-      icon: "bi-calendar-check",
-      color: "#8b5cf6"
+      icon: "bi-calendar-check"
     },
     {
       title: "IT-tekniker",
       description: "Ansvar för installation, underhåll och support av IT-system. Felsökning, teknisk support och säkerhet för hårdvara och mjukvara.",
       location: "Aten, Grekland",
       employmentTypes: ["Deltid", "Heltid", "Projekt"],
-      icon: "bi-laptop",
-      color: "#f59e0b"
+      icon: "bi-laptop"
     },
     {
       title: "Marknadsföringsspecialist",
       description: "Planera, genomför och optimera marknadsföringskampanjer. Utveckla kundrelationer och stärk företagets varumärke.",
       location: "Aten, Grekland",
       employmentTypes: ["Deltid", "Heltid", "Projekt"],
-      icon: "bi-megaphone",
-      color: "#ef4444"
+      icon: "bi-megaphone"
     },
     {
       title: "Revisor",
       description: "Granska och säkerställ korrekthet i bokföring och ekonomiska rapporter. Analysera finansiella processer för regelefterlevnad.",
       location: "Aten, Grekland",
       employmentTypes: ["Deltid", "Heltid", "Projekt"],
-      icon: "bi-calculator",
-      color: "#ec4899"
+      icon: "bi-calculator"
     },
     {
       title: "Kundtjänst",
       description: "Ge utmärkt kundservice genom tydlig kommunikation och support. Säkerställ snabb hjälp och positiv kundupplevelse.",
       location: "Aten, Grekland",
       employmentTypes: ["Deltid", "Heltid", "Projekt"],
-      icon: "bi-headset",
-      color: "#06b6d4"
+      icon: "bi-headset"
     }
   ];
 
   const stats = [
-    { number: '7', label: 'Lediga tjänster', icon: 'bi-briefcase', color: '#2563eb' },
-    { number: '1', label: 'Stad', icon: 'bi-geo-alt', color: '#10b981' },
-    { number: '3', label: 'Anställningsformer', icon: 'bi-clock', color: '#8b5cf6' },
-    { number: '48h', label: 'Snabb respons', icon: 'bi-lightning', color: '#f59e0b' }
+    { number: '7', label: 'Lediga tjänster', icon: 'bi-briefcase' },
+    { number: '1', label: 'Stad', icon: 'bi-geo-alt' },
+    { number: '3', label: 'Anställningsformer', icon: 'bi-clock' },
+    { number: '48h', label: 'Snabb respons', icon: 'bi-lightning' }
   ];
 
   const handleSpontaneousApplication = () => {
@@ -92,13 +85,30 @@ function Tjanster() {
   return (
     <div className="tjanster-container">
       <div className="container">
-        {/* Hero Header */}
+        {/* Hero Section */}
+        <div className="hero-section">
+          <div className="hero-content">
+            <h1 className={`hero-title ${isVisible ? 'visible' : ''}`}>
+              Lediga Tjänster
+            </h1>
+            <p className={`hero-subtitle ${isVisible ? 'visible' : ''}`}>
+              Upptäck spännande karriärmöjligheter inom olika branscher
+            </p>
+            <div className={`hero-search ${isVisible ? 'visible' : ''}`}>
+              <p style={{ margin: 0, color: 'rgba(255, 255, 255, 0.9)', fontSize: '0.95rem' }}>
+                Sök efter tjänster i Aten, Grekland
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {/* Section Header */}
         <div className="section-header">
-          <h1 className={`section-title gradient-text ${isVisible ? 'visible' : ''}`}>
-            Lediga Tjänster
-          </h1>
+          <h2 className={`section-title gradient-text ${isVisible ? 'visible' : ''}`}>
+            Aktuella Lediga Tjänster
+          </h2>
           <p className={`section-subtitle ${isVisible ? 'visible' : ''}`}>
-            Upptäck spännande karriärmöjligheter inom olika branscher
+            Hitta din nästa karriärmöjighet bland våra utvalda tjänster
           </p>
         </div>
 
@@ -113,18 +123,12 @@ function Tjanster() {
               onMouseLeave={() => setHoveredCard(null)}
             >
               {/* Top Color Bar */}
-              <div 
-                className="job-card-bar"
-                style={{ background: `linear-gradient(90deg, ${job.color}, ${job.color}dd)` }}
-              ></div>
+              <div className="job-card-bar"></div>
               
               <div className="job-card-content">
                 {/* Job Header */}
                 <div className="job-card-header">
-                  <div 
-                    className="job-icon"
-                    style={{ backgroundColor: `${job.color}15`, color: job.color }}
-                  >
+                  <div className="job-icon">
                     <i className={`bi ${job.icon}`}></i>
                   </div>
                   <div>
@@ -147,7 +151,6 @@ function Tjanster() {
                     <span 
                       key={typeIndex}
                       className="employment-type"
-                      style={{ backgroundColor: `${job.color}15`, color: job.color }}
                     >
                       {type}
                     </span>
@@ -157,7 +160,6 @@ function Tjanster() {
                 {/* Apply Button */}
                 <button 
                   className="apply-button"
-                  style={{ backgroundColor: job.color }}
                   onClick={() => navigate('/contact', { state: { jobTitle: job.title } })}
                 >
                   {hoveredCard === index ? (
@@ -172,7 +174,7 @@ function Tjanster() {
               
               {/* Hover Arrow */}
               {hoveredCard === index && (
-                <div className="hover-arrow" style={{ color: job.color }}>
+                <div className="hover-arrow">
                   <i className="bi bi-arrow-right-circle"></i>
                 </div>
               )}
@@ -210,10 +212,7 @@ function Tjanster() {
         <div className="stats-bar">
           {stats.map((stat, index) => (
             <div key={index} className="stat-item">
-              <div 
-                className="stat-icon-wrapper"
-                style={{ backgroundColor: `${stat.color}15`, color: stat.color }}
-              >
+              <div className="stat-icon-wrapper">
                 <i className={`bi ${stat.icon}`}></i>
               </div>
               <div className="stat-number">{stat.number}</div>

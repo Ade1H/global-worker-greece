@@ -1,4 +1,4 @@
-/* Tjanster.css - Mörkblå professionell version */
+/* Resurser.css - EXACT SAME STYLING as Tjanster.css */
 
 /* Dark Blue/Navy Color Theme */
 :root {
@@ -48,7 +48,7 @@
 }
 
 /* Base Container */
-.tjanster-container {
+.resurser-container {
   min-height: 100vh;
   background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
   padding: 2rem 1rem;
@@ -59,7 +59,7 @@
   margin: 0 auto;
 }
 
-/* Hero Section - Mörkblå tema */
+/* Hero Section - EXACT SAME */
 .hero-section {
   background: linear-gradient(135deg, var(--primary-navy) 0%, var(--primary-navy-light) 100%);
   color: white;
@@ -140,7 +140,7 @@
   transform: translateY(0);
 }
 
-/* Section Headers */
+/* Section Headers - EXACT SAME */
 .section-header {
   text-align: center;
   margin-bottom: 3rem;
@@ -198,7 +198,59 @@
   transform: translateY(0);
 }
 
-/* Job Grid */
+/* Stats Bar - EXACT SAME */
+.stats-bar {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+  background: linear-gradient(135deg, var(--navy-800) 0%, var(--navy-900) 100%);
+  border-radius: var(--radius-lg);
+  padding: 2.5rem;
+  box-shadow: var(--shadow-lg);
+  border: 1px solid var(--navy-700);
+  color: white;
+  margin-bottom: 3rem;
+}
+
+@media (min-width: 640px) {
+  .stats-bar {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.stat-item {
+  text-align: center;
+}
+
+.stat-icon-wrapper {
+  width: 3rem;
+  height: 3rem;
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 0.75rem;
+  font-size: 1.25rem;
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--primary-blue-light);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+}
+
+.stat-number {
+  font-size: 1.75rem;
+  font-weight: 800;
+  color: white;
+  margin-bottom: 0.25rem;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.stat-label {
+  font-size: 0.875rem;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+/* Job Grid - EXACT SAME */
 .job-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -218,7 +270,7 @@
   }
 }
 
-/* Job Card */
+/* Job Card - EXACT SAME */
 .job-card {
   background: white;
   border-radius: var(--radius-xl);
@@ -302,7 +354,7 @@
   text-overflow: ellipsis;
 }
 
-/* Employment Types */
+/* Employment Types - EXACT SAME */
 .employment-types {
   display: flex;
   flex-wrap: wrap;
@@ -327,7 +379,7 @@
   transform: translateY(-1px);
 }
 
-/* Apply Button */
+/* Apply Button - EXACT SAME */
 .apply-button {
   background: linear-gradient(to right, var(--primary-navy), var(--navy-700));
   color: white;
@@ -352,7 +404,7 @@
   box-shadow: 0 8px 20px rgba(10, 31, 68, 0.3);
 }
 
-/* Hover Arrow */
+/* Hover Arrow - EXACT SAME */
 .hover-arrow {
   position: absolute;
   top: 1rem;
@@ -368,7 +420,68 @@
   opacity: 1;
 }
 
-/* Spontaneous CTA */
+/* Filter Section */
+.filter-section {
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.filter-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  justify-content: center;
+  margin-top: 1rem;
+}
+
+.filter-tab {
+  background: linear-gradient(145deg, var(--navy-50) 0%, var(--navy-100) 100%);
+  color: var(--navy-800);
+  border: 2px solid var(--navy-200);
+  padding: 0.75rem 1.5rem;
+  border-radius: 50px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all var(--transition-base);
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  box-shadow: var(--shadow-sm);
+}
+
+.filter-tab:hover {
+  background: linear-gradient(145deg, var(--navy-100) 0%, var(--navy-200) 100%);
+  border-color: var(--accent-blue);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.filter-tab.active {
+  background: linear-gradient(to right, var(--primary-navy), var(--navy-700));
+  color: white;
+  border-color: var(--primary-navy);
+  box-shadow: 0 4px 12px rgba(10, 31, 68, 0.2);
+}
+
+.filter-label {
+  font-weight: 600;
+}
+
+.filter-count {
+  background: rgba(255, 255, 255, 0.2);
+  color: currentColor;
+  padding: 0.125rem 0.5rem;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  margin-left: 0.25rem;
+}
+
+.filter-tab.active .filter-count {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* Spontaneous CTA - EXACT SAME */
 .spontaneous-cta {
   background: linear-gradient(135deg, var(--primary-navy) 0%, var(--navy-800) 100%);
   border-radius: var(--radius-xl);
@@ -487,58 +600,7 @@
   color: var(--accent-gold);
 }
 
-/* Stats Bar */
-.stats-bar {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 1.5rem;
-  background: linear-gradient(135deg, var(--navy-800) 0%, var(--navy-900) 100%);
-  border-radius: var(--radius-lg);
-  padding: 2.5rem;
-  box-shadow: var(--shadow-lg);
-  border: 1px solid var(--navy-700);
-  color: white;
-}
-
-@media (min-width: 640px) {
-  .stats-bar {
-    grid-template-columns: repeat(4, 1fr);
-  }
-}
-
-.stat-item {
-  text-align: center;
-}
-
-.stat-icon-wrapper {
-  width: 3rem;
-  height: 3rem;
-  border-radius: var(--radius-md);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0 auto 0.75rem;
-  font-size: 1.25rem;
-  background: rgba(255, 255, 255, 0.1);
-  color: var(--primary-blue-light);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  backdrop-filter: blur(10px);
-}
-
-.stat-number {
-  font-size: 1.75rem;
-  font-weight: 800;
-  color: white;
-  margin-bottom: 0.25rem;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-}
-
-.stat-label {
-  font-size: 0.875rem;
-  color: rgba(255, 255, 255, 0.8);
-}
-
-/* Animations */
+/* Animations - EXACT SAME */
 @keyframes fadeInUp {
   from {
     opacity: 0;
@@ -561,9 +623,9 @@
   }
 }
 
-/* Responsive Design */
+/* Responsive Design - EXACT SAME */
 @media (max-width: 768px) {
-  .tjanster-container {
+  .resurser-container {
     padding: 1.5rem 1rem;
   }
   
@@ -611,9 +673,19 @@
   .stats-bar {
     padding: 2rem;
   }
+  
+  .filter-tabs {
+    justify-content: flex-start;
+    overflow-x: auto;
+    padding-bottom: 1rem;
+  }
+  
+  .filter-tab {
+    flex-shrink: 0;
+  }
 }
 
-/* Accessibility */
+/* Accessibility - EXACT SAME */
 @media (prefers-reduced-motion: reduce) {
   * {
     animation-duration: 0.01ms !important;
@@ -633,15 +705,16 @@
   }
 }
 
-/* Focus states */
+/* Focus states - EXACT SAME */
 .job-card:focus-within,
 .apply-button:focus,
-.cta-button:focus {
+.cta-button:focus,
+.filter-tab:focus {
   outline: 2px solid var(--accent-blue);
   outline-offset: 2px;
 }
 
-/* Loading state for job cards */
+/* Loading state for resource cards */
 .job-card.loading {
   animation: pulse 1.5s infinite;
 }
