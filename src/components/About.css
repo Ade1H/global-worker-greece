@@ -1,4 +1,4 @@
-/* OmOss.css - Mörkblå professionell version */
+/* About.css - Uppdaterad för att matcha din JSX */
 
 /* Dark Blue/Navy Color Theme */
 :root {
@@ -37,19 +37,33 @@
   --transition-slow: 500ms ease;
 }
 
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+}
+
+/* Main Container */
 .om-container {
   min-height: 100vh;
   background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
   padding: 2rem 1rem;
+  width: 100%;
 }
 
 .om-content {
   max-width: 1200px;
   margin: 0 auto;
+  width: 100%;
 }
 
-/* Hero Section - Mörkblå tema */
-.om-hero {
+/* HERO SECTION - MATCHAR DIN JSX */
+.hero-section {
   background: linear-gradient(135deg, var(--primary-navy) 0%, var(--primary-navy-light) 100%);
   color: white;
   padding: clamp(3rem, 5vw, 5rem) clamp(1.5rem, 2vw, 2rem);
@@ -58,18 +72,19 @@
   margin-bottom: 4rem;
   position: relative;
   overflow: hidden;
+  width: 100%;
+  min-height: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.hero-background {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: radial-gradient(circle at 20% 80%, rgba(255, 255, 255, 0.1) 2px, transparent 2px);
-  background-size: 50px 50px;
-  opacity: 0.3;
-  animation: floatParticles 20s linear infinite;
+.hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 900px;
+  margin: 0 auto;
+  width: 100%;
 }
 
 .hero-title {
@@ -82,18 +97,37 @@
   -webkit-text-fill-color: transparent;
   background-clip: text;
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all var(--transition-base);
 }
 
-.hero-description {
+.hero-title.visible {
+  opacity: 1;
+  transform: translateY(0);
+  animation: fadeInUp 0.6s ease forwards;
+}
+
+.hero-subtitle {
   font-size: clamp(1.1rem, 1.25vw, 1.25rem);
   opacity: 0.9;
   max-width: 700px;
   margin: 0 auto 2rem;
   line-height: 1.6;
   color: rgba(255, 255, 255, 0.9);
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all var(--transition-base);
+  transition-delay: 0.2s;
 }
 
-/* Mission & Vision */
+.hero-subtitle.visible {
+  opacity: 1;
+  transform: translateY(0);
+  animation: fadeInUp 0.6s ease forwards 0.2s;
+}
+
+/* Mission & Vision Grid */
 .mission-vision-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -167,7 +201,7 @@
   font-size: 1.75rem;
   font-weight: 700;
   margin-bottom: 1rem;
-  text-shadow: 0 2px 4px rgba(236, 229, 229, 0.3);
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 .card-description {
@@ -177,8 +211,8 @@
   color: rgba(255, 255, 255, 0.9);
 }
 
-/* Stats Section */
-.stats-section {
+/* Values Section */
+.values-section {
   margin-bottom: 4rem;
 }
 
@@ -214,69 +248,6 @@
   max-width: 600px;
   margin: 2rem auto 0;
   line-height: 1.6;
-}
-
-.stats-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 1.5rem;
-}
-
-.stat-card {
-  background: white;
-  border-radius: var(--radius-xl);
-  padding: 2rem;
-  text-align: center;
-  box-shadow: var(--shadow-lg);
-  border: 2px solid var(--navy-200);
-  transition: all var(--transition-base);
-  opacity: 0;
-  transform: translateY(20px);
-}
-
-.stat-card.visible {
-  opacity: 1;
-  transform: translateY(0);
-  animation: fadeInUp 0.6s ease forwards;
-}
-
-.stat-card:hover {
-  transform: translateY(-5px);
-  box-shadow: var(--shadow-xl);
-  border-color: var(--accent-blue);
-}
-
-.stat-icon-wrapper {
-  width: 3rem;
-  height: 3rem;
-  border-radius: var(--radius-md);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0 auto 1rem;
-  font-size: 1.5rem;
-  background: linear-gradient(135deg, var(--primary-navy) 0%, var(--navy-700) 100%);
-  color: white;
-  box-shadow: 0 4px 12px rgba(10, 31, 68, 0.2);
-}
-
-.stat-number {
-  font-size: 2.5rem;
-  font-weight: 800;
-  color: var(--navy-900);
-  margin-bottom: 0.5rem;
-  line-height: 1;
-}
-
-.stat-label {
-  font-size: 1rem;
-  color: var(--navy-600);
-  font-weight: 500;
-}
-
-/* Values Section */
-.values-section {
-  margin-bottom: 4rem;
 }
 
 .values-grid {
@@ -334,128 +305,6 @@
   color: var(--navy-600);
   line-height: 1.6;
   margin: 0;
-}
-
-/* Timeline Section */
-.timeline-section {
-  margin-bottom: 4rem;
-}
-
-.timeline-container {
-  position: relative;
-}
-
-.timeline-line {
-  position: absolute;
-  left: 50%;
-  top: 0;
-  bottom: 0;
-  width: 3px;
-  background: linear-gradient(to bottom, var(--primary-navy), var(--accent-blue), var(--primary-blue-light));
-  transform: translateX(-50%);
-  z-index: 1;
-}
-
-.timeline-items {
-  display: grid;
-  gap: 2rem;
-}
-
-.timeline-item {
-  display: flex;
-  align-items: center;
-  gap: 1.5rem;
-  position: relative;
-  z-index: 2;
-  opacity: 0;
-  transform: translateY(20px);
-}
-
-.timeline-item.visible {
-  opacity: 1;
-  transform: translateY(0);
-  animation: fadeInUp 0.6s ease forwards;
-}
-
-.timeline-content {
-  flex: 1;
-  background: white;
-  border-radius: var(--radius-lg);
-  padding: 1.5rem;
-  box-shadow: var(--shadow-lg);
-  border: 2px solid var(--navy-200);
-  transition: all var(--transition-base);
-}
-
-.timeline-content:hover {
-  transform: translateY(-5px);
-  box-shadow: var(--shadow-xl);
-  border-color: var(--accent-blue);
-}
-
-.timeline-content-header {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  margin-bottom: 0.75rem;
-}
-
-.content-icon-wrapper {
-  width: 2.5rem;
-  height: 2.5rem;
-  border-radius: var(--radius-sm);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.25rem;
-  background: linear-gradient(135deg, var(--primary-navy) 0%, var(--navy-700) 100%);
-  color: white;
-  box-shadow: 0 4px 12px rgba(10, 31, 68, 0.2);
-}
-
-.content-title {
-  font-size: 1.25rem;
-  font-weight: 700;
-  color: var(--navy-900);
-  margin: 0;
-}
-
-.content-description {
-  color: var(--navy-600);
-  line-height: 1.6;
-  margin: 0;
-}
-
-.timeline-year {
-  width: 5rem;
-  height: 5rem;
-  background: linear-gradient(135deg, var(--primary-navy) 0%, var(--navy-700) 100%);
-  border-radius: 50%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  color: white;
-  font-weight: 700;
-  flex-shrink: 0;
-  box-shadow: 0 4px 12px rgba(10, 31, 68, 0.3);
-  border: 2px solid white;
-  z-index: 3;
-}
-
-.year-number {
-  font-size: 1.5rem;
-  line-height: 1;
-}
-
-.year-label {
-  font-size: 0.75rem;
-  opacity: 0.9;
-  margin-top: 0.25rem;
-}
-
-.timeline-spacer {
-  flex: 1;
 }
 
 /* Reasons Section */
@@ -547,17 +396,6 @@
   background: linear-gradient(to right, var(--accent-blue), var(--accent-gold));
 }
 
-.cta-section::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 200px;
-  height: 200px;
-  background: radial-gradient(circle, rgba(66, 153, 225, 0.1) 0%, transparent 70%);
-  transform: translate(30%, -30%);
-}
-
 .cta-title {
   font-size: clamp(1.5rem, 2vw, 2rem);
   font-weight: 800;
@@ -631,11 +469,6 @@
 }
 
 /* Animations */
-@keyframes floatParticles {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-}
-
 @keyframes fadeInUp {
   from {
     opacity: 0;
@@ -647,40 +480,23 @@
   }
 }
 
-/* Responsive */
+/* Responsive Design */
 @media (max-width: 767px) {
-  .om-hero {
+  .hero-section {
     padding: 3rem 1.5rem;
+    min-height: 300px;
   }
   
   .mission-vision-grid {
     grid-template-columns: 1fr;
   }
   
-  .stats-grid {
-    grid-template-columns: repeat(2, 1fr);
+  .values-grid {
+    grid-template-columns: 1fr;
   }
   
   .reasons-grid {
     grid-template-columns: repeat(2, 1fr);
-  }
-  
-  .timeline-item {
-    flex-direction: column;
-    text-align: center;
-  }
-  
-  .timeline-content {
-    width: 100%;
-  }
-  
-  .timeline-year {
-    order: -1;
-    margin-bottom: 1rem;
-  }
-  
-  .timeline-line {
-    display: none;
   }
   
   .cta-buttons {
@@ -692,12 +508,26 @@
   }
 }
 
-@media (min-width: 768px) {
-  .om-hero {
-    padding: 5rem 2rem;
+@media (min-width: 768px) and (max-width: 1023px) {
+  .hero-section {
+    min-height: 350px;
   }
   
-  .stats-grid {
+  .values-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .reasons-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .hero-section {
+    min-height: 400px;
+  }
+  
+  .values-grid {
     grid-template-columns: repeat(4, 1fr);
   }
   
@@ -714,17 +544,20 @@
     transition-duration: 0.01ms !important;
   }
   
-  .hero-background {
-    animation: none;
-  }
-  
+  .hero-title,
+  .hero-subtitle,
   .mission-card,
   .vision-card,
-  .stat-card,
   .value-card,
-  .timeline-item,
   .reason-card {
     opacity: 1;
     transform: none;
   }
+}
+
+/* Debug om fortfarande inte syns */
+.hero-section {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
 }

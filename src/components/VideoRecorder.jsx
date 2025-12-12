@@ -139,7 +139,8 @@ function VideoRecorder() {
     formData.append('timestamp', new Date().toISOString());
 
     try {
-      const response = await fetch('http://localhost:5000/api/send-video', {
+      // DENNA RAD ÄR ÄNDRAD MED DIN RENDER-URL
+      const response = await fetch('https://cv-backend-290a.onrender.com/api/send-video', {
         method: 'POST',
         body: formData,
       });

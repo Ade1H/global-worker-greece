@@ -37,26 +37,27 @@ const upload = multer({
   },
 });
 
-// Nodemailer transporter for Loopia
+// RESEND TRANSPORTER (ersätter Loopia)
 const transporter = nodemailer.createTransport({
   host: process.env.EMAIL_HOST,
-  port: parseInt(process.env.EMAIL_PORT),
-  secure: false,
+  port: Number(process.env.EMAIL_PORT),
+  secure: process.env.EMAIL_SECURE === "true",
   auth: {
     user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASS,
+    pass: process.env.EMAIL_PASS
   },
   tls: {
     rejectUnauthorized: false
   }
 });
 
+
 // Test email connection
 transporter.verify(function(error, success) {
   if (error) {
     console.log("SMTP connection error:", error);
   } else {
-    console.log("SMTP server is ready to send emails");
+    console.log("✅ Resend SMTP server is ready to send emails");
   }
 });
 
@@ -65,13 +66,13 @@ app.post("/api/send-cv", upload.single("cv"), async (req, res) => {
   const { name, email, phone, message } = req.body;
   const cvFile = req.file;
 
-  console.log("Received CV submission:", { name, email, phone });
+  console.log("📄 CV mottaget från:", { name, email, phone });
 
   try {
     const mailOptions = {
-      from: process.env.EMAIL_USER,
+      from: 'CV Formulär <noreply@globalworker.nu>',  // Verifiera denna i Resend
       replyTo: email,
-      to: process.env.EMAIL_USER,
+      to: 'Johan.karlsson@globalworker.nu',           // ALLTID till DIG
       subject: "NYTT CV: " + name,
       text: "Namn: " + name + "\n" +
             "E-post: " + email + "\n" +
@@ -98,7 +99,7 @@ app.post("/api/send-cv", upload.single("cv"), async (req, res) => {
     }
 
     await transporter.sendMail(mailOptions);
-    console.log("CV email sent successfully to", process.env.EMAIL_USER);
+    console.log("✅ CV email skickat till Johan.karlsson@globalworker.nu");
     
     res.json({ 
       success: true, 
@@ -118,12 +119,12 @@ app.post("/api/send-cv", upload.single("cv"), async (req, res) => {
 app.post("/api/send-video", upload.single("video"), async (req, res) => {
   const videoFile = req.file;
 
-  console.log("Received Video submission, file size:", videoFile ? videoFile.size : 'No file');
+  console.log("🎥 Video CV mottaget, filstorlek:", videoFile ? videoFile.size : 'Ingen fil');
 
   try {
     const mailOptions = {
-      from: process.env.EMAIL_USER,
-      to: process.env.EMAIL_USER,
+      from: 'Video CV <video@globalworker.nu>',  // Verifiera denna i Resend
+      to: 'Johan.karlsson@globalworker.nu',      // ALLTID till DIG
       subject: "NYTT VIDEO CV",
       text: "Ett nytt video CV har skickats via webbplatsen.\n\n" +
             "---\n" +
@@ -145,7 +146,7 @@ app.post("/api/send-video", upload.single("video"), async (req, res) => {
     }
 
     await transporter.sendMail(mailOptions);
-    console.log("Video email sent successfully to", process.env.EMAIL_USER);
+    console.log("✅ Video email skickat till Johan.karlsson@globalworker.nu");
     
     res.json({ 
       success: true, 
@@ -171,5 +172,5 @@ app.use((err, req, res, next) => {
   next();
 });
 
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log("Backend körs på http://localhost:" + PORT));
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => console.log("✅ Backend körs på port " + PORT));
