@@ -1,4 +1,4 @@
-﻿import React, { useState, useEffect } from 'react';
+﻿import React, { useState, useEffect, useRef } from 'react';
 import './RequestForm.css';
 
 function RequestForm() {
@@ -14,9 +14,20 @@ function RequestForm() {
   const [error, setError] = useState('');
   const [fileName, setFileName] = useState('');
   const [isVisible, setIsVisible] = useState(false);
+  const [backendUrl, setBackendUrl] = useState('');
+  const fileInputRef = useRef(null);
 
   useEffect(() => {
     setIsVisible(true);
+    
+    // Sätt backend URL baserat på miljö
+    const isLocalhost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+    const url = isLocalhost 
+      ? 'http://localhost:3000'  // Lokal backend
+      : 'https://cv-backend-290a.onrender.com';  // Render backend
+    
+    setBackendUrl(url);
+    console.log(`Backend URL satt till: ${url}`);
   }, []);
 
   const handleSubmit = async (e) => {
@@ -24,24 +35,43 @@ function RequestForm() {
     setSubmitting(true);
     setError('');
 
+    // Manuell validering av CV-fil
+    if (!formData.cv) {
+      setError('Du måste ladda upp en CV-fil');
+      setSubmitting(false);
+      return;
+    }
+
+    // Validera namn och email
+    if (!formData.name.trim()) {
+      setError('Namn är obligatoriskt');
+      setSubmitting(false);
+      return;
+    }
+
+    if (!formData.email.trim()) {
+      setError('E-post är obligatoriskt');
+      setSubmitting(false);
+      return;
+    }
+
     const submitData = new FormData();
     submitData.append('name', formData.name);
     submitData.append('email', formData.email);
     submitData.append('phone', formData.phone);
     submitData.append('message', formData.message);
-    
-    if (formData.cv) {
-      submitData.append('cv', formData.cv);
-    }
+    submitData.append('cv', formData.cv);
 
     try {
-      // DENNA RAD ÄR ÄNDRAD: localhost → din Render-URL
-      const response = await fetch('https://cv-backend-290a.onrender.com/api/send-cv', {
+      console.log('Skickar CV till:', `${backendUrl}/api/send-cv`);
+      
+      const response = await fetch(`${backendUrl}/api/send-cv`, {
         method: 'POST',
         body: submitData,
       });
 
       const result = await response.json();
+      console.log('Svar från server:', result);
 
       if (result.success) {
         setSubmitted(true);
@@ -49,8 +79,8 @@ function RequestForm() {
         setError(result.message || 'Något gick fel vid sändning');
       }
     } catch (err) {
-      setError('Kunde inte ansluta till servern. Kontrollera att backend körs.');
-      console.error('Error:', err);
+      console.error('Fetch error:', err);
+      setError(`Kunde inte ansluta till servern på ${backendUrl}. Kontrollera att backend körs.`);
     } finally {
       setSubmitting(false);
     }
@@ -62,6 +92,7 @@ function RequestForm() {
       // Check file size (max 10MB)
       if (file.size > 10 * 1024 * 1024) {
         setError('Filen är för stor. Maximal storlek är 10MB.');
+        e.target.value = ''; // Rensa input
         return;
       }
       
@@ -70,12 +101,19 @@ function RequestForm() {
                            'application/vnd.openxmlformats-officedocument.wordprocessingml.document'];
       if (!allowedTypes.includes(file.type)) {
         setError('Ogiltigt filformat. Endast PDF, DOC och DOCX är tillåtna.');
+        e.target.value = ''; // Rensa input
         return;
       }
       
       setFormData({ ...formData, cv: file });
       setFileName(file.name);
       setError('');
+    }
+  };
+
+  const handleFileClick = () => {
+    if (fileInputRef.current) {
+      fileInputRef.current.click();
     }
   };
 
@@ -90,11 +128,17 @@ function RequestForm() {
       cv: null,
       message: ''
     });
+    if (fileInputRef.current) {
+      fileInputRef.current.value = '';
+    }
   };
 
   const removeFile = () => {
     setFormData({ ...formData, cv: null });
     setFileName('');
+    if (fileInputRef.current) {
+      fileInputRef.current.value = '';
+    }
   };
 
   return (
@@ -199,8 +243,16 @@ function RequestForm() {
                   </div>
                 )}
 
+                {/* Backend Status */}
+                <div className="backend-status">
+                  <small>
+                    <i className="bi bi-server"></i>
+                    Ansluten till: {backendUrl || 'Laddar...'}
+                  </small>
+                </div>
+
                 {/* Form */}
-                <form onSubmit={handleSubmit}>
+                <form onSubmit={handleSubmit} noValidate>
                   <div className="form-grid">
                     {/* Name Field */}
                     <div className="form-group">
@@ -265,7 +317,7 @@ function RequestForm() {
                       {!fileName ? (
                         <div 
                           className="file-dropzone"
-                          onClick={() => document.getElementById('file-input').click()}
+                          onClick={handleFileClick}
                         >
                           <div className="dropzone-icon">
                             <i className="bi bi-cloud-arrow-up"></i>
@@ -277,12 +329,13 @@ function RequestForm() {
                             PDF, DOC, DOCX (max 10MB)
                           </p>
                           <input
+                            ref={fileInputRef}
                             id='file-input'
                             type='file'
                             accept='.pdf,.doc,.docx'
                             onChange={handleFileChange}
-                            required
                             className="file-input"
+                            style={{ display: 'none' }}
                           />
                         </div>
                       ) : (

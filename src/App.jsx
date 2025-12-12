@@ -1,5 +1,5 @@
 ﻿import React, { useState, useEffect } from 'react';
-import { HashRouter as Router, Routes, Route } from 'react-router-dom';
+import { HashRouter as Router, Routes, Route } from 'react-router-dom'; // Line 2
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import Sidebar from './components/Sidebar';
@@ -38,7 +38,11 @@ function App() {
   const sidebarWidth = isMobile ? '0' : '280px';
 
   return (
-    <Router>
+    <Router
+      future={{
+        v7_startTransition: true
+      }}
+    > {/* Add the future prop here */}
       <div style={{ 
         minHeight: '100vh', 
         display: 'flex', 
