@@ -149,6 +149,7 @@ app.get("/", (req, res) => {
 });
 
 // Starta server
+console.log("=== Using SendGrid Email Service ===");
 const PORT = process.env.PORT || 3000;
 
 // Root route - add this if missing
@@ -162,4 +163,5 @@ app.get("/", (req, res) => {
     }
   });
 });
+
 app.listen(PORT, '0.0.0.0', () => console.log(`✅ Server körs på port ${PORT}`));
