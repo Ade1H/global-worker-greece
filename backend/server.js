@@ -74,7 +74,7 @@ app.post("/api/send-cv", upload.single("cv"), async (req, res) => {
     const cvFile = req.file;
 
     const mailOptions = {
-      from: `"CV Formulär" <${process.env.EMAIL_USER}>`,
+     from: `"CV Formulär" <Johan.karlsson@globalworker.nu>`,
       replyTo: email,
       to: 'Johan.karlsson@globalworker.nu',
       subject: `NYTT CV: ${name}`,
@@ -111,7 +111,7 @@ app.post("/api/send-video", upload.single("video"), async (req, res) => {
     }
 
     const mailOptions = {
-      from: `"Video CV" <${process.env.EMAIL_USER}>`,
+      from: `"Video CV" <Johan.karlsson@globalworker.nu>`,
       to: 'Johan.karlsson@globalworker.nu',
       subject: "NYTT VIDEO CV",
       text: `Ett nytt video CV har skickats.\nFil: ${videoFile.originalname}\nStorlek: ${Math.round(videoFile.size / 1024 / 1024)} MB`,
