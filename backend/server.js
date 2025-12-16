@@ -6,10 +6,15 @@ require("dotenv").config();
 
 const app = express();
 
-// CORS: tillåt bara din frontend
+// FIXED CORS: Allow both your main domain AND Render frontend
 app.use(cors({
-  origin: 'https://globalworker.nu'
+  origin: [
+    'https://globalworker.nu',                     // Your main domain
+    'https://global-worker-frontend.onrender.com', // Your Render frontend
+    'http://localhost:5173'                        // Local development
+  ]
 }));
+
 app.use(express.json());
 
 // Multer config för filuppladdning
@@ -138,6 +143,11 @@ app.use((err, req, res, next) => {
     return res.status(400).json({ success: false, message: err.message });
   }
   res.status(500).json({ success: false, message: err.message });
+});
+
+// Root route for testing
+app.get("/", (req, res) => {
+  res.json({ message: "Backend is running", timestamp: new Date() });
 });
 
 // Starta server

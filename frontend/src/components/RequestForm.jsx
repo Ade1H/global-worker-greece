@@ -20,11 +20,11 @@ function RequestForm() {
   useEffect(() => {
     setIsVisible(true);
     
-    // Sätt backend URL baserat på miljö
-    const url = 'https://cv.globalworker.nu'; // <-- här ändrar du
+    // FIXED: Use your actual Render backend URL
+    const url = 'https://global-worker-backend.onrender.com';
     setBackendUrl(url);
     console.log(`Backend URL satt till: ${url}`);
-}, []);
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
