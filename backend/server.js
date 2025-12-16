@@ -46,17 +46,15 @@ const upload = multer({
   },
 });
 
-// Nodemailer transporter för Loopia
+
+// Nodemailer transporter för SendGrid
 const transporter = nodemailer.createTransport({
-  host: process.env.EMAIL_HOST,
-  port: parseInt(process.env.EMAIL_PORT),
-  secure: process.env.EMAIL_SECURE === 'true', // måste vara boolean
+  host: 'smtp.sendgrid.net', // SendGrids server
+  port: 587,                 // Standardport för SendGrid
+  secure: false,             // Använd STARTTLS
   auth: {
-    user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASS,
-  },
-  tls: {
-    rejectUnauthorized: false
+    user: 'apikey',          // Ordet 'apikey' skrivs bokstavligen här
+    pass: process.env.SENDGRID_API_KEY // Din hemliga nyckel kommer härifrån
   }
 });
 
