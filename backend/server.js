@@ -152,4 +152,14 @@ app.get("/", (req, res) => {
 
 // Starta server
 const PORT = process.env.PORT || 3000;
+// Add this route before app.listen()
+app.get("/", (req, res) => {
+  res.json({
+    message: "Backend server is running",
+    api_endpoints: {
+      send_cv: "POST /api/send-cv",
+      send_video: "POST /api/send-video"
+    }
+  });
+});
 app.listen(PORT, '0.0.0.0', () => console.log(`✅ Server körs på port ${PORT}`));
