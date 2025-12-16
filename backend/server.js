@@ -58,6 +58,8 @@ const transporter = nodemailer.createTransport({
   }
 });
 
+console.log("SendGrid Transporter Created. API Key present?", !!process.env.SENDGRID_API_KEY);
+
 // Testa SMTP
 transporter.verify((error, success) => {
   if (error) {
