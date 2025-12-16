@@ -114,14 +114,14 @@ function Contact() {
                     <h4>Följ oss</h4>
                     <div className="social-links">
                       {[
-                        { platform: 'LinkedIn', icon: 'bi-linkedin' },
-                        { platform: 'Facebook', icon: 'bi-facebook' },
-                        { platform: 'Instagram', icon: 'bi-instagram' },
-                        { platform: 'Twitter', icon: 'bi-twitter' }
+                        { platform: 'LinkedIn', icon: 'bi-linkedin', url: 'https://www.linkedin.com/your-profile' },
+                        { platform: 'Facebook', icon: 'bi-facebook', url: 'https://www.facebook.com/profile.php?id=61584620006161' },
+                        { platform: 'Instagram', icon: 'bi-instagram', url: 'https://www.instagram.com/worker.global/' },
+                        { platform: 'Twitter', icon: 'bi-twitter', url: 'https://twitter.com/your-profile' }
                       ].map((item) => (
                         <a
                           key={item.platform}
-                          href={`https://${item.platform.toLowerCase()}.com`}
+                          href={item.url}
                           target="_blank"
                           rel="noopener noreferrer"
                           className="social-link"
@@ -132,6 +132,7 @@ function Contact() {
                       ))}
                     </div>
                   </div>
+
                 </div>
               </div>
 

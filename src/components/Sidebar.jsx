@@ -134,7 +134,7 @@ function Sidebar() {
     fontSize: "0.95rem",
     fontWeight: "500",
     flex: 1,
-  };
+  }
 
   const badgeStyle = {
     backgroundColor: '#0ea5e9',

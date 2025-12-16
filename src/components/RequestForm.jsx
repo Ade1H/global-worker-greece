@@ -21,14 +21,10 @@ function RequestForm() {
     setIsVisible(true);
     
     // Sätt backend URL baserat på miljö
-    const isLocalhost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
-    const url = isLocalhost 
-      ? 'http://localhost:3000'  // Lokal backend
-      : 'https://cv-backend-290a.onrender.com';  // Render backend
-    
+    const url = 'https://cv.globalworker.nu'; // <-- här ändrar du
     setBackendUrl(url);
     console.log(`Backend URL satt till: ${url}`);
-  }, []);
+}, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -243,13 +239,7 @@ function RequestForm() {
                   </div>
                 )}
 
-                {/* Backend Status */}
-                <div className="backend-status">
-                  <small>
-                    <i className="bi bi-server"></i>
-                    Ansluten till: {backendUrl || 'Laddar...'}
-                  </small>
-                </div>
+
 
                 {/* Form */}
                 <form onSubmit={handleSubmit} noValidate>
