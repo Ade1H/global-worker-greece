@@ -152,11 +152,13 @@ app.get("/", (req, res) => {
 
 // Starta server
 const PORT = process.env.PORT || 3000;
-// Add this route before app.listen()
+
+// Root route - add this if missing
 app.get("/", (req, res) => {
-  res.json({
+  res.json({ 
     message: "Backend server is running",
-    api_endpoints: {
+    timestamp: new Date(),
+    endpoints: {
       send_cv: "POST /api/send-cv",
       send_video: "POST /api/send-video"
     }
