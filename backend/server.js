@@ -13,6 +13,18 @@ sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 // Multer config för CV
 const upload = multer({ storage: multer.memoryStorage(), limits: { fileSize: 10 * 1024 * 1024 } });
 
+// Root route för test
+app.get("/", (req, res) => {
+  res.json({
+    message: "Backend is running",
+    timestamp: new Date(),
+    endpoints: {
+      send_cv: "/api/send-cv",
+      welcome_email: "/api/welcome-email"
+    }
+  });
+});
+
 // API: Skicka CV
 app.post("/api/send-cv", upload.single("cv"), async (req, res) => {
   try {
