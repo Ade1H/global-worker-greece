@@ -6,36 +6,41 @@ require("dotenv").config();
 
 const app = express();
 
-// FIXED CORS: Allow both your main domain AND Render frontend
+// =====================
+// CORS
+// =====================
 app.use(cors({
   origin: [
-    'https://globalworker.nu',                     // Your main domain
-    'https://global-worker-frontend.onrender.com', // Your Render frontend
-    'http://localhost:5173'                        // Local development
-  ]
+    "https://globalworker.nu",
+    "https://global-worker-frontend.onrender.com",
+    "http://localhost:5173",
+  ],
 }));
 
 app.use(express.json());
 
-// Multer config för filuppladdning
+// =====================
+// MULTER (SAFE LIMITS)
+// =====================
 const upload = multer({
-  storage: multer.memoryStorage(),
-  limits: { 
-    fileSize: 50 * 1024 * 1024, // Max 50 MB
+  storage: multer.diskStorage({
+    destination: "/tmp",
+    filename: (req, file, cb) => {
+      cb(null, Date.now() + "-" + file.originalname);
+    },
+  }),
+  limits: {
+    fileSize: 10 * 1024 * 1024, // 10 MB MAX (SAFE FOR SENDGRID)
   },
   fileFilter: (req, file, cb) => {
     const allowedCvTypes = [
       "application/pdf",
       "application/msword",
-      "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+      "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
     ];
-    
-    const allowedVideoTypes = [
-      "video/webm",
-      "video/mp4",
-      "video/quicktime"
-    ];
-    
+
+    const allowedVideoTypes = ["video/mp4", "video/webm", "video/quicktime"];
+
     if (file.fieldname === "cv" && allowedCvTypes.includes(file.mimetype)) {
       cb(null, true);
     } else if (file.fieldname === "video" && allowedVideoTypes.includes(file.mimetype)) {
@@ -46,124 +51,90 @@ const upload = multer({
   },
 });
 
-
-// Nodemailer transporter för SendGrid
+// =====================
+// SENDGRID SMTP
+// =====================
 const transporter = nodemailer.createTransport({
-  host: 'smtp.sendgrid.net', // SendGrids server
-  port: 587,                 // Standardport för SendGrid
-  secure: false,             // Använd STARTTLS
+  host: "smtp.sendgrid.net",
+  port: 587,
+  secure: false,
   auth: {
-    user: 'apikey',          // Ordet 'apikey' skrivs bokstavligen här
-    pass: process.env.SENDGRID_API_KEY // Din hemliga nyckel kommer härifrån
-  }
+    user: "apikey",
+    pass: process.env.SENDGRID_API_KEY,
+  },
+  connectionTimeout: 10000,
 });
 
-console.log("SendGrid Transporter Created. API Key present?", !!process.env.SENDGRID_API_KEY);
-
-// Testa SMTP
-transporter.verify((error, success) => {
-  if (error) {
-    console.log("SMTP error:", error);
-  } else {
-    console.log("✅ SMTP server redo");
-  }
+transporter.verify((err) => {
+  if (err) console.error("SMTP error:", err);
+  else console.log("✅ SendGrid SMTP ready");
 });
 
-// POST /api/send-cv
+// =====================
+// SEND CV (EMAIL ATTACHMENT)
+// =====================
 app.post("/api/send-cv", upload.single("cv"), async (req, res) => {
   try {
     const { name, email, phone, message } = req.body;
-    const cvFile = req.file;
 
-    const mailOptions = {
-     from: `"CV Formulär" <Johan.karlsson@globalworker.nu>`,
+    await transporter.sendMail({
+      from: '"CV Formulär" <noreply@globalworker.nu>',
       replyTo: email,
-      to: 'Johan.karlsson@globalworker.nu',
+      to: "Johan.karlsson@globalworker.nu",
       subject: `NYTT CV: ${name}`,
-      text: `Namn: ${name}\nE-post: ${email}\nTelefon: ${phone || "Ej angivet"}\n\nMeddelande:\n${message || "Inget meddelande"}`,
-      html: `<h3>Nytt CV har skickats</h3>
-             <p><strong>Namn:</strong> ${name}</p>
-             <p><strong>E-post:</strong> ${email}</p>
-             <p><strong>Telefon:</strong> ${phone || "Ej angivet"}</p>
-             <p><strong>Meddelande:</strong> ${message || "Inget meddelande"}</p>
-             <p><strong>CV-fil:</strong> ${cvFile ? cvFile.originalname : "Ingen fil"}</p>`,
-      attachments: cvFile ? [{
-        filename: cvFile.originalname,
-        content: cvFile.buffer
-      }] : []
-    };
+      text: `Namn: ${name}\nE-post: ${email}\nTelefon: ${phone || "Ej angivet"}\n\n${message || ""}`,
+      attachments: req.file
+        ? [
+            {
+              filename: req.file.originalname,
+              path: req.file.path,
+            },
+          ]
+        : [],
+    });
 
-    await transporter.sendMail(mailOptions);
-    console.log("✅ CV skickat");
-
-    res.json({ success: true, message: "CV:t har skickats!" });
+    return res.json({ success: true, message: "CV skickat" });
   } catch (err) {
-    console.error("Email error:", err);
-    res.status(500).json({ success: false, message: "Kunde inte skicka: " + err.message });
+    console.error(err);
+    return res.status(500).json({ success: false, message: "Kunde inte skicka CV" });
   }
 });
 
-// POST /api/send-video
+// =====================
+// SEND VIDEO (LINK ONLY – NO ATTACHMENT)
+// =====================
 app.post("/api/send-video", upload.single("video"), async (req, res) => {
   try {
-    const videoFile = req.file;
-
-    if (!videoFile) {
-      return res.status(400).json({ success: false, message: "Ingen video fil" });
+    if (!req.file) {
+      return res.status(400).json({ success: false, message: "Ingen video" });
     }
 
-    const mailOptions = {
-      from: `"Video CV" <Johan.karlsson@globalworker.nu>`,
-      to: 'Johan.karlsson@globalworker.nu',
+    // ⚠️ In production: upload to Cloudinary / S3 and generate URL
+    const fakeVideoLink = `Video mottagen: ${req.file.originalname}`;
+
+    await transporter.sendMail({
+      from: '"Video CV" <noreply@globalworker.nu>',
+      to: "Johan.karlsson@globalworker.nu",
       subject: "NYTT VIDEO CV",
-      text: `Ett nytt video CV har skickats.\nFil: ${videoFile.originalname}\nStorlek: ${Math.round(videoFile.size / 1024 / 1024)} MB`,
-      html: `<h3>Nytt Video CV</h3>
-             <p><strong>Filnamn:</strong> ${videoFile.originalname}</p>
-             <p><strong>Filstorlek:</strong> ${Math.round(videoFile.size / 1024 / 1024)} MB</p>`,
-      attachments: [{
-        filename: videoFile.originalname,
-        content: videoFile.buffer,
-        contentType: videoFile.mimetype
-      }]
-    };
+      text: fakeVideoLink,
+    });
 
-    await transporter.sendMail(mailOptions);
-    console.log("✅ Video skickat");
-
-    res.json({ success: true, message: "Video CV har skickats!" });
+    return res.json({ success: true, message: "Video mottagen (länk skickad)" });
   } catch (err) {
-    console.error("Video error:", err);
-    res.status(500).json({ success: false, message: "Kunde inte skicka video: " + err.message });
+    console.error(err);
+    return res.status(500).json({ success: false, message: "Kunde inte skicka video" });
   }
 });
 
-// Error handling
-app.use((err, req, res, next) => {
-  if (err instanceof multer.MulterError) {
-    return res.status(400).json({ success: false, message: err.message });
-  }
-  res.status(500).json({ success: false, message: err.message });
-});
-
-// Root route for testing
+// =====================
+// HEALTH CHECK
+// =====================
 app.get("/", (req, res) => {
-  res.json({ message: "Backend is running", timestamp: new Date() });
+  res.json({ status: "ok", time: new Date() });
 });
 
-// Starta server
-console.log("=== Using SendGrid Email Service ===");
+// =====================
+// START SERVER
+// =====================
 const PORT = process.env.PORT || 3000;
-
-// Root route - add this if missing
-app.get("/", (req, res) => {
-  res.json({ 
-    message: "Backend server is running",
-    timestamp: new Date(),
-    endpoints: {
-      send_cv: "POST /api/send-cv",
-      send_video: "POST /api/send-video"
-    }
-  });
-});
-
-app.listen(PORT, '0.0.0.0', () => console.log(`✅ Server körs på port ${PORT}`));
+app.listen(PORT, "0.0.0.0", () => console.log(`✅ Server running on ${PORT}`));
