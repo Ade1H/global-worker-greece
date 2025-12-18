@@ -1,4 +1,5 @@
 ﻿import React, { useState, useEffect, useRef } from 'react';
+import { Link } from 'react-router-dom';
 import HeroSection from '../components/HeroSection';
 import VideoRecorder from '../components/VideoRecorder';
 import RequestForm from '../components/RequestForm';
@@ -20,30 +21,6 @@ function Home() {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
- /*  */ const processSteps = [
-    { 
-      number: '01', 
-      title: 'Skapa Profil', 
-      desc: 'Registrera dig på vår plattform', 
-      icon: 'bi-person-badge',
-      gradient: 'linear-gradient(135deg, #2563eb, #1d4ed8)'
-    },
-    { 
-      number: '02', 
-      title: 'Skicka Ansökan', 
-      desc: 'Fyll i dina uppgifter och CV', 
-      icon: 'bi-file-earmark-arrow-up',
-      gradient: 'linear-gradient(135deg, #7c3aed, #6d28d9)'
-    },
-    { 
-      number: '03', 
-      title: 'Möt Arbetsgivare', 
-      desc: 'Starta din nya karriär', 
-      icon: 'bi-briefcase',
-      gradient: 'linear-gradient(135deg, #059669, #047857)'
-    }
-  ];
-
   const stats = [
     { number: '8+', label: 'Länder', icon: 'bi-globe', color: '#2563eb', bgColor: '#dbeafe' },
     { number: '13+', label: 'Arbetare', icon: 'bi-people', color: '#059669', bgColor: '#d1fae5' },
@@ -53,56 +30,72 @@ function Home() {
 
   return (
     <div className="home-container">
-      {/* Hero Section - Updated with wrapper */}
-      <div className="hero-section-wrapper">
-        <HeroSection />
-      </div>
+      {/* Hero Section - FIXED: Remove wrapper div that might be causing issues */}
+      <HeroSection />
       
-      {/* Process Steps Section - Added mobile spacing class */}
-     <div className="form-section">
-  {/* Combined Container */}
-  <div className="combined-application-container elevated-card">
-    {/* Combined Header */}
- 
-    {/* Combined Body */}
-    <div className="combined-body">
-      {/* Request Form Section */}
-      <div className="form-section-container">
-        
-        <RequestForm />
-      </div>
-
-      {/* Divider */}
-      <div className="combined-divider">
-        <span className="combined-divider-text">ELLER</span>
-      </div>
-
-      {/* Video Recorder Section */}
-      <div className="video-section-container">
-        
-    
-        <VideoRecorder />
-      </div>
-
-      {/* Footer Note */}
-      <div className="combined-footer">
-        <div className="combined-footer-content">
-          <div className="combined-footer-icon">
-            <i className="bi bi-lightbulb"></i>
+      {/* Form Section */}
+      <div className="form-section">
+        <div className="combined-application-container elevated-card">
+       {/*    <div className="combined-header">
+            <div className="combined-header-content">
+              <div className="combined-header-icon">
+                <i className="bi bi-send"></i>
+              </div>
+              <div>
+                <h2 className="combined-title">Ansök Nu</h2>
+                <p className="combined-subtitle">Fyll i formuläret eller skicka en video</p>
+              </div>
+            </div>
           </div>
-          <p className="combined-footer-text">
-            <strong>Tips:</strong> Både formuläret och videon hjälper oss att förstå dina behov bättre. 
-            Du kan välja att skicka båda eller enbart ett av alternativen.
-          </p>
+           */}
+          <div className="combined-body">
+            {/* Request Form Section */}
+            <div className="form-section-container">
+          {/*     <div className="form-section-header">
+                <i className="bi bi-pencil-square"></i>
+                <span>Ansökningsformulär</span>
+              </div> */}
+              <RequestForm />
+            </div>
+
+            {/* Divider */}
+            <div className="combined-divider">
+              <span className="combined-divider-text">ELLER</span>
+            </div>
+
+            {/* Video Recorder Section - Currently commented out */}
+            {/* <div className="video-section-container">
+              <div className="video-section-header">
+                <i className="bi bi-camera-video"></i>
+                <span>Video Presentation</span>
+              </div>
+              <div className="video-description">
+                Spela in en kort video där du presenterar dig själv och berättar om dina erfarenheter.
+              </div>
+              <VideoRecorder />
+            </div> */}
+
+            {/* Footer Note */}
+            <div className="combined-footer">
+              <div className="combined-footer-content">
+                <div className="combined-footer-icon">
+                  <i className="bi bi-lightbulb"></i>
+                </div>
+                <p className="combined-footer-text">
+                  <strong>Tips:</strong> Du kan ladda upp ditt CV här direkt.
+                  📹 Videopresentationen skickar du via e-post till
+                  johan.karlsson@globalworker.nu.
+                  Både formuläret och videon hjälper oss att förstå dina behov bättre. 
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
-  </div>
-</div>
+
       {/* Maps Section */}
       <section className="maps-section">
         <div className="container">
-       
           <div className="maps-grid">
             <div className="map-card">
               <div className="map-header company-gradient">
@@ -151,41 +144,41 @@ function Home() {
                     <span className="status-dot worker-dot"></span>
                     <span className="status-label">Aktiva arbetare</span>
                   </div>
-                  <span className="status-badge worker-badge">500+ aktiva</span>
+                  <span className="status-badge worker-badge">8 aktiva</span>
                 </div>
               </div>
             </div>
           </div>
 
-     <div className="stats-container">
-  {stats.map((stat, index) => (
-    <div key={index} className="stat-item">
-      <div 
-        className="stat-icon" 
-        style={{ 
-          backgroundColor: stat.bgColor,
-          color: stat.color
-        }}
-      >
-        <i className={`bi ${stat.icon}`}></i>
-      </div>
-      <div className="stat-content">
-        <h4 
-          className="stat-number" 
-          style={{ color: '#0f172a' }}  
-        >
-          {stat.number}
-        </h4>
-        <p 
-          className="stat-label" 
-          style={{ color: '#1e293b' }}  
-        >
-          {stat.label}
-        </p>
-      </div>
-    </div>
-  ))}
-</div>
+          <div className="stats-container">
+            {stats.map((stat, index) => (
+              <div key={index} className="stat-item">
+                <div 
+                  className="stat-icon" 
+                  style={{ 
+                    backgroundColor: stat.bgColor,
+                    color: stat.color
+                  }}
+                >
+                  <i className={`bi ${stat.icon}`}></i>
+                </div>
+                <div className="stat-content">
+                  <h4 
+                    className="stat-number" 
+                    style={{ color: '#0f172a' }}  
+                  >
+                    {stat.number}
+                  </h4>
+                  <p 
+                    className="stat-label" 
+                    style={{ color: '#1e293b' }}  
+                  >
+                    {stat.label}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
     </div>

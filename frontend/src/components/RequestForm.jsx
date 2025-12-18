@@ -146,7 +146,7 @@ function RequestForm() {
             CV-ansökan
           </h1>
           <p className={`hero-subtitle ${isVisible ? 'visible' : ''}`}>
-            Skicka in ditt CV och video presentation för att komma i kontakt med vårt rekryteringsteam
+            Skicka in ditt CV för att komma i kontakt med vårt rekryteringsteam
           </p>
         </div>
       </div>

@@ -159,7 +159,7 @@ function Contact() {
                   </div>
 
                   {/* Video Recorder Section */}
-                  <div className="video-section">
+              {/*     <div className="video-section">
                     <div className="video-section-header">
                       <div className="video-section-icon">
                         <i className="bi bi-camera-video"></i>
@@ -169,7 +169,7 @@ function Contact() {
                     <div className="video-wrapper">
                       <VideoRecorder />
                     </div>
-                  </div>
+                  </div> */}
                 </div>
 
                 {/* Combined Footer Note */}
@@ -177,9 +177,11 @@ function Contact() {
                   <div className="footer-note">
                     <i className="bi bi-lightbulb"></i>
                     <p>
-                      <strong>Tips:</strong> 
-                      Både formuläret och videon hjälper oss att förstå dina behov bättre. 
-                      Du kan välja att skicka båda eller enbart ett av alternativen.
+                      <strong>Tips:</strong> Du kan ladda upp ditt CV här direkt.
+📹 Videopresentationen skickar du via e-post till
+johan.karlsson@globalworker.nu.
+Både formuläret och videon hjälper oss att förstå dina behov bättre. 
+            
                     </p>
                   </div>
                 </div>

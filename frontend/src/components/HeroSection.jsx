@@ -1,10 +1,34 @@
-﻿import React, { useState, useEffect } from "react";
+﻿import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./HeroSection.css";
 
 function HeroSection() {
   const [isMobile, setIsMobile] = useState(false);
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const intervalRef = useRef(null);
+
+  // Bildsökvägar - använder WebP för bättre prestanda
+  const slideImages = [
+    {
+      id: 1,
+      image: "/images/hero1-1920.webp", // Byt från .png till .webp
+      title: "Global Worker Grekland",
+      subtitle: "Rekryterar svenska arbetare till jobb i Aten"
+    },
+    {
+      id: 2,
+      image: "/images/hero2-1920.webp", // Byt från .png till .webp
+      title: "Jobb i 8 Länder",
+      subtitle: "Vi erbjuder jobb i vackra länder runt om i världen"
+    },
+    {
+      id: 3,
+      image: "/images/hero3-1920.webp", // Byt från .png till .webp
+      title: "Fördelar för dig",
+      subtitle: ""
+    }
+  ];
 
   useEffect(() => {
     const checkMobile = () => {
@@ -13,28 +37,72 @@ function HeroSection() {
     
     checkMobile();
     window.addEventListener('resize', checkMobile);
+
+    // Auto-slide funktion
+    const startAutoSlide = () => {
+      intervalRef.current = setInterval(() => {
+        setCurrentSlide(prev => (prev + 1) % slideImages.length);
+      }, 8000);
+    };
     
-    return () => window.removeEventListener('resize', checkMobile);
-  }, []);
+    startAutoSlide();
+
+    // Preload nästa bild för bättre UX
+    const preloadImages = () => {
+      slideImages.forEach((slide, index) => {
+        if (index !== currentSlide) {
+          const img = new Image();
+          img.src = slide.image;
+        }
+      });
+    };
+    
+    preloadImages();
+
+    return () => {
+      window.removeEventListener('resize', checkMobile);
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current);
+      }
+    };
+  }, [currentSlide, slideImages.length]);
+
+  const nextSlide = () => {
+    setCurrentSlide(prev => (prev + 1) % slideImages.length);
+    resetAutoSlide();
+  };
+
+  const prevSlide = () => {
+    setCurrentSlide(prev => (prev - 1 + slideImages.length) % slideImages.length);
+    resetAutoSlide();
+  };
+
+  const goToSlide = (index) => {
+    setCurrentSlide(index);
+    resetAutoSlide();
+  };
+
+  const resetAutoSlide = () => {
+    if (intervalRef.current) {
+      clearInterval(intervalRef.current);
+    }
+    intervalRef.current = setInterval(() => {
+      setCurrentSlide(prev => (prev + 1) % slideImages.length);
+    }, 8000);
+  };
 
   return (
     <div className="hero-section-container">
-      <div 
-        id="heroCarousel" 
-        className="carousel slide" 
-        data-bs-ride="carousel"
-        data-bs-interval="8000"
-        data-bs-pause="false"
-      >
+      <div className="hero-carousel">
         {/* Carousel Indicators */}
         <div className="carousel-indicators custom-indicators">
-          {[0, 1, 2].map((index) => (
+          {slideImages.map((_, index) => (
             <button
               key={index}
               type="button"
-              data-bs-target="#heroCarousel"
-              data-bs-slide-to={index}
-              className={index === 0 ? "active" : ""}
+              className={index === currentSlide ? "active" : ""}
+              onClick={() => goToSlide(index)}
+              aria-label={`Gå till slide ${index + 1}`}
             ></button>
           ))}
         </div>
@@ -42,15 +110,28 @@ function HeroSection() {
         {/* Carousel Slides */}
         <div className="carousel-inner">
           {/* Slide 1: Huvudbudskap */}
-          <div className="carousel-item active">
-            <div className="carousel-slide slide-1">
+          <div className={`carousel-item ${currentSlide === 0 ? 'active' : ''}`}>
+            <div 
+              className="carousel-slide"
+              style={{
+                backgroundImage: `linear-gradient(to bottom, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5)), url('${slideImages[0].image}')`
+              }}
+            >
               <div className="carousel-content">
                 <div className="animate-fade-in">
+                   <img 
+                    src="/images/logo.png" 
+                    alt="Global Worker Grekland Logo" 
+                    className="logo-img mb-4"
+                    loading="lazy"
+                    width="200"
+                    height="200"
+                  />
                   <h1 className="hero-title mb-4">
-                    Global Worker Grekland
+                    {slideImages[0].title}
                   </h1>
                   <p className="hero-subtitle mb-5">
-                    Rekryterar svenska arbetare till jobb i länder med fantastiskt väder
+                    {slideImages[0].subtitle}
                   </p>
                   <div className="button-group">
                     <Link to="/Tjanster" className="btn-modern btn-primary-modern">
@@ -63,16 +144,21 @@ function HeroSection() {
             </div>
           </div>
 
-          {/* Slide 2: Länderlista - UPDATED WITH YOUR COUNTRIES */}
-          <div className="carousel-item">
-            <div className="carousel-slide slide-2">
+          {/* Slide 2: Länderlista */}
+          <div className={`carousel-item ${currentSlide === 1 ? 'active' : ''}`}>
+            <div 
+              className="carousel-slide"
+              style={{
+                backgroundImage: `linear-gradient(to bottom, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5)), url('${slideImages[1].image}')`
+              }}
+            >
               <div className="carousel-content">
                 <div className="animate-slide-up">
                   <h1 className="hero-title mb-4">
-                    Jobb i 8 Länder
+                    {slideImages[1].title}
                   </h1>
                   <p className="hero-subtitle mb-5">
-                    Vi erbjuder jobb i vackra länder runt om i världen
+                    {slideImages[1].subtitle}
                   </p>
                   
                   {/* Länder - UPDATED LIST */}
@@ -149,17 +235,25 @@ function HeroSection() {
           </div>
 
           {/* Slide 3: Fördelar */}
-          <div className="carousel-item">
-            <div className="carousel-slide slide-3">
+          <div className={`carousel-item ${currentSlide === 2 ? 'active' : ''}`}>
+            <div 
+              className="carousel-slide"
+              style={{
+                backgroundImage: `linear-gradient(to bottom, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5)), url('${slideImages[2].image}')`
+              }}
+            >
               <div className="carousel-content">
                 <div className="animate-bounce-in">
-                  <img 
+                {/*   <img 
                     src="/images/logo.png" 
                     alt="Global Worker Grekland Logo" 
                     className="logo-img mb-4"
-                  />
+                    loading="lazy"
+                    width="150"
+                    height="75"
+                  /> */}
                   <h1 className="hero-title mb-4">
-                    Fördelar för dig
+                    {slideImages[2].title}
                   </h1>
                   
                   {/* Fördelar */}
@@ -213,11 +307,11 @@ function HeroSection() {
         {/* Carousel Controls */}
         {!isMobile && (
           <>
-            <button className="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
+            <button className="carousel-control-prev" type="button" onClick={prevSlide}>
               <span className="carousel-control-prev-icon" aria-hidden="true"></span>
               <span className="visually-hidden">Föregående</span>
             </button>
-            <button className="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
+            <button className="carousel-control-next" type="button" onClick={nextSlide}>
               <span className="carousel-control-next-icon" aria-hidden="true"></span>
               <span className="visually-hidden">Nästa</span>
             </button>
@@ -229,13 +323,13 @@ function HeroSection() {
       {isMobile && (
         <div className="mobile-indicators">
           <div className="carousel-indicators custom-indicators">
-            {[0, 1, 2].map((index) => (
+            {slideImages.map((_, index) => (
               <button
                 key={index}
                 type="button"
-                data-bs-target="#heroCarousel"
-                data-bs-slide-to={index}
-                className={index === 0 ? "active" : ""}
+                className={index === currentSlide ? "active" : ""}
+                onClick={() => goToSlide(index)}
+                aria-label={`Gå till slide ${index + 1}`}
               ></button>
             ))}
           </div>

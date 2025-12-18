@@ -1,4 +1,4 @@
-﻿/* HeroSection.css - COMPLETELY RESPONSIVE VERSION */
+﻿/* HeroSection.css - OPTIMIZED FOR PERFORMANCE */
 
 /* Modern Hero Section CSS */
 .hero-section-container {
@@ -6,9 +6,37 @@
   min-height: 700px;
   position: relative;
   overflow: hidden;
-  margin-bottom: 0 !important;
-  padding-bottom: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
   width: 100%;
+}
+
+.hero-carousel {
+  position: relative;
+  height: 100%;
+  width: 100%;
+}
+
+.carousel-inner {
+  height: 100%;
+  position: relative;
+}
+
+.carousel-item {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+  pointer-events: none;
+}
+
+.carousel-item.active {
+  opacity: 1;
+  pointer-events: all;
+  z-index: 1;
 }
 
 .carousel-slide {
@@ -21,25 +49,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-}
-
-/* Modern gradient overlays */
-.slide-1 {
-  background-image: 
-    linear-gradient(to bottom, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5)),
-    url('/images/hero1.png');
-}
-
-.slide-2 {
-  background-image: 
-    linear-gradient(to bottom, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5)),
-    url('/images/hero3.png');
-}
-
-.slide-3 {
-  background-image: 
-    linear-gradient(to bottom, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5)),
-    url('/images/hero2.png');
+  will-change: transform; /* Performance optimization */
+  transform: translateZ(0); /* GPU acceleration */
 }
 
 /* Modern content container - RESPONSIVE */
@@ -52,14 +63,15 @@
   z-index: 2;
   padding: 1rem;
   margin: 0 auto;
+  backdrop-filter: blur(2px); /* Light blur for better text readability */
 }
 
-/* Logo with glow effect */
+/* Logo with glow effect - OPTIMIZED */
 .logo-img {
   height: 60px;
   width: auto;
   margin-bottom: 1rem;
-  filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.3));
+  filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.3));
   animation: floatLogo 6s ease-in-out infinite;
 }
 
@@ -73,7 +85,8 @@
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  text-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  text-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  letter-spacing: -0.5px;
 }
 
 .hero-subtitle {
@@ -83,9 +96,10 @@
   max-width: 800px;
   margin-left: auto;
   margin-right: auto;
-  opacity: 0.9;
+  opacity: 0.95;
   line-height: 1.5;
   padding: 0 0.5rem;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 /* Modern button group - RESPONSIVE */
@@ -117,36 +131,26 @@
   text-decoration: none !important;
   width: 100%;
   max-width: 280px;
+  transform: translateZ(0); /* GPU acceleration */
 }
 
 .btn-primary-modern {
-  background: transparent;
+  background: rgba(255, 255, 255, 0.1);
   color: white;
   border: 2px solid rgba(255, 255, 255, 0.3);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-  /* Ta bort gul gradient och gul skugga */
-  /* background: linear-gradient(135deg, #ffcd00, #ffaa00); */
-  /* color: #005293; */
-  /* box-shadow: 0 10px 30px rgba(255, 205, 0, 0.4); */
 }
 
 .btn-primary-modern:hover {
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.15);
   border-color: rgba(255, 255, 255, 0.5);
-  transform: translateY(-3px);
-  box-shadow: 0 10px 30px rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(15px);
-  -webkit-backdrop-filter: blur(15px);
-  /* Ta bort gul hover-effekt */
-  /* transform: translateY(-3px); */
-  /* box-shadow: 0 15px 40px rgba(255, 205, 0, 0.6); */
-  /* background: linear-gradient(135deg, #ffd633, #ffbb33); */
-  /* color: #005293; */
+  transform: translateY(-3px) translateZ(0);
+  box-shadow: 0 10px 20px rgba(255, 255, 255, 0.1);
 }
 
 .btn-secondary-modern {
-  background: transparent;
+  background: rgba(0, 0, 0, 0.2);
   color: white;
   border: 2px solid rgba(255, 255, 255, 0.3);
   backdrop-filter: blur(10px);
@@ -154,15 +158,13 @@
 }
 
 .btn-secondary-modern:hover {
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(0, 0, 0, 0.3);
   border-color: rgba(255, 255, 255, 0.5);
-  transform: translateY(-3px);
-  box-shadow: 0 10px 30px rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(15px);
-  -webkit-backdrop-filter: blur(15px);
+  transform: translateY(-3px) translateZ(0);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
 }
 
-/* Floating feature icons - RESPONSIVE - UPDATED FOR 8 COUNTRIES */
+/* Floating feature icons - OPTIMIZED */
 .features-container {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -177,18 +179,17 @@
 .feature-icon {
   text-align: center;
   background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(15px);
-  -webkit-backdrop-filter: blur(15px);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 12px;
   padding: 1rem;
   width: 100%;
-  transition: all 0.4s ease;
-  animation: floatIcon 3s ease-in-out infinite;
-  animation-delay: calc(var(--i) * 0.2s);
+  transition: all 0.3s ease;
+  transform: translateZ(0); /* GPU acceleration */
 }
 
-/* Animation delays for 8 items */
+/* Animation delays */
 .feature-icon:nth-child(1) { --i: 1; }
 .feature-icon:nth-child(2) { --i: 2; }
 .feature-icon:nth-child(3) { --i: 3; }
@@ -199,12 +200,10 @@
 .feature-icon:nth-child(8) { --i: 8; }
 
 .feature-icon:hover {
-  transform: translateY(-5px) scale(1.05);
+  transform: translateY(-3px) scale(1.02) translateZ(0);
   background: rgba(255, 255, 255, 0.1);
   border-color: rgba(255, 255, 255, 0.3);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
 /* Allow custom colors for country icons */
@@ -212,14 +211,6 @@
   font-size: 1.75rem;
   margin-bottom: 0.5rem;
   display: block;
-}
-
-/* Override gradient text for country icons - they'll use inline styles */
-.feature-icon i[style*="color"] {
-  -webkit-background-clip: initial;
-  -webkit-text-fill-color: initial;
-  background-clip: initial;
-  background: none;
 }
 
 .feature-text {
@@ -232,13 +223,14 @@
   margin-bottom: 0.125rem;
   display: block;
   color: white;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
 }
 
 .feature-text .small {
   font-size: 0.75rem;
-  opacity: 0.75;
+  opacity: 0.85;
   line-height: 1.2;
-  color: rgba(255, 255, 255, 0.8);
+  color: rgba(255, 255, 255, 0.9);
 }
 
 /* Modern carousel indicators */
@@ -282,18 +274,21 @@
 /* Carousel controls */
 .carousel-control-prev,
 .carousel-control-next {
-  z-index: 10;
-  width: 35px;
-  height: 35px;
+  position: absolute;
   top: 50%;
   transform: translateY(-50%);
+  width: 35px;
+  height: 35px;
   background: rgba(255, 255, 255, 0.1);
+  border: none;
   border-radius: 50%;
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  transition: all 0.3s ease;
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  cursor: pointer;
+  z-index: 10;
   opacity: 0.7;
-  display: none; /* Hide on mobile */
+  transition: all 0.3s ease;
+  display: none;
 }
 
 .carousel-control-prev:hover,
@@ -310,37 +305,29 @@
   right: 10px;
 }
 
-/* Scroll indicator - Hide on mobile */
-.scroll-indicator {
-  position: absolute;
-  bottom: 50px;
-  left: 50%;
-  transform: translateX(-50%);
-  color: white;
-  opacity: 0.7;
-  animation: bounce 2s infinite;
-  z-index: 10;
-  font-size: 0.8rem;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  display: none; /* Hide on mobile by default */
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 100% 100%;
 }
 
-.scroll-indicator::after {
-  content: '';
-  display: block;
-  width: 2px;
-  height: 30px;
-  background: white;
-  margin: 8px auto 0;
-  border-radius: 1px;
+.carousel-control-prev-icon {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='%23fff' viewBox='0 0 8 8'%3e%3cpath d='M5.25 0l-4 4 4 4 1.5-1.5-2.5-2.5 2.5-2.5-1.5-1.5z'/%3e%3c/svg%3e");
 }
 
-/* Animations */
+.carousel-control-next-icon {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='%23fff' viewBox='0 0 8 8'%3e%3cpath d='M2.75 0l-1.5 1.5 2.5 2.5-2.5 2.5 1.5 1.5 4-4-4-4z'/%3e%3c/svg%3e");
+}
+
+/* Animations - OPTIMIZED */
 @keyframes fadeIn {
   from { 
     opacity: 0;
-    transform: translateY(20px) scale(0.95);
+    transform: translateY(10px) scale(0.98);
   }
   to { 
     opacity: 1;
@@ -351,7 +338,7 @@
 @keyframes slideUp {
   from { 
     opacity: 0;
-    transform: translateY(40px);
+    transform: translateY(20px);
   }
   to { 
     opacity: 1;
@@ -361,35 +348,24 @@
 
 @keyframes floatLogo {
   0%, 100% { transform: translateY(0) rotate(0); }
-  50% { transform: translateY(-5px) rotate(1deg); }
+  50% { transform: translateY(-3px) rotate(0.5deg); }
 }
 
-@keyframes floatIcon {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-5px); }
-}
-
-@keyframes bounce {
-  0%, 20%, 50%, 80%, 100% { transform: translateY(0) translateX(-50%); }
-  40% { transform: translateY(-5px) translateX(-50%); }
-  60% { transform: translateY(-2px) translateX(-50%); }
-}
-
-/* Apply animations */
+/* Apply animations - OPTIMIZED TIMINGS */
 .animate-fade-in {
-  animation: fadeIn 1s ease-out 0.3s both;
+  animation: fadeIn 0.8s ease-out 0.2s both;
 }
 
 .animate-slide-up {
-  animation: slideUp 1s ease-out 0.5s both;
+  animation: slideUp 0.8s ease-out 0.3s both;
 }
 
 .animate-bounce-in {
-  animation: fadeIn 1s ease-out 0.7s both;
+  animation: fadeIn 0.8s ease-out 0.4s both;
 }
 
 .features-container > * {
-  animation: fadeIn 1s ease-out calc(0.8s + (var(--i, 0) * 0.1s)) both;
+  animation: fadeIn 0.6s ease-out calc(0.5s + (var(--i, 0) * 0.08s)) both;
 }
 
 /* ========== TABLET AND DESKTOP STYLES ========== */
@@ -408,14 +384,17 @@
     padding: 2rem;
   }
   
-  .logo-img {
-    height: 80px;
-    margin-bottom: 2rem;
-  }
+.logo-img {
+  height: 200px;
+  margin-bottom: 2rem;
+  border-radius: 12px; 
+}
+
   
   .hero-title {
     font-size: 3.5rem;
     margin-bottom: 1rem;
+    letter-spacing: -1px;
   }
   
   .hero-subtitle {
@@ -480,6 +459,8 @@
   .carousel-control-prev,
   .carousel-control-next {
     display: flex;
+    align-items: center;
+    justify-content: center;
     width: 50px;
     height: 50px;
   }
@@ -490,16 +471,6 @@
   
   .carousel-control-next {
     right: 20px;
-  }
-  
-  .scroll-indicator {
-    display: block;
-    bottom: 80px;
-    font-size: 0.9rem;
-  }
-  
-  .scroll-indicator::after {
-    height: 40px;
   }
 }
 
@@ -515,6 +486,9 @@
   
   .features-container {
     gap: 2rem;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
   }
   
   .feature-icon {
@@ -526,16 +500,7 @@
   }
 }
 
-/* ========== CRITICAL FIXES ========== */
-/* Remove Bootstrap defaults */
-.carousel,
-.carousel-inner,
-.carousel-item {
-  margin: 0 !important;
-  padding: 0 !important;
-}
-
-/* Ensure proper mobile height */
+/* ========== MOBILE FIXES ========== */
 @media (max-width: 767px) {
   .hero-section-container {
     height: auto;
@@ -546,17 +511,15 @@
   .carousel-slide {
     height: auto;
     min-height: 100vh;
-    padding: 1rem 0;
+    padding: 2rem 0;
   }
   
   .carousel-content {
-    padding: 1rem 0.5rem;
+    padding: 1rem;
   }
   
-  /* Remove the stats container styles since you don't use them */
-  .stats-container,
-  .stat-card {
-    display: none;
+  .carousel-indicators.custom-indicators {
+    bottom: 15px;
   }
 }
 
@@ -564,10 +527,12 @@
 @media (max-width: 480px) {
   .hero-title {
     font-size: 2rem;
+    margin-bottom: 0.5rem;
   }
   
   .hero-subtitle {
     font-size: 1rem;
+    margin-bottom: 1rem;
   }
   
   .features-container {
@@ -596,7 +561,11 @@
   }
   
   .carousel-indicators.custom-indicators {
-    bottom: 15px;
+    bottom: 10px;
+  }
+  
+  .button-group {
+    margin-top: 1rem;
   }
 }
 
@@ -610,11 +579,6 @@
   .feature-icon {
     padding: 1rem;
   }
-}
-
-/* FIX for multiple features-container in one slide */
-.carousel-content .features-container + .features-container {
-  margin-top: 0.5rem;
 }
 
 /* Mobile-specific adjustments */
@@ -645,3 +609,26 @@
   }
 }
 
+/* Performance optimizations */
+.carousel-slide {
+  background-attachment: scroll; /* Change from fixed to scroll for mobile performance */
+}
+
+@media (min-width: 768px) {
+  .carousel-slide {
+    background-attachment: fixed; /* Only use fixed on desktop */
+  }
+}
+
+/* Remove unnecessary animations on reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  .animate-fade-in,
+  .animate-slide-up,
+  .animate-bounce-in,
+  .feature-icon,
+  .logo-img,
+  .btn-modern {
+    animation: none !important;
+    transition: none !important;
+  }
+}

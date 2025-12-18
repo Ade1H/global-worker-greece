@@ -35,11 +35,12 @@
   --transition-slow: 500ms ease;
 }
 
-/* Base Container */
+/* ========== BASE CONTAINER ========== */
 .home-container {
   min-height: 100vh;
   background: linear-gradient(to bottom, var(--gray-50), #ffffff);
   overflow-x: hidden;
+  position: relative;
 }
 
 .container {
@@ -48,14 +49,80 @@
   padding: 0 1rem;
 }
 
-/* Hero Section Wrapper - NEW */
-.hero-section-wrapper {
-  margin: 0;
-  padding: 0;
-  width: 100%;
+/* ========== HERO SECTION CRITICAL FIXES ========== */
+/* Prevent Home.css from overriding HeroSection.css */
+.hero-section-container {
+  position: relative !important;
+  z-index: 1 !important;
+  min-height: 100vh !important;
+  width: 100% !important;
+  overflow: visible !important;
 }
 
-/* Section Styles */
+/* Ensure HeroSection is above everything */
+.home-container > .hero-section-container {
+  position: relative;
+  z-index: 10;
+}
+
+/* Prevent wrapper divs from affecting HeroSection */
+.hero-section-wrapper {
+  position: relative;
+  z-index: 10;
+  height: 100vh;
+  width: 100%;
+  overflow: visible !important;
+}
+
+/* Ensure text in HeroSection is visible */
+.hero-title,
+.hero-subtitle {
+  position: relative !important;
+  z-index: 100 !important;
+  color: white !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8) !important;
+}
+
+/* Force text visibility with important */
+h1.hero-title,
+p.hero-subtitle {
+  color: white !important;
+  -webkit-text-fill-color: white !important;
+}
+
+/* Remove any potential background-clip that hides text */
+.hero-title {
+  background: none !important;
+  -webkit-background-clip: initial !important;
+  background-clip: initial !important;
+}
+
+/* Ensure all HeroSection elements are visible */
+.carousel-content {
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+/* Prevent other sections from overlapping HeroSection */
+.form-section,
+.maps-section {
+  position: relative;
+  z-index: 5;
+  margin-top: 0;
+}
+
+/* Fix for HeroSection to take full height */
+.hero-section-container,
+.carousel-slide,
+.carousel-item,
+.carousel-inner {
+  height: 100vh !important;
+  min-height: 700px !important;
+}
+
+/* ========== SECTION STYLES ========== */
 .process-section {
   padding: 4rem 0;
   opacity: 0;
@@ -73,7 +140,7 @@
   background: linear-gradient(to bottom, #ffffff, var(--gray-50));
 }
 
-/* Section Headers */
+/* ========== SECTION HEADERS ========== */
 .section-header {
   text-align: center;
   margin-bottom: 3rem;
@@ -101,7 +168,7 @@
   line-height: 1.6;
 }
 
-/* Process Steps */
+/* ========== PROCESS STEPS ========== */
 .process-steps-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -167,9 +234,10 @@
   line-height: 1.5;
 }
 
-/* Form Section */
+/* ========== FORM SECTION ========== */
 .form-section {
   margin-top: 2rem;
+  padding: 2rem 0;
 }
 
 .form-grid {
@@ -178,7 +246,7 @@
   gap: 2rem;
 }
 
-/* Combined Application Container */
+/* ========== COMBINED APPLICATION CONTAINER ========== */
 .combined-application-container {
   background: white;
   border-radius: var(--radius-xl);
@@ -186,6 +254,7 @@
   box-shadow: var(--shadow-lg);
   overflow: hidden;
   margin-top: 2rem;
+  transition: transform var(--transition-base), box-shadow var(--transition-base);
 }
 
 .combined-application-container.elevated-card:hover {
@@ -332,60 +401,7 @@
   position: relative;
 }
 
-/* Mobile responsive styles */
-@media (max-width: 768px) {
-  .combined-header {
-    padding: 1.5rem 1rem 1rem;
-  }
-  
-  .combined-header-icon {
-    width: 2rem;
-    height: 2rem;
-  }
-  
-  .combined-header-icon i {
-    font-size: 1rem;
-  }
-  
-  .combined-title {
-    font-size: 1.2rem;
-  }
-  
-  .combined-subtitle {
-    font-size: 0.8rem;
-  }
-  
-  .combined-body {
-    padding: 1rem;
-  }
-  
-  .form-section-header,
-  .video-section-header {
-    font-size: 1rem;
-  }
-  
-  .combined-divider {
-    margin: 1.5rem 0;
-  }
-  
-  .video-description {
-    font-size: 0.8rem;
-    margin-bottom: 1rem;
-  }
-  
-  .combined-footer {
-    padding: 0.75rem;
-  }
-  
-  .combined-footer-text {
-    font-size: 0.7rem;
-  }
-  
-  .form-section-container > *,
-  .video-section-container > * {
-    min-height: 300px;
-  }
-}
+/* ========== FORM CARD ========== */
 @media (min-width: 1024px) {
   .form-grid {
     grid-template-columns: 1fr 1fr;
@@ -428,7 +444,7 @@
   font-size: 0.9rem;
 }
 
-/* Maps Grid */
+/* ========== MAPS GRID ========== */
 .maps-grid {
   display: grid;
   grid-template-columns: 1fr;
@@ -558,7 +574,7 @@
   color: #065f46;
 }
 
-/* Stats Container */
+/* ========== STATS CONTAINER ========== */
 .stats-container {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -610,7 +626,7 @@
   margin: 0;
 }
 
-/* Animations */
+/* ========== ANIMATIONS ========== */
 @keyframes slideUpFade {
   from {
     opacity: 0;
@@ -637,6 +653,10 @@
   .process-section,
   .maps-section {
     padding: 1.5rem 0 !important;
+  }
+  
+  .form-section {
+    padding: 1rem 0 !important;
   }
   
   .section-header {
@@ -688,6 +708,62 @@
   
   .form-grid {
     gap: 1rem;
+  }
+  
+  .combined-application-container {
+    margin-top: 1rem;
+  }
+  
+  .combined-header {
+    padding: 1.5rem 1rem 1rem;
+  }
+  
+  .combined-header-icon {
+    width: 2rem;
+    height: 2rem;
+  }
+  
+  .combined-header-icon i {
+    font-size: 1rem;
+  }
+  
+  .combined-title {
+    font-size: 1.2rem;
+  }
+  
+  .combined-subtitle {
+    font-size: 0.8rem;
+  }
+  
+  .combined-body {
+    padding: 1rem;
+  }
+  
+  .form-section-header,
+  .video-section-header {
+    font-size: 1rem;
+  }
+  
+  .combined-divider {
+    margin: 1.5rem 0;
+  }
+  
+  .video-description {
+    font-size: 0.8rem;
+    margin-bottom: 1rem;
+  }
+  
+  .combined-footer {
+    padding: 0.75rem;
+  }
+  
+  .combined-footer-text {
+    font-size: 0.7rem;
+  }
+  
+  .form-section-container > *,
+  .video-section-container > * {
+    min-height: 300px;
   }
   
   .card-header {
@@ -791,6 +867,7 @@
   }
 }
 
+/* ========== UTILITY FIXES ========== */
 /* Prevent horizontal scrolling */
 html, body {
   overflow-x: hidden;
@@ -805,4 +882,27 @@ html, body {
   .stat-item {
     min-height: 44px;
   }
+}
+
+/* Ensure HeroSection is not affected by any other styles */
+.home-container > :first-child:not(.form-section):not(.maps-section) {
+  position: relative;
+  z-index: 100;
+}
+
+/* Debug styling - remove in production */
+.debug-border * {
+  border: 1px solid rgba(255, 0, 0, 0.1) !important;
+}
+
+/* Force HeroSection to be visible */
+.carousel-slide {
+  background-size: cover !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+}
+
+.carousel-content {
+  text-align: center !important;
+  color: white !important;
 }
